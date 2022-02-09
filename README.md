@@ -5,8 +5,8 @@
 
 ## La taberna del chino
 
-<center>
+<div style="text-align: center">
 
 <img src="logo.png" width=400>
 
-</center>
+</div>
