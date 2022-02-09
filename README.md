@@ -5,6 +5,4 @@
 
 ## La taberna del chino
 
-![](logo.png)
-
-<img src="logo.png" width=100>
+<img src="logo.png" width=400>
