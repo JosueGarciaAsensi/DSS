@@ -5,4 +5,4 @@
 
 ## La taberna del chino
 
-<center><img src="logo.png" width=400></center>
+<p align="center"><img src="logo.png" width=400></p>
