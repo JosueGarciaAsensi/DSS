@@ -16,9 +16,7 @@
 
 ## :one: Revisión de la descripción de la práctica
 
-Tras haber leído la práctica en el siguiente punto tenemos un pequeño vistazo sobre qué tratará el proyecto.
-
-Por otro lado, en la asginación de tareas hemos repartido la revisión del diagrama y la implementaci
+Tras haber leído la práctica en los siguientes puntos tenemos un pequeño vistazo sobre qué tratará el proyecto.
 
 ## :two: Elección del nombre y temática del proyecto
 
@@ -28,6 +26,11 @@ Será una tienda online que ofrecerá un amplio catálogo de cervezas al cliente
 
 El objetivo del proyecto será realizar una web funcional con su cesta de la compra, registro, visualización de productos y simulación de compra (estamos abiertos a ampliaciones).
 
+## :three: Diagrama de clases
 
+Se ha creado el borrador del diagrama de clases y se ha acordado su uso entre los participantes del proyecto, a falta de la confirmación del profesor.
 
 ## :four: Asignación de tareas
+
+- Practicar con Laravel (todos).
+- Comentar el proyecto con el profesor.
