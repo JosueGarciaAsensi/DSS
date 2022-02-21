@@ -13,7 +13,7 @@ Contenido:
 - _Descripción del proyecto_
 
 Entregado: 
-- [_\_documentacion/Propuesta-proyecto.pdf_](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
+- [\_documentacion/Propuesta-proyecto.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
 
 A fecha de _13/02/2022_ ✔️
 
