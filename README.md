@@ -5,7 +5,13 @@
 
 <br>
 
-## :one: Descripción del proyecto ✔️
+## Inicialización del proyecto
+
+Se facilita el archivo ```.env``` en el índice privado.
+
+## Entregas
+
+### :one: Descripción del proyecto ✔️
 
 Fecha límite de entrega: _18/02/2022_
 
@@ -19,7 +25,7 @@ A fecha de _13/02/2022_
 
 <br>
 
-## :two: Primera entrega ⏰
+### :two: Primera entrega ⏰
 
 Fecha límite de entrega: _04/03/2022_
 
