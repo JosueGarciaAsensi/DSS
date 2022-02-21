@@ -13,7 +13,7 @@ Contenido: _Descripción del proyecto_
 
 Entrega realizada el _13/02/2022_ ✔️
 
-Ruta: _[\_documentacion/descripcion.pdf](./\_documentacion)
+Ruta: [_\_documentacion/Propuesta\_proyecto.pdf_](./\_documentacion/Propuesta_proyecto.pdf)
 ## :two: Primera entrega
 
 Fecha límite de entrega: _04/03/2022_
