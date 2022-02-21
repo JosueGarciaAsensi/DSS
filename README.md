@@ -23,7 +23,7 @@ Contenido:
 Entregado: 
 - [\_documentacion/Propuesta-proyecto.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
 
-A fecha de _13/02/2022_
+A fecha de _14/02/2022_
 
 <br>
 
