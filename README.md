@@ -9,6 +9,8 @@
 
 Se facilita el archivo ```.env``` en el índice privado.
 
+<br>
+
 ## Entregas
 
 ### :one: Descripción del proyecto ✔️
