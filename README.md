@@ -13,7 +13,7 @@ Contenido: _Descripción del proyecto_
 
 Entrega realizada el _13/02/2022_ ✔️
 
-Ruta: [_\_documentacion/Propuesta-proyecto.pdf_](./\_documentacion/Propuesta-proyecto.pdf)
+Ruta: [_\_documentacion/Propuesta-proyecto.pdf_](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
 ## :two: Primera entrega
 
 Fecha límite de entrega: _04/03/2022_
