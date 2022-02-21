@@ -3,6 +3,6 @@
 
 # DSS Project
 
-## La taberna del chino
+## :one: Descripción del proyecto
 
-<p align="center"><img src="logo.png" width=400></p>
+Fecha límite de entrega: _18/02/2022_
