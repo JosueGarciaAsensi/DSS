@@ -9,7 +9,8 @@
 
 Fecha límite de entrega: _18/02/2022_
 
-Contenido: _Descripción del proyecto_
+Contenido: 
+- _Descripción del proyecto_
 
 Entregado: 
 - [_\_documentacion/Propuesta-proyecto.pdf_](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
