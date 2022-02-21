@@ -19,7 +19,7 @@ A fecha de _13/02/2022_
 
 <br>
 
-## :two: Primera entrega ⏲️
+## :two: Primera entrega ⏰
 
 Fecha límite de entrega: _04/03/2022_
 
