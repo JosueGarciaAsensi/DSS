@@ -5,7 +5,7 @@
 
 <br>
 
-## :one: Descripción del proyecto
+## :one: Descripción del proyecto ✔️
 
 Fecha límite de entrega: _18/02/2022_
 
@@ -15,11 +15,11 @@ Contenido:
 Entregado: 
 - [\_documentacion/Propuesta-proyecto.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Propuesta-proyecto.pdf)
 
-A fecha de _13/02/2022_ ✔️
+A fecha de _13/02/2022_
 
 <br>
 
-## :two: Primera entrega
+## :two: Primera entrega ⏲️
 
 Fecha límite de entrega: _04/03/2022_
 
