@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('factura', function (Blueprint $table) {
             $table->id();
+            $table->double('importe');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
