@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->id();
+            $table->string('estado');
+            $table->foreignID('id_factura')->nullable();
             $table->timestamps();
         });
     }
