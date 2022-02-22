@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('id_direccion')->constrained();   // Añadido por Jordi. PDTE verificar
+            $table->foreignId('id_direccion')->nullable();   // Añadido por Jordi. PDTE verificar
             $table->timestamps();
         });
     }
