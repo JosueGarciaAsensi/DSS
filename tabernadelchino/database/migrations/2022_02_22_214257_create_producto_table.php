@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('producto', function (Blueprint $table) {
             $table->id();
+            $table->nombre();
+            $table->stock();
+            $table->descripcion();
+            $table->precio();
+            $table->foreignID('id_tipocerveza');         //PDTE de verificar
             $table->timestamps();
         });
     }
