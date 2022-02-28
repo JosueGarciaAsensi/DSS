@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bill', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            //$table->unsignedBigInteger('order_id');
+            //$table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
             $table->foreignId('order_id')->constrained();
             $table->date('date');
             $table->double('amount');
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bill');
+        Schema::dropIfExists('bills');
     }
 };
