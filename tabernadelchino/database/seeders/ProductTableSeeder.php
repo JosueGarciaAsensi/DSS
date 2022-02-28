@@ -16,10 +16,10 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product')->delete();
+        DB::table('products')->delete();
         // Añadimos una entrada a esta tabla
         foreach (range(1,10) as $index) {
-            DB::table('product')->insert(
+            DB::table('products')->insert(
                 [
                     'name' => Str::random(10),
                     'stock' => 1,

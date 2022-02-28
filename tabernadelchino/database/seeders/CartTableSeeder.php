@@ -15,11 +15,11 @@ class CartTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cart')->delete();
+        DB::table('carts')->delete();
         // Añadimos una entrada a esta tabla
         foreach (range(1,10) as $index) {
             foreach (range(1,10) as $indey) {
-                DB::table('cart')->insert(
+                DB::table('carts')->insert(
                     [
                         'product_id' => $indey
                     ]

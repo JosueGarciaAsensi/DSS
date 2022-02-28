@@ -17,10 +17,10 @@ class BeerTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('beertype')->delete();
+        DB::table('beertypes')->delete();
         // Añadimos una entrada a esta tabla
         foreach (range(1,10) as $index) {
-            DB::table('beertype')->insert(
+            DB::table('beertypes')->insert(
                 [
                     'name' => Str::random(10)
                 ]

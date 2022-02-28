@@ -17,11 +17,11 @@ class BillTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bill')->delete();
+        DB::table('bills')->delete();
         // Añadimos una entrada a esta tabla
         foreach (range(1,10) as $index) {
             $timestamp = mt_rand(1, time());
-            DB::table('bill')->insert(
+            DB::table('bills')->insert(
                 [
                     'date' => date("d M Y", $timestamp),
                     'amount' => 20.0,

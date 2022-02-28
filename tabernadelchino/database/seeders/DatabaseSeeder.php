@@ -17,24 +17,24 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call( AddressTableSeeder ::class );
-        $this->command->info('Address table seeded!' );
+        $this->command->info('Addresses table seeded!' );
 
         $this->call( UsersTableSeeder ::class );
-        $this->command->info('User table seeded!' );
+        $this->command->info('Users table seeded!' );
 
         $this->call( BeerTypeTableSeeder ::class );
-        $this->command->info('BeerType table seeded!' );
+        $this->command->info('BeerTypes table seeded!' );
 
         $this->call( ProductTableSeeder ::class );
-        $this->command->info('Product table seeded!' );
+        $this->command->info('Products table seeded!' );
 
         $this->call( CartTableSeeder ::class );
-        $this->command->info('Cart table seeded!' );
+        $this->command->info('Carts table seeded!' );
 
         $this->call( OrderTableSeeder ::class );
-        $this->command->info('Order table seeded!' );
+        $this->command->info('Orders table seeded!' );
 
         $this->call( BillTableSeeder ::class );
-        $this->command->info('Bill table seeded!' );
+        $this->command->info('Bills table seeded!' );
     }
 }

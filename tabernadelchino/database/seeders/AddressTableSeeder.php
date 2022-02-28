@@ -16,10 +16,10 @@ class AddressTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('address')->delete();
+        DB::table('addresses')->delete();
         // Añadimos una entrada a esta tabla
         foreach (range(1,10) as $index) {
-            DB::table('address')->insert(
+            DB::table('addresses')->insert(
                 [
                     'type' => Str::random(10),
                     'name' => Str::random(10),
