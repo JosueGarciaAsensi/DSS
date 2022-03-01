@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->id();
+            $table->UnsignedbigInteger('votes');
             $table->foreignId('product_id')->constrained();
             $table->foreignId('users_id')->constrained();
+            $table->primary(['votes', 'users_id']);
             $table->timestamps();
+            
         });
     }
 

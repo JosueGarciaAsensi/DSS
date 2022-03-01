@@ -17,14 +17,31 @@ class CartTableSeeder extends Seeder
     {
         DB::table('carts')->delete();
         // Añadimos una entrada a esta tabla
+        
+        $info = [];
+        foreach (range(1, 10) as $index) {
+
+            $votes = $index;
+            $users_id = $index;
+
+            foreach(range(1, 10) as $indey) {
+                $product_id = $indey;
+
+                $info[] = [$votes, $users_id , $product_id];
+            }
+
+        }
+
+        print(strval($info));
+
         foreach (range(1,10) as $index) {
-            foreach (range(1,10) as $indey) {
                 DB::table('carts')->insert(
                     [
-                        'product_id' => $indey
+                        'votes' => $info[$index][0],
+                        'users_id' => $info[$index][1],
+                        'product_id' => $info[$index][2]                        
                     ]
                 );
-            }
         }
     }
 }
