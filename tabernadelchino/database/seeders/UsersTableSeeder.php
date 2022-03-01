@@ -8,13 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UsersTableSeeder extends Seeder
-{
+class UsersTableSeeder extends Seeder {
     public static function obtenerSiguienteIndice($indiceDirecciones) {
-        while (! DB::table('addresses')->key_exists($indiceDirecciones)) {
-            $indiceDirecciones += 1;
-        }
-        return $indiceDirecciones;
+        return DB::table('addresses')->where('id', '>', 0)->pluck('id')->toArray()[$indiceDirecciones - 1];
     }
 
     /**
@@ -26,9 +22,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         // Añadimos una entrada a esta tabla
-        $indiceDirecciones = 1;
         foreach (range(1,10) as $index) {
-            $indiceDirecciones = $this->obtenerSiguienteIndice($indiceDirecciones);
             DB::table('users')->insert(
                 [
                     'name' => Str::random(10),
@@ -37,10 +31,9 @@ class UsersTableSeeder extends Seeder
                     'password' => Hash::make(Str::random(5)),
                     'dni' => Str::random(8),
                     'admin' => true,
-                    'address_id' => $indiceDirecciones
+                    'address_id' => $this->obtenerSiguienteIndice($index)
                 ]
             );
-
             
         }
     }

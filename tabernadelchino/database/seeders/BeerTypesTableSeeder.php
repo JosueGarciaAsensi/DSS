@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class BeerTypeTableSeeder extends Seeder
+class BeerTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

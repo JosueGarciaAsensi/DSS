@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call( UsersTableSeeder ::class );
         $this->command->info('Users table seeded!' );
 
-        $this->call( BeerTypeTableSeeder ::class );
+        $this->call( BeerTypesTableSeeder ::class );
         $this->command->info('BeerTypes table seeded!' );
 
-        $this->call( ProductTableSeeder ::class );
+        $this->call( ProductsTableSeeder ::class );
         $this->command->info('Products table seeded!' );
 
         $this->call( CartTableSeeder ::class );
