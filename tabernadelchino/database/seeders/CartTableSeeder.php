@@ -21,25 +21,20 @@ class CartTableSeeder extends Seeder
         $info = [];
         foreach (range(1, 10) as $index) {
 
-            $votes = $index;
             $users_id = $index;
 
             foreach(range(1, 10) as $indey) {
                 $product_id = $indey;
-
-                $info[] = [$votes, $users_id , $product_id];
+                $info[] = [$users_id , $product_id];
             }
 
         }
 
-        print(strval($info));
-
-        foreach (range(1,10) as $index) {
+        foreach (range(1,10) as $index) {                
                 DB::table('carts')->insert(
-                    [
-                        'votes' => $info[$index][0],
-                        'users_id' => $info[$index][1],
-                        'product_id' => $info[$index][2]                        
+                    [                        
+                        'users_id' => $info[$index][0],
+                        'product_id' => $info[$index][1]                        
                     ]
                 );
         }
