@@ -6,9 +6,13 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
 
 class AddressTableSeeder extends Seeder
 {
+    protected $dirs = [];
+    protected $type = ['Calle', 'Avenida'];
+
     /**
      * Run the database seeds.
      *
