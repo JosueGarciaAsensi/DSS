@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+
+    /**
+     * The explicit primary key.
+     * 
+     */
+    protected $primaryKey = ['users_id', 'product_id'];
 }
