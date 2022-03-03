@@ -12,4 +12,8 @@ class Product extends Model
     public function beertypes() {
         return $this->belongsToMany('App\Models\BeerType');
     }
+
+    public function carts() {
+        return $this->belongsToMany('App\Models\Cart');
+    }
 }

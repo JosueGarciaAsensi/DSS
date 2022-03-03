@@ -16,6 +16,10 @@ class User extends Authenticatable
         return $this->hasOne(Address::class, 'foreign_key');
     }
 
+    public function cart() {
+        return $this->hasOne(('App\ModelsCart'));
+    }
+
     /**
      * The attributes that are mass assignable.
      *
