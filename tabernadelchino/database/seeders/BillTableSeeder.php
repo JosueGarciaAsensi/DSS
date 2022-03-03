@@ -23,8 +23,8 @@ class BillTableSeeder extends Seeder
             DB::table('bills')->insert(
                 [
                     'date' => Carbon::create($t[2], $t[1], $t[0]),
-                    'amount' => 20.0,
-                    'order_id' => $index
+                    'amount' => 20.0
+                    //'order_id' => $index
                 ]
             );
         }

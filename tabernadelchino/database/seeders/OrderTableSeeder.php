@@ -35,7 +35,8 @@ class OrderTableSeeder extends Seeder
                     [                        
                         'users_id' => $info[$index][0],
                         'product_id' => $info[$index][1],
-                        'state' => Str::random(10)                        
+                        'state' => Str::random(10),
+                        'bills_id' => $index                        
                     ]
                 );
         }
