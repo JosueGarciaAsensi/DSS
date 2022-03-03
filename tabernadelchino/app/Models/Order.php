@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    /*
+    public function bill() {
+        return $this->belongsTo(Bill::class);
+    }
+    */
 
     public function bill() {
-        return $this->belongsTo('App\Models\Bill');
+        return $this->hasOne(Bill::class);
     }
 
     public function user(){
