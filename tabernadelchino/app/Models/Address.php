@@ -9,6 +9,10 @@ class Address extends Model
 {
     use HasFactory;
 
+    public function user() {
+        return $this->belongsTo(User::class, 'foreign_key');
+    }
+
     // protected $fillable = [
     //     'type',
     //     'name',
