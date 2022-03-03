@@ -16,8 +16,12 @@ class User extends Authenticatable
         return $this->hasOne(Address::class, 'foreign_key');
     }
 
+    public function order() {
+        return $this->hasOne(Order::class, 'foreign_key');
+    }
+
     public function cart() {
-        return $this->hasOne(('App\ModelsCart'));
+        return $this->hasOne(Cart::class, 'foreign_key');
     }
 
     /**
