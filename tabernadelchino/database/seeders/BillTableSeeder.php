@@ -24,7 +24,6 @@ class BillTableSeeder extends Seeder
                 [
                     'date' => Carbon::create($t[2], $t[1], $t[0]),
                     'amount' => 20.0
-                    //'order_id' => $index
                 ]
             );
         }

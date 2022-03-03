@@ -17,12 +17,14 @@ class BeerTypesTableSeeder extends Seeder
      */
     public function run()
     {
+        $types = ['Clásica', 'Especial', 'Tostada', 'Negra'];
+
         DB::table('beertypes')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,10) as $index) {
+        foreach (range(0,3) as $index) {
             DB::table('beertypes')->insert(
                 [
-                    'name' => Str::random(10)
+                    'name' => $types[$index]
                 ]
             );
         }

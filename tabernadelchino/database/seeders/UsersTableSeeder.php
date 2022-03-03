@@ -20,18 +20,23 @@ class UsersTableSeeder extends Seeder {
      */
     public function run()
     {
+        $names = ['Francisco', 'Josué', 'Jordi', 'David', 'Ángel'];
+        $surnames = ['Ferrández Martínez', 'García Asensi', 'Sellés Enríquez', 'Pastor Crespo', 'León Cerdán'];
+        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
+        $dni = ['55391233J', '51253198K', '23421897W', '384230271P', '891238421O'];
+
         DB::table('users')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,10) as $index) {
+        foreach (range(0, 4) as $index) {
             DB::table('users')->insert(
                 [
-                    'name' => Str::random(10),
-                    'surname' => Str::random(10),
-                    'email' => Str::random(5)."@gmail.com",
+                    'name' => $names[$index],
+                    'surname' => $surnames[$index],
+                    'email' => $emails[$index],
                     'password' => Hash::make(Str::random(5)),
-                    'dni' => Str::random(8),
+                    'dni' => $dni[$index],
                     'admin' => true,
-                    'address_id' => $this->obtenerSiguienteIndice($index)
+                    'address_id' => random_int(1, 3)
                 ]
             );
             
