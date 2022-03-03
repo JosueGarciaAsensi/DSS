@@ -12,17 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function address() {
-        return $this->hasOne(Address::class, 'foreign_key');
-    }
+    public function address() { return $this->hasOne(Address::class, 'foreign_key'); }
 
-    public function order() {
-        return $this->hasOne(Order::class, 'foreign_key');
-    }
+    public function linord() { return $this->belongsTo(Linord::class, 'foreign_key'); }
 
-    public function cart() {
-        return $this->hasOne(Cart::class, 'foreign_key');
-    }
+    public function cart() { return $this->hasOne(Cart::class, 'foreign_key'); }
 
     /**
      * The attributes that are mass assignable.

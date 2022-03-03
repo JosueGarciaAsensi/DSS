@@ -18,8 +18,8 @@ class Order extends Model
         return $this->hasOne(Bill::class);
     }
 
-    public function user(){
-        return $this->belongsTo(Address::class);
+    public function linord(){
+        return $this->belongsTo(Linord::class);
     }
 
     public function products(){

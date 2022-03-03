@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->id();
-            $table->boolean('status');
-            $table->timestamps();            
+        Schema::create('linords', function (Blueprint $table) {
+            $table->primary(['user_id', 'order_id']);
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('linords');
     }
 };

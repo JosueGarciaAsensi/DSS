@@ -18,11 +18,10 @@ class CartTableSeeder extends Seeder
         DB::table('carts')->delete();
         // Añadimos una entrada a esta tabla
 
-        foreach (range(1,4) as $index) {                
+        foreach (range(1,10) as $index) {                
                 DB::table('carts')->insert(
                     [                        
-                        'users_id' => $index,
-                        'product_id' => $index                        
+                        'status' => random_int(0,1)                        
                     ]
                 );
         }

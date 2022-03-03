@@ -22,11 +22,8 @@ class OrderTableSeeder extends Seeder
         
         foreach (range(1,4) as $index) {                
                 DB::table('orders')->insert(
-                    [                        
-                        'users_id' => $index,
-                        'product_id' => $index,
-                        'state' => $states[random_int(1, 3)],
-                        'bills_id' => $index                        
+                    [    
+                        'state' => $states[random_int(1, 3)]
                     ]
                 );
         }

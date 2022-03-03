@@ -5,10 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-class BeerTypesTableSeeder extends Seeder
+class ProductsBillsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,14 +15,13 @@ class BeerTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Clásica', 'Especial', 'Tostada', 'Negra'];
+        DB::table('product_bill')->delete();
 
-        DB::table('beertypes')->delete();
-        // Añadimos una entrada a esta tabla
         foreach (range(1,3) as $index) {
-            DB::table('beertypes')->insert(
+            DB::table('product_bill')->insert(
                 [
-                    'name' => $types[$index]
+                    'bill_id' => $index,
+                    'product_id' => random_int(1, 7)
                 ]
             );
         }

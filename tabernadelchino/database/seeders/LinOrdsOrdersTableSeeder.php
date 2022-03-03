@@ -5,9 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
-class BillTableSeeder extends Seeder
+class LinOrdsOrdersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +15,13 @@ class BillTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bills')->delete();
-        // Añadimos una entrada a esta tabla
+        DB::table('linords')->delete();
+
         foreach (range(1,4) as $index) {
-            $t = date("d m Y", mt_rand(1, time()));
-            DB::table('bills')->insert(
+            DB::table('linords')->insert(
                 [
-                    'order_id' => $index, 
-                    'date' => Carbon::create($t[2], $t[1], $t[0]),
-                    'amount' => 20.0
+                    'user_id' => random_int(1, 5),
+                    'order_id' => $index
                 ]
             );
         }

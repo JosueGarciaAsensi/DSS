@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('address_id')->constrained()->cascadeOnDelete();  // Composición
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete();     // Composición
-            $table->foreignId('order_id')->constrained();                       // Agregación
             $table->string('dni');
             $table->string('surname');
             $table->boolean('admin');
@@ -33,7 +32,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['address_id']);
             $table->dropForeign(['cart_id']);
-            $table->dropForeign(['order_id']);
             $table->dropColumn('dni');
             $table->dropColumn('surname');
             $table->dropColumn('admin');
