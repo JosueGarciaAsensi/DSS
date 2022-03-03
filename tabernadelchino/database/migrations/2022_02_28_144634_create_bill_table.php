@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             //$table->unsignedBigInteger('order_id');
             //$table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->date('date');
             $table->double('amount');
             $table->timestamps();

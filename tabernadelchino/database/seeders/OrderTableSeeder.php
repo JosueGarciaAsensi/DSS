@@ -17,14 +17,27 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         DB::table('orders')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(1,10) as $index) {
-            DB::table('orders')->insert(
-                [
-                    'state' => Str::random(10),
-                    'users_id' => $index
-                ]
-            );
+
+        $info = [];
+        foreach (range(1, 10) as $index) {
+
+            $users_id = $index;
+
+            foreach(range(1, 10) as $indey) {
+                $product_id = $indey;
+                $info[] = [$users_id , $product_id];
+            }
+
+        }
+
+        foreach (range(1,10) as $index) {                
+                DB::table('orders')->insert(
+                    [                        
+                        'users_id' => $info[$index][0],
+                        'product_id' => $info[$index][1],
+                        'state' => Str::random(10)                        
+                    ]
+                );
         }
     }
 }

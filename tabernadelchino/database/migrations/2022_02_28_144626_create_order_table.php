@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
-            //No sé si se hace esto
-            //$table->foreignId('users_id')->constrained();
+            $table->foreignId('users_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnUpdate();
             $table->string('state');
             $table->timestamps();
         });
