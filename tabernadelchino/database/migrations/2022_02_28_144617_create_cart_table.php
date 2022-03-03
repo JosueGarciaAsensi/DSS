@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('users_id')->constrained();
-            $table->primary(['users_id', 'product_id']);
+            $table->id();
             $table->timestamps();
             
         });
