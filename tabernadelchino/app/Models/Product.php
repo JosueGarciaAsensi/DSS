@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function beertypes() {
+    public function beertype() {
         return $this->belongsToMany('App\Models\BeerType');
     }
 
