@@ -9,7 +9,7 @@ class Linord extends Model
 {
     use HasFactory;
 
-    public function order() { return $this->hasOne(Order::class, 'foreign_key'); }
+    public function order() { return $this->belongsToMany(Order::class, 'foreign_key'); }
 
-    public function user() { return $this->hasOne(User::class, 'foreign_key'); }
+    public function user() { return $this->belongsToMany(User::class, 'foreign_key'); }
 }

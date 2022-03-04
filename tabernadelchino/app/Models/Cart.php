@@ -9,17 +9,15 @@ class Cart extends Model
 {
     use HasFactory;
 
-    /**
-     * The explicit primary key.
-     * 
-     */
-    protected $primaryKey = ['users_id', 'product_id'];
-
-    public function products() {
+    public function product() {
         return $this->belongsToMany('App\Models\Product');
     }
 
     public function user() {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function order(){
+        return $this->belongsTo('App\Models\Cart');
     }
 }

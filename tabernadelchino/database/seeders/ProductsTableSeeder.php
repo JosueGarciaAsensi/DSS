@@ -37,6 +37,7 @@ class ProductsTableSeeder extends Seeder
                     'stock' => random_int(1, 10),
                     'description' => $description[$index],
                     'price' => $price[$index],
+                    'user_id' => random_int(1, 4),
                     'beertype_id' => random_int(1, 3)
                 ]
             );

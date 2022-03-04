@@ -9,11 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function beertype() {
-        return $this->belongsToMany('App\Models\BeerType');
-    }
+    public function beertype() { return $this->hasOne('App\Models\BeerType'); }
 
-    public function carts() {
-        return $this->belongsToMany('App\Models\Cart');
-    }
+
+
+
+    
+    public function user() { return $this->hasOne('App\Models\User'); }
+
+    public function cart() { return $this->belongsToMany('App\Models\Cart'); }
+
+    public function order() { return $this->belongsToMany('App\Models\Order'); }
+
+    public function bill() { return $this->belongsToMany('App\Models\Bill'); }
 }

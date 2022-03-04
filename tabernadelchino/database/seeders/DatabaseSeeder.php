@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('ProductsBills table seeded!' );
 
         $this->call( ProductsCartsTableSeeder ::class );
-        $this->command->info('ProductsCart table seeded!' );
+        $this->command->info('ProductsCarts table seeded!' );
 
         $this->call( ProductsOrdersTableSeeder ::class );
         $this->command->info('ProductsOrders table seeded!' );

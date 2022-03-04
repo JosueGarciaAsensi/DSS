@@ -14,9 +14,19 @@ class User extends Authenticatable
 
     public function address() { return $this->hasOne(Address::class, 'foreign_key'); }
 
-    public function linord() { return $this->belongsTo(Linord::class, 'foreign_key'); }
+    //JORDI ME CAGO EN TODO
+    //public function linord() { return $this->belongsTo(Linord::class, 'foreign_key'); }
 
     public function cart() { return $this->hasOne(Cart::class, 'foreign_key'); }
+
+    public function product() { 
+        if ($this->admin){
+            return $this->belongsTo(Product::class);
+        }
+        else{
+            echo "No es un administrador";
+        }
+    }
 
     /**
      * The attributes that are mass assignable.
