@@ -26,16 +26,6 @@ class UserTest extends TestCase
     }
 
     /**
-     * A linord test.
-     *
-     * @return void
-     */
-    public function test_linord()
-    {
-        $this->fail('Not implemented');
-    }
-
-    /**
      * A cart test.
      *
      * @return void

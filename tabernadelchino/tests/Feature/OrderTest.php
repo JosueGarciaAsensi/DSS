@@ -61,14 +61,4 @@ class OrderTest extends TestCase
     {
         $this->assertEquals(Order::find(1)->cart, Cart::find(1));
     }
-
-    /**
-     * A linord test.
-     * 
-     * @return void
-     */
-    public function test_linord()
-    {        
-        $this->fail('Not implemented');
-    }
 }
