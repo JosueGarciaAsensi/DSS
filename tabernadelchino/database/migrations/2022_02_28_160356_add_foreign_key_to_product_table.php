@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->foreignId('beertype_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('beer_type_id')->constrained()->cascadeOnUpdate();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['beertype_id']);
+            $table->dropForeign(['beer_type_id']);
         });
     }
 };

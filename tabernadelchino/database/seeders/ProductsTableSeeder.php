@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -16,16 +15,30 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        $names = ['Heineken', 'Mahou', 'Estrella Galicia', 'Estrella Levante', 'Paulaner', 'San Miguel', 'CruzCampo', 'Steinburg'];
+        $description = [
+            'Es una cerveza de tipo Lager y estilo Pilsen de color amarillo claro y brillante, con una espuma blanca intensa, cremosa y persistente en el vaso.',
+            'Soy la caña',
+            'De las mejorcitas que probarás',
+            'Si es de la huerta, es que está muy buena',
+            'Esto está a otro nivel, sólo para los verdaderos amantes de la cerveza',
+            'Estará a la misma altura que el arcangel Miguel?',
+            'La favorita de Jordi',
+            'No te dejes engañar porque se venda en el Mercadona'
+        ];
+        $price = [3.0, 1.5, 2, 1.8, 2.5, 1.5, 1.6, 0.79];
+
         DB::table('products')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,10) as $index) {
+        foreach (range(0, 4) as $index) {
             DB::table('products')->insert(
                 [
-                    'name' => Str::random(10),
-                    'stock' => 1,
-                    'description' => Str::random(10),
-                    'price' => 10.0,
-                    'beertype_id' => $index  #TODO Mirar si funciona
+                    'name' => $names[$index],
+                    'stock' => random_int(1, 10),
+                    'description' => $description[$index],
+                    'price' => $price[$index],
+                    'user_id' => $index+1, 
+                    'beer_type_id' => $index+1
                 ]
             );
         } 

@@ -9,9 +9,25 @@ class Cart extends Model
 {
     use HasFactory;
 
+    public function product() {
+        return $this->belongsToMany('App\Models\Product');
+    }
+
+    public function user() {
+        return $this->hasOne('App\Models\User');
+    }
+
+    public function order(){
+        return $this->hasMany('App\Models\Order');
+    }
+
+
     /**
-     * The explicit primary key.
-     * 
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
      */
-    protected $primaryKey = ['users_id', 'product_id'];
+    protected $fillable = [
+        'status'
+    ];
 }

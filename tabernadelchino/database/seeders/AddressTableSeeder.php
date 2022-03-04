@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
 
 class AddressTableSeeder extends Seeder
 {
@@ -16,14 +17,18 @@ class AddressTableSeeder extends Seeder
      */
     public function run()
     {
+        $dirs = ['Médico Pedro Herrero', 'Pais Valencia', 'La Flora', 'Denia', 'Aguilera'];
+        $type = ['Calle', 'Avenida', 'Calle', 'Avenida', 'Calle'];
+        $pc = ['03006', '03007', '03006', '03010', '03008'];
+
         DB::table('addresses')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,10) as $index) {
+        foreach (range(0,4) as $index) {
             DB::table('addresses')->insert(
                 [
-                    'type' => Str::random(10),
-                    'name' => Str::random(10),
-                    'pc' => Str::random(10) 
+                    'type' => $type[$index],
+                    'name' => $dirs[$index],
+                    'pc' => $pc[$index] 
                 ]
             );
         }

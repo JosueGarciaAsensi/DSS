@@ -9,13 +9,16 @@ class Address extends Model
 {
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo(User::class, 'foreign_key');
-    }
+    public function user() { return $this->hasOne(User::class); }
 
-    // protected $fillable = [
-    //     'type',
-    //     'name',
-    //     'pc'
-    // ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'type',
+        'name',
+        'pc'
+    ];
 }
