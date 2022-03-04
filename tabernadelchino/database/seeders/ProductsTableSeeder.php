@@ -38,7 +38,7 @@ class ProductsTableSeeder extends Seeder
                     'description' => $description[$index],
                     'price' => $price[$index],
                     'user_id' => $index+1, 
-                    'beertype_id' => $index+1
+                    'beer_type_id' => $index+1
                 ]
             );
         } 
