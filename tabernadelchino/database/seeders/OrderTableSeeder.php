@@ -18,14 +18,14 @@ class OrderTableSeeder extends Seeder
     {
         DB::table('orders')->delete();
         
-        $states = ['Pendiente pago', 'Pago realizado', 'Enviado', 'Entregado'];
+        $states = ['Pendiente pago', 'Pago realizado', 'Enviado', 'Entregado', 'Devuelto'];
         
-        foreach (range(1,4) as $index) {                
+        foreach (range(0,4) as $index) {                
                 DB::table('orders')->insert(
                     [    
-                        'cart_id' => $index,
-                        'user_id' => $index,
-                        'state' => $states[random_int(1, 3)]
+                        'cart_id' => $index+1,
+                        'user_id' => $index+1,
+                        'state' => $states[$index]
                     ]
                 );
         }

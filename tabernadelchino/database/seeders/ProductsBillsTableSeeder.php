@@ -17,11 +17,11 @@ class ProductsBillsTableSeeder extends Seeder
     {
         DB::table('product_bill')->delete();
 
-        foreach (range(1,3) as $index) {
+        foreach (range(0, 4) as $index) {
             DB::table('product_bill')->insert(
                 [
-                    'bill_id' => $index,
-                    'product_id' => random_int(1, 7)
+                    'bill_id' => $index+1,
+                    'product_id' => $index+1
                 ]
             );
         }

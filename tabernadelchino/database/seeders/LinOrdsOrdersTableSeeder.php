@@ -17,11 +17,11 @@ class LinOrdsOrdersTableSeeder extends Seeder
     {
         DB::table('linords')->delete();
 
-        foreach (range(1,4) as $index) {
+        foreach (range(0,4) as $index) {
             DB::table('linords')->insert(
                 [
-                    'user_id' => random_int(1, 5),
-                    'order_id' => $index
+                    'user_id' => $index+1,
+                    'order_id' => $index+1
                 ]
             );
         }

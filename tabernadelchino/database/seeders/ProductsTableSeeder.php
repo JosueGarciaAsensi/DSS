@@ -30,15 +30,15 @@ class ProductsTableSeeder extends Seeder
 
         DB::table('products')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,7) as $index) {
+        foreach (range(0, 4) as $index) {
             DB::table('products')->insert(
                 [
                     'name' => $names[$index],
                     'stock' => random_int(1, 10),
                     'description' => $description[$index],
                     'price' => $price[$index],
-                    'user_id' => random_int(1, 4),
-                    'beertype_id' => random_int(1, 3)
+                    'user_id' => $index+1, 
+                    'beertype_id' => $index+1
                 ]
             );
         } 

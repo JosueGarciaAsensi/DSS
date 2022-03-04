@@ -9,13 +9,9 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function beertype() { return $this->hasOne('App\Models\BeerType'); }
-
-
-
-
+    public function beertype() { return $this->belongsTo('App\Models\BeerType'); }
     
-    public function user() { return $this->hasOne('App\Models\User'); }
+    public function user() { return $this->belongsTo('App\Models\User'); }
 
     public function cart() { return $this->belongsToMany('App\Models\Cart'); }
 

@@ -17,16 +17,16 @@ class AddressTableSeeder extends Seeder
      */
     public function run()
     {
-        $dirs = ['Médico Pedro Herrero', 'La Flora', 'Denia', 'Aguilera', 'Isabel II'];
-        $type = ['Calle', 'Avenida'];
+        $dirs = ['Médico Pedro Herrero', 'Pais Valencia', 'La Flora', 'Denia', 'Aguilera'];
+        $type = ['Calle', 'Avenida', 'Calle', 'Avenida', 'Calle'];
         $pc = ['03006', '03007', '03006', '03010', '03008'];
 
         DB::table('addresses')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,4) as $index) {
+        foreach (range(0,4) as $index) {
             DB::table('addresses')->insert(
                 [
-                    'type' => $type[random_int(1, 1)],
+                    'type' => $type[$index],
                     'name' => $dirs[$index],
                     'pc' => $pc[$index] 
                 ]

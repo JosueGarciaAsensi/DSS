@@ -9,5 +9,5 @@ class BeerType extends Model
 {
     use HasFactory;
 
-    public function product() { return $this->belongsTo('App\Models\Product'); }
+    public function product() { return $this->hasMany('App\Models\Product'); }
 }

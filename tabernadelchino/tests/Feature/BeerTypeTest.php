@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\BeerType;
+use App\Models\Product;
+
 class BeerTypeTest extends TestCase
 {
     /**
@@ -15,6 +18,6 @@ class BeerTypeTest extends TestCase
      */
     public function test_product()
     {
-        $this->fail('Not implemented');
+        $this->assertEquals(BeerType::find(1)->product, Product::find(1));
     }
 }

@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder {
                     'password' => Hash::make(Str::random(5)),
                     'dni' => $dni[$index],
                     'admin' => true,
-                    'address_id' => random_int(1, 3),
+                    'address_id' => $index+1, 
                     'cart_id' => $index+1
                 ]
             );

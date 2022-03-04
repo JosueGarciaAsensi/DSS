@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models;
+
 class ProductTest extends TestCase
 {
     /**
@@ -15,6 +17,7 @@ class ProductTest extends TestCase
      */
     public function test_beertype()
     {
+        //$this->assertEquals(Product::find(1)->beertype, BeerType::find(1));
         $this->fail('Not implemented');
     }
 
@@ -25,6 +28,7 @@ class ProductTest extends TestCase
      */
     public function test_user()
     {
+        // $this->assertEquals(Product::find(1)->user, User::find(1))
         $this->fail('Not implemented');
     }
 

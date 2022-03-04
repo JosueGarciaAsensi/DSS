@@ -18,11 +18,11 @@ class BillTableSeeder extends Seeder
     {
         DB::table('bills')->delete();
         // Añadimos una entrada a esta tabla
-        foreach (range(1,4) as $index) {
+        foreach (range(0, 4) as $index) {
             $t = date("d m Y", mt_rand(1, time()));
             DB::table('bills')->insert(
                 [
-                    'order_id' => $index, 
+                    'order_id' => $index+1, 
                     'date' => Carbon::create($t[2], $t[1], $t[0]),
                     'amount' => 20.0
                 ]

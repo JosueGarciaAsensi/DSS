@@ -7,6 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Assert;
 use Tests\TestCase;
 
+use App\Models\Address;
+use App\Models\User;
+
 use function PHPUnit\Framework\assertEquals;
 
 class AddressTest extends TestCase
@@ -18,6 +21,6 @@ class AddressTest extends TestCase
      */
     public function test_user()
     {
-        $this->fail('Not implemented');
+        $this->assertEquals(Address::find(1)->user, User::find(1));
     }
 }
