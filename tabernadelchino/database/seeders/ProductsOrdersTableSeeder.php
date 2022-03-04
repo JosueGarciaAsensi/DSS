@@ -15,10 +15,10 @@ class ProductsOrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_order')->delete();
+        DB::table('order_product')->delete();
 
         foreach (range(0, 4) as $index) {                
-            DB::table('product_order')->insert(
+            DB::table('order_product')->insert(
                 [    
                     'product_id' => $index+1,
                     'order_id' => $index+1

@@ -10,6 +10,7 @@ use App\Models\Address;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 
 class UserTest extends TestCase
@@ -56,6 +57,24 @@ class UserTest extends TestCase
 
         foreach ($products as $it) {
             if (Product::find(1) == $it) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
+    }
+
+    /**
+     * A order test.
+     * 
+     * @return void
+     */
+    public function test_order()
+    {
+        $orders = User::find(1)->order;
+        $found = false;
+
+        foreach($orders as $it) {
+            if (Order::find(1) == $it) {                
                 $found = true;
             }
         }

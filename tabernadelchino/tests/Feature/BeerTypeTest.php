@@ -18,7 +18,14 @@ class BeerTypeTest extends TestCase
      */
     public function test_product()
     {
-        //$this->assertEquals(BeerType::find(1)->product, Product::find(1));
-        $this->fail('F');
+        $products = BeerType::find(1)->product;
+        $found = false;
+
+        foreach ($products as $it) {
+            if (Product::find(1) == $it) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 }

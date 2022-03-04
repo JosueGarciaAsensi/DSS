@@ -31,7 +31,15 @@ class OrderTest extends TestCase
      */
     public function test_product()
     {
-        $this->fail('Not implemented');
+        $products = Order::find(1)->product;
+        $found = false;
+
+        foreach ($products as $it) {
+            if (Product::find(1) == $it) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 
     /**
@@ -52,5 +60,15 @@ class OrderTest extends TestCase
     public function test_cart()
     {
         $this->assertEquals(Order::find(1)->cart, Cart::find(1));
+    }
+
+    /**
+     * A linord test.
+     * 
+     * @return void
+     */
+    public function test_linord()
+    {
+        $this->fail('Not implemented');
     }
 }

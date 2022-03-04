@@ -6,6 +6,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\Product;
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Order;
+
 class CartTest extends TestCase
 {
     /**
@@ -15,7 +20,15 @@ class CartTest extends TestCase
      */
     public function test_order()
     {
-        $this->fail('Not implemented');
+        $products = Cart::find(1)->order;
+        $found = false;
+
+        foreach ($products as $it) {
+            if (Order::find(1) == $it) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 
     /**
@@ -35,6 +48,6 @@ class CartTest extends TestCase
      */
     public function test_user()
     {
-        $this->fail('Not implemented');
+        $this->assertEquals(Cart::find(1)->user, User::find(1));
     }
 }

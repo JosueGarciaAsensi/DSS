@@ -9,6 +9,8 @@ use Tests\TestCase;
 use App\Models\Bill;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductBill;
+use Illuminate\Support\Facades\DB;
 
 class BillTest extends TestCase
 {
@@ -23,22 +25,20 @@ class BillTest extends TestCase
     }
 
     /**
-     * A linord test.
-     *
-     * @return void
-     */
-    public function test_linord()
-    {
-        $this->fail('Not implemented');
-    }
-
-    /**
      * A product test.
-     *
+     * 
      * @return void
      */
     public function test_product()
     {
-        $this->fail('Not implemented');
+        $products = Bill::find(1)->product;
+        $found = false;
+
+        foreach($products as $it) {
+            if (Product::find(1)->bill_id == $it->bill_id) {                
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 }
