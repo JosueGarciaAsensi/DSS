@@ -35,7 +35,7 @@ class OrderTest extends TestCase
         $found = false;
 
         foreach ($products as $it) {
-            if (Product::find(1) == $it) {
+            if (Product::find(1)->product_id == $it->product_id) {
                 $found = true;
             }
         }
@@ -68,7 +68,7 @@ class OrderTest extends TestCase
      * @return void
      */
     public function test_linord()
-    {
+    {        
         $this->fail('Not implemented');
     }
 }

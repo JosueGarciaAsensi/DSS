@@ -18,7 +18,7 @@ class Cart extends Model
     }
 
     public function order(){
-        return $this->hasMany('App\Models\Cart');
+        return $this->hasMany('App\Models\Order');
     }
 
 

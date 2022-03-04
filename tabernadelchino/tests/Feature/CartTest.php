@@ -20,10 +20,10 @@ class CartTest extends TestCase
      */
     public function test_order()
     {
-        $products = Cart::find(1)->order;
+        $orders = Cart::find(1)->order;
         $found = false;
 
-        foreach ($products as $it) {
+        foreach ($orders as $it) {
             if (Order::find(1) == $it) {
                 $found = true;
             }
@@ -38,7 +38,15 @@ class CartTest extends TestCase
      */
     public function test_product()
     {
-        $this->fail('Not implemented');
+        $products = Cart::find(1)->product;
+        $found = false;
+
+        foreach ($products as $it) {
+            if (Product::find(1)->product_id == $it->product_id) {
+                $found = true;
+            }
+        }
+        $this->assertTrue($found);
     }
 
     /**

@@ -15,6 +15,8 @@ use App\Models\Bill;
 use App\Models\Order;
 use App\Models\Cart;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ProductTest extends TestCase
 {
     /**
@@ -24,6 +26,7 @@ class ProductTest extends TestCase
      */
     public function test_beertype()
     {
+
         $this->assertEquals(Product::find(1)->beer_type, BeerType::find(1));
     }
 

@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function beertype() { return $this->belongsTo('App\Models\BeerType'); }
+    public function beer_type() { return $this->belongsTo('App\Models\BeerType'); }
     
     public function user() { return $this->belongsTo('App\Models\User'); }
 
