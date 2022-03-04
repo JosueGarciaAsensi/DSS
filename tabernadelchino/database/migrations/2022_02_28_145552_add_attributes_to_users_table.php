@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('address_id')->constrained()->cascadeOnDelete();  // Composición
-            $table->foreignId('cart_id')->constrained()->cascadeOnDelete();     // Composición
+            //$table->foreignId('address_id')->constrained()->cascadeOnDelete();  // Composición
+            $table->foreignId('address_id')->default(0);
+            //$table->foreignId('cart_id')->constrained()->cascadeOnDelete();     // Composición
+            $table->foreignId('cart_id')->default(0);
             $table->string('dni');
             $table->string('surname');
             $table->boolean('admin');

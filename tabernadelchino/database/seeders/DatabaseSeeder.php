@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
         $this->call( CartTableSeeder ::class );
         $this->command->info('Carts table seeded!' );
 
-        $this->call( UsersTableSeeder ::class );
-        $this->command->info('Users table seeded!' );
-
         $this->call( OrderTableSeeder ::class );
         $this->command->info('Orders table seeded!' );
+
+        $this->call( UsersTableSeeder ::class );
+        $this->command->info('Users table seeded!' );
 
         $this->call( BillTableSeeder ::class );
         $this->command->info('Bills table seeded!' );

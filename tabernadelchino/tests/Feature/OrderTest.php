@@ -15,7 +15,7 @@ class OrderTest extends TestCase
      */
     public function test_bill()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 
     /**
@@ -25,7 +25,7 @@ class OrderTest extends TestCase
      */
     public function test_product()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 
     /**
@@ -35,7 +35,7 @@ class OrderTest extends TestCase
      */
     public function test_user()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 
     /**
@@ -45,6 +45,6 @@ class OrderTest extends TestCase
      */
     public function test_cart()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 }

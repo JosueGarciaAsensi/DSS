@@ -15,7 +15,7 @@ class CartTest extends TestCase
      */
     public function test_order()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 
     /**
@@ -25,7 +25,7 @@ class CartTest extends TestCase
      */
     public function test_product()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 
     /**
@@ -35,6 +35,6 @@ class CartTest extends TestCase
      */
     public function test_user()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 }

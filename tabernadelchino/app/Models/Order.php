@@ -11,8 +11,7 @@ class Order extends Model
 
     public function bill() { return $this->belongsTo(Bill::class); }
 
-    //MIRAR COMO COÑO SE HACE (GRACIAS JORDI)
-    //public function linord() { return $this->belongsTo(Linord::class); }
+    public function linord() { return $this->hasMany(Linord::class); }
 
     public function product() { return $this->belongsToMany(Product::class); }
 

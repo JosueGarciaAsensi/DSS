@@ -20,4 +20,14 @@ class Cart extends Model
     public function order(){
         return $this->belongsTo('App\Models\Cart');
     }
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'status'
+    ];
 }

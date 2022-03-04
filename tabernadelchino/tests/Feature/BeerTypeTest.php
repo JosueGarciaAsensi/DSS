@@ -15,6 +15,6 @@ class BeerTypeTest extends TestCase
      */
     public function test_product()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 }

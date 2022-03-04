@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Models\Address;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Assert;
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertEquals;
 
 class AddressTest extends TestCase
 {
@@ -17,6 +18,6 @@ class AddressTest extends TestCase
      */
     public function test_user()
     {
-        return false;
+        $this->fail('Not implemented');
     }
 }
