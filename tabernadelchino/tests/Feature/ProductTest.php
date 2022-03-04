@@ -8,6 +8,10 @@ use Tests\TestCase;
 
 use App\Models;
 
+use App\Models\Product;
+use App\Models\BeerType;
+
+
 class ProductTest extends TestCase
 {
     /**
@@ -17,8 +21,8 @@ class ProductTest extends TestCase
      */
     public function test_beertype()
     {
-        //$this->assertEquals(Product::find(1)->beertype, BeerType::find(1));
-        $this->fail('Not implemented');
+        $this->assertEquals(Product::find(1)->beertype, BeerType::find(1));
+        //$this->fail('Not implemented');
     }
 
     /**

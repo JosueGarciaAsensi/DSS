@@ -6,6 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\Bill;
+use App\Models\Order;
+use App\Models\Product;
+
 class BillTest extends TestCase
 {
     /**
@@ -14,6 +18,16 @@ class BillTest extends TestCase
      * @return void
      */
     public function test_order()
+    {
+        $this->assertEquals(Bill::find(1)->order, Order::find(1));
+    }
+
+    /**
+     * A linord test.
+     *
+     * @return void
+     */
+    public function test_linord()
     {
         $this->fail('Not implemented');
     }

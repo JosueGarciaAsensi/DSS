@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function bill() { return $this->belongsTo(Bill::class); }
+    public function bill() { return $this->hasOne(Bill::class); }
 
     public function linord() { return $this->hasMany(Linord::class); }
 
@@ -17,5 +17,5 @@ class Order extends Model
 
     public function user() { return $this->belongsTo(User::class); }
 
-    public function cart() { return $this->hasOne(Cart::class); }
+    public function cart() { return $this->belongsTo(Cart::class); }
 }
