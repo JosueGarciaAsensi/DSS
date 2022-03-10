@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id');
-            $table->foreignId('user_id');
+            $table->foreignId('users_id')->constrained();
             $table->string('state');
             $table->timestamps();
         });
@@ -29,6 +28,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['users_id']);
+            $table->dropColumn('state');
+        });   
     }
 };

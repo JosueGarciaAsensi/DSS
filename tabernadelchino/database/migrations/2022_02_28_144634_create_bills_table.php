@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained();   //Agregación
+            $table->foreignId('orders_id')->constrained();   //Agregación
             $table->date('date');
             $table->double('amount');
             $table->timestamps();
@@ -29,6 +29,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::table('bills', function (Blueprint $table) {
+            $table->dropForeign(['orders_id']);
+            $table->dropColumn('date');
+            $table->dropColumn('amount');
+        });     
     }
 };
