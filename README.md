@@ -27,16 +27,24 @@ A fecha de **_14/02/2022_**
 
 <br>
 
-### :two: Primera entrega ⏰
+### :two: Primera entrega ✔️
 
 Fecha límite de entrega: _04/03/2022_
 
 Contenido:
 - _Creación del repositorio_
 - _Diagrama de clases_ (3 clases)
-- _Implementación_
+- _Implementación del diagrama_
 
 Entregado:
 - [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
+- [\_documentacion/ER.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/ER.png)
 
 
+### :three: Segunda entrega ⏰
+
+Fecha límite de entrega: _08/04/2022_
+
+Contenido:
+- _Diagrama de clases_ (completo)
+- _Aplicación funcional sin autenticación de usuarios_
