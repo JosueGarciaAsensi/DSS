@@ -7,7 +7,11 @@
 
 ## Inicialización del proyecto
 
-Se facilita el archivo ```.env``` en el índice privado.
+Se facilita el archivo ```.env``` en el índice privado. Una vez copiado en el directorio de Laravel, se deben ejecutar los siguientes comandos.
+```
+composer install --no-scripts
+composer dump-load
+```
 
 <br>
 
