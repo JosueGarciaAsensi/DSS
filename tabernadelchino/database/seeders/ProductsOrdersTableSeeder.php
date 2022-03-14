@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\ProductOrder;
 
 class ProductsOrdersTableSeeder extends Seeder
 {
@@ -15,15 +15,12 @@ class ProductsOrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_product')->delete();
+        foreach (range(0,4) as $i) {
+            $productOrder = new ProductOrder();
+            $productOrder->product_id = $i+1;
+            $productOrder->order_id = $i+1;
 
-        foreach (range(0, 4) as $index) {                
-            DB::table('order_product')->insert(
-                [    
-                    'product_id' => $index+1,
-                    'order_id' => $index+1
-                ]
-            );
+            $productOrder->save();
         }
     }
 }

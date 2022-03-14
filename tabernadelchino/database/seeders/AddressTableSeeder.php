@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Enum;
+
+use App\Models\Address;
 
 class AddressTableSeeder extends Seeder
 {
@@ -21,16 +19,13 @@ class AddressTableSeeder extends Seeder
         $type = ['Calle', 'Avenida', 'Calle', 'Avenida', 'Calle'];
         $pc = ['03006', '03007', '03006', '03010', '03008'];
 
-        DB::table('addresses')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0,4) as $index) {
-            DB::table('addresses')->insert(
-                [
-                    'type' => $type[$index],
-                    'name' => $dirs[$index],
-                    'pc' => $pc[$index] 
-                ]
-            );
+        foreach (range(0,4) as $i) {
+            $address = new Address();
+            $address->type = $type[$i];
+            $address->name = $dirs[$i];
+            $address->pc = $pc[$i];
+
+            $address->save();
         }
     }
 }

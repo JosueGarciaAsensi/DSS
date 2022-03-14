@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Product;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -28,19 +28,16 @@ class ProductsTableSeeder extends Seeder
         ];
         $price = [3.0, 1.5, 2, 1.8, 2.5, 1.5, 1.6, 0.79];
 
-        DB::table('products')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0, 4) as $index) {
-            DB::table('products')->insert(
-                [
-                    'name' => $names[$index],
-                    'stock' => random_int(1, 10),
-                    'description' => $description[$index],
-                    'price' => $price[$index],
-                    'user_id' => $index+1, 
-                    'beer_type_id' => $index+1
-                ]
-            );
-        } 
+        foreach (range(0,4) as $i) {
+            $product = new Product();
+            $product->name = $names[$i];
+            $product->stock = random_int(1, 10);
+            $product->description = $description[$i];
+            $product->price = $price[$i];
+            $product->user_id = $i+1;
+            $product->beer_type_id = $i+1;
+
+            $product->save();
+        }
     }
 }

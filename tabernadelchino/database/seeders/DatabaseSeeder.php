@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
         $this->call( AddressTableSeeder ::class );
         $this->command->info('Addresses table seeded!' );
 
@@ -33,12 +31,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call( UsersTableSeeder ::class );
         $this->command->info('Users table seeded!' );
-
-        $this->call( BillTableSeeder ::class );
-        $this->command->info('Bills table seeded!' );
-
-        $this->call( ProductsBillsTableSeeder ::class );
-        $this->command->info('ProductsBills table seeded!' );
 
         $this->call( ProductsCartsTableSeeder ::class );
         $this->command->info('ProductsCarts table seeded!' );

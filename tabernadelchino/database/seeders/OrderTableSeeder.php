@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+
+use App\Models\Order;
 
 class OrderTableSeeder extends Seeder
 {
@@ -15,19 +14,16 @@ class OrderTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        DB::table('orders')->delete();
-        
+    { 
         $states = ['Pendiente pago', 'Pago realizado', 'Enviado', 'Entregado', 'Devuelto'];
-        
-        foreach (range(0,4) as $index) {                
-                DB::table('orders')->insert(
-                    [    
-                        'cart_id' => $index+1,
-                        'user_id' => $index+1,
-                        'state' => $states[$index]
-                    ]
-                );
+
+        foreach (range(0,4) as $i) {
+            $order = new Order();
+            $order->cart_id = $i+1;
+            $order->user_id = $i+1;
+            $order->state = $states[$i];
+
+            $order->save();
         }
     }
 }

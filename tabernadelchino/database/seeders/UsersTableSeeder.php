@@ -2,17 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UsersTableSeeder extends Seeder {
-    public static function obtenerSiguienteIndice($indiceDirecciones) {
-        return DB::table('addresses')->where('id', '>', 0)->pluck('id')->toArray()[$indiceDirecciones - 1];
-    }
+use App\Models\User;
+use App\Models\Address;
+use App\Models\Cart;
 
+class UsersTableSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -25,22 +23,18 @@ class UsersTableSeeder extends Seeder {
         $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
         $dni = ['55391233J', '51253198K', '23421897W', '384230271P', '891238421O'];
 
-        DB::table('users')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0, 4) as $index) {
-            DB::table('users')->insert(
-                [
-                    'name' => $names[$index],
-                    'surname' => $surnames[$index],
-                    'email' => $emails[$index],
-                    'password' => Hash::make(Str::random(5)),
-                    'dni' => $dni[$index],
-                    'admin' => true,
-                    'address_id' => $index+1, 
-                    'cart_id' => $index+1
-                ]
-            );
-            
+        foreach (range(0,4) as $i) {
+            $user = new User();
+            $user->name = $names[$i];
+            $user->surname = $surnames[$i];
+            $user->email = $emails[$i];
+            $user->password = Hash::make(Str::random(5));
+            $user->dni = $dni[$i];
+            $user->admin = true;
+            $user->address()->associate(Address::find($i+1));
+            $user->cart()->associate(Cart::find($i+1));
+
+            $user->save();
         }
     }
 }

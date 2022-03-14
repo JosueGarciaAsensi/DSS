@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
+use App\Models\BeerType;
 
 class BeerTypesTableSeeder extends Seeder
 {
@@ -19,14 +17,11 @@ class BeerTypesTableSeeder extends Seeder
     {
         $types = ['Clásica', 'Especial', 'Tostada', 'Negra', 'Trigo'];
 
-        DB::table('beer_types')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0,4) as $index) {
-            DB::table('beer_types')->insert(
-                [
-                    'name' => $types[$index]
-                ]
-            );
+        foreach (range(0,4) as $i) {
+            $beertype = new BeerType();
+            $beertype->name = $types[$i];
+
+            $beertype->save();
         }
     }
 }
