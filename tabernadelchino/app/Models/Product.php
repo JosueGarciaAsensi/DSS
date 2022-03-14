@@ -16,6 +16,4 @@ class Product extends Model
     public function cart() { return $this->belongsToMany('App\Models\Cart'); }
 
     public function order() { return $this->belongsToMany('App\Models\Order'); }
-
-    public function bill() { return $this->belongsToMany('App\Models\Bill'); }
 }

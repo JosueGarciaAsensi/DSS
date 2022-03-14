@@ -11,7 +11,6 @@ use App\Models;
 use App\Models\Product;
 use App\Models\BeerType;
 use App\Models\User;
-use App\Models\Bill;
 use App\Models\Order;
 use App\Models\Cart;
 
@@ -70,24 +69,6 @@ class ProductTest extends TestCase
 
         foreach($orders as $it) {
             if (Order::find(1)->order_id == $it->order_id) {                
-                $found = true;
-            }
-        }
-        $this->assertTrue($found);
-    }
-
-    /**
-     * A bill test.
-     *
-     * @return void
-     */
-    public function test_bill()
-    {
-        $bills = Product::find(1)->bill;
-        $found = false;
-
-        foreach($bills as $it) {
-            if (Bill::find(1)->bill_id == $it->bill_id) {                
                 $found = true;
             }
         }
