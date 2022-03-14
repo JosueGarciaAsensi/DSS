@@ -19,7 +19,7 @@ class BeerTypesTableSeeder extends Seeder
 
         foreach (range(0,4) as $i) {
             $beertype = new BeerType();
-            $beertype->name = $types[$i];
+            $beertype->names = $types[$i];
 
             $beertype->save();
         }

@@ -2,12 +2,23 @@
 
 namespace Database\Seeders;
 
+use App\Models\BeerType;
 use Illuminate\Database\Seeder;
 
 use App\Models\Product;
+use App\Models\User;
 
 class ProductsTableSeeder extends Seeder
 {
+    protected function getUsers() {
+        $users = User::all();
+        return $users[random_int(1, count($users))];
+    }
+
+    protected function getBeerType() {
+        $types = BeerType::all();
+        return $types[random_int(1, count($types))];
+    }
     /**
      * Run the database seeds.
      *
@@ -34,8 +45,8 @@ class ProductsTableSeeder extends Seeder
             $product->stock = random_int(1, 10);
             $product->description = $description[$i];
             $product->price = $price[$i];
-            $product->user_id = $i+1;
-            $product->beer_type_id = $i+1;
+            $product->user()->associate($this->getUsers());
+            $product->beer_type()->associate($this->getBeerType());
 
             $product->save();
         }
