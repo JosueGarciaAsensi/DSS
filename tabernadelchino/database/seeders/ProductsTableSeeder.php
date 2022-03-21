@@ -12,12 +12,12 @@ class ProductsTableSeeder extends Seeder
 {
     protected function getUsers() {
         $users = User::all();
-        return $users[random_int(1, count($users))];
+        return $users[random_int(0, count($users)-1)];
     }
 
     protected function getBeerType() {
         $types = BeerType::all();
-        return $types[random_int(1, count($types))];
+        return $types[random_int(0, count($types)-1)];
     }
     /**
      * Run the database seeds.
@@ -45,8 +45,8 @@ class ProductsTableSeeder extends Seeder
             $product->stock = random_int(1, 10);
             $product->description = $description[$i];
             $product->price = $price[$i];
-            $product->user()->associate($this->getUsers());
-            $product->beer_type()->associate($this->getBeerType());
+            $product->users()->associate($this->getUsers());
+            $product->beer_types()->associate($this->getBeerType());
 
             $product->save();
         }

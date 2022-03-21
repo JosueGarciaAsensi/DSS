@@ -31,15 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        /*
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['users_id']);
-            $table->dropColumn('name');
-            $table->dropColumn('stock');
-            $table->dropColumn('description');
-            $table->dropColumn('price');
-        });   
-        */
         Schema::dropIfExists('products');
     }
 };

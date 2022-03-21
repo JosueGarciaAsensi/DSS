@@ -12,13 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function address() { return $this->belongsTo(Address::class); }
+    public function addresses() { return $this->belongsTo(Address::class); }
 
-    public function linord() { return $this->hasMany(Linord::class, 'foreign_key'); }
+    public function orders() { return $this->hasMany(Order::class); }
 
-    public function order() { return $this->hasMany(Order::class); }
-
-    public function cart() { return $this->belongsTo(Cart::class); }
+    public function carts() { return $this->belongsTo(Cart::class); }
 
     public function product() { 
         if ($this->admin){

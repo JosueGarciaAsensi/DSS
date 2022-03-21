@@ -11,14 +11,14 @@ use App\Models\Address;
 use App\Models\Cart;
 
 class UsersTableSeeder extends Seeder {
-    protected function getAddress() {
+    protected function getAddress($i) {
         $direcciones = Address::all();
-        return $direcciones[random_int(1, count($direcciones)-1)];
+        return $direcciones[$i];
     }
 
     protected function getCart() {
         $carts = Cart::all();
-        return $carts[random_int(1, count($carts)-1)];
+        return $carts[random_int(0, count($carts)-1)];
     }
 
     /**
@@ -41,8 +41,10 @@ class UsersTableSeeder extends Seeder {
             $user->password = Hash::make(Str::random(5));
             $user->dni = $dni[$i];
             $user->admin = true;
-            $user->address()->associate($this->getAddress());
-            $user->cart()->associate($this->getCart());
+
+            $user->addresses()->associate($this->getAddress($i));
+
+            $user->carts()->associate($this->getCart());
 
             $user->save();
         }

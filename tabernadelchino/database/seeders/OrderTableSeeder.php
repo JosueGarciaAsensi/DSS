@@ -12,12 +12,12 @@ class OrderTableSeeder extends Seeder
 {
     protected function getUsers() {
         $users = User::all();
-        return $users[random_int(1, count($users))];
+        return $users[random_int(0, count($users)-1)];
     }
 
     protected function getCart() {
         $carts = Cart::all();
-        return $carts[random_int(1, count($carts))];
+        return $carts[random_int(0, count($carts)-1)];
     }
 
     /**
@@ -31,8 +31,7 @@ class OrderTableSeeder extends Seeder
 
         foreach (range(0,4) as $i) {
             $order = new Order();
-            $order->user()->associate($this->getUsers());
-            $order->cart()->associate($this->getCart());
+            $order->users()->associate($this->getUsers());
             $order->state = $states[$i];
 
             $order->save();
