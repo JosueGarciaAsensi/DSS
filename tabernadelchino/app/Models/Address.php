@@ -9,7 +9,7 @@ class Address extends Model
 {
     use HasFactory;
 
-    public function user() { return $this->hasOne(User::class); }
+    //public function user() { return $this->hasOne(User::class); }
 
     /**
      * The attributes that are mass assignable.

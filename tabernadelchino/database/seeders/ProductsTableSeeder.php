@@ -2,12 +2,23 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\BeerType;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Product;
+use App\Models\User;
 
 class ProductsTableSeeder extends Seeder
 {
+    protected function getUsers() {
+        $users = User::all();
+        return $users[random_int(0, count($users)-1)];
+    }
+
+    protected function getBeerType() {
+        $types = BeerType::all();
+        return $types[random_int(0, count($types)-1)];
+    }
     /**
      * Run the database seeds.
      *
@@ -28,19 +39,16 @@ class ProductsTableSeeder extends Seeder
         ];
         $price = [3.0, 1.5, 2, 1.8, 2.5, 1.5, 1.6, 0.79];
 
-        DB::table('products')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0, 4) as $index) {
-            DB::table('products')->insert(
-                [
-                    'name' => $names[$index],
-                    'stock' => random_int(1, 10),
-                    'description' => $description[$index],
-                    'price' => $price[$index],
-                    'user_id' => $index+1, 
-                    'beer_type_id' => $index+1
-                ]
-            );
-        } 
+        foreach (range(0,4) as $i) {
+            $product = new Product();
+            $product->name = $names[$i];
+            $product->stock = random_int(1, 10);
+            $product->description = $description[$i];
+            $product->price = $price[$i];
+            $product->users()->associate($this->getUsers());
+            $product->beer_types()->associate($this->getBeerType());
+
+            $product->save();
+        }
     }
 }
