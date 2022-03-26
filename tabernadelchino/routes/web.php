@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,15 @@ Route::get('/sobre-nosotros', function () {
     return view('about');
 });
 
-Route::get('/products', function() {
+//Route::get('/products', function() {
+//    $products = Product::all();
+//    return view('products')->with('products', $products);
+//});
+
+Route::get('/products', [ProductController::class, 'index']);
+
+Route::get('/products/{id}', function($id){
     $products = Product::all();
-    return view('products')->with('products', $products);
+    $product = Product::find($id);
+    return view('product')->with('product', $product)->with('products', $products);
 });

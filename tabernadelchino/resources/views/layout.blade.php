@@ -5,12 +5,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body style="background-color: #ffa834;">
+    <body class="d-flex flex-column min-vh-100" style="background-color: #ffa834;">
         @section('menu')
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
-                <a href="#" class="navbar-brand">La Taberna del Chino</a>
+                <a href="{{ url('/') }}" class="navbar-brand">La Taberna del Chino</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,7 +53,7 @@
         </div>
     </body>
         <!-- Footer -->
-        <footer class="text-center text-white" style="background-color: black;">
+        <footer class="text-center text-white mt-auto" style="background-color: black;">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->

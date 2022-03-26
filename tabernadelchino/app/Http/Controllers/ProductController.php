@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function gridView() {
-        $products = Product::all();
+    public function index() {
+        $products = Product::paginate(3);
         return view('products', ['products' => $products]);
     }
 
