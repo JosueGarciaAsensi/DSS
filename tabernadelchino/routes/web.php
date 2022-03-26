@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,9 @@ Route::get('/', function () {
 
 Route::get('/sobre-nosotros', function () {
     return view('about');
+});
+
+Route::get('/products', function() {
+    $products = Product::all();
+    return view('products')->with('products', $products);
 });

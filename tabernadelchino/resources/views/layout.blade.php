@@ -2,12 +2,12 @@
     <head>
         <title>@yield('title')</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-color: #ffa834;">
         @section('menu')
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
                 <a href="#" class="navbar-brand">La Taberna del Chino</a>
@@ -17,13 +17,13 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Inicio</a>
-                        <a href="#" class="nav-item nav-link">Productos</a>
+                        <a href="{{ url('/products') }}" class="nav-item nav-link">Productos</a>
                         <a href="{{ url('/sobre-nosotros') }}" class="nav-item nav-link">Sobre nosotros</a>
                     </div>
                     <form class="d-flex">
                         <div class="input-group mt-3">                    
                             <input type="text" class="form-control" placeholder="Search">
-                            <button type="button" class="btn btn-secondary">
+                            <button type="button" class="btn" style="background-color: #ffa834;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-light" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                 </svg>
@@ -53,7 +53,7 @@
         </div>
     </body>
         <!-- Footer -->
-        <footer class="bg-dark text-center text-white">
+        <footer class="text-center text-white" style="background-color: black;">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->
