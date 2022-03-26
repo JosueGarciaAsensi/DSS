@@ -35,3 +35,9 @@ Route::get('/products/{id}', function($id){
     $product = Product::find($id);
     return view('product')->with('product', $product)->with('products', $products);
 });
+
+
+// Admin routes
+Route::get('/admin-menu', function () {
+    return view('admin-menu');
+});
