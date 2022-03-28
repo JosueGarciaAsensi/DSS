@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>@yield('admin')</title>
+        <title>@yield('title')</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -12,9 +12,7 @@
                     <img src="{{ asset('img/logo.png') }}" width=80>
                     <a href="{{ url('/admin') }}" class="navbar-brand" style="color:white">La Taberna del Chino</a>
                 </div>
-                <div class="d-flex align-items-center">
-                    <h2 class="text-light">Portal de administrador</h2>
-                </div>
+                <h2 class="text-light">Portal de administrador</h2>
                 <div class="d-flex align-items-center">
                     <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-person text-light mt-2" viewBox="0 0 16 16">
@@ -24,7 +22,6 @@
                 </div>
             </div>
             <div style="background-color:black;">
-
                 <div class="row px-2">
                     <div class="col">
                         <a href="{{ url('/admin-menu') }}" class="nav-item nav-link">

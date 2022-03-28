@@ -34,7 +34,7 @@ Route::get('/cart', function() {
 });
 
 // Admin routes
-Route::get('/admin-menu', function () {
+Route::get('/admin', function () {
     return view('admin-menu');
 });
 
