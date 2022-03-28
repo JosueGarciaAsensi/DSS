@@ -1,16 +1,28 @@
 @extends('layout')
-@section('title', 'Inicio - La Taberna del Chino')
+@section('title', 'Usuarios - La Taberna del Chino')
 @section('menu')
     @parent
 @endsection
+
+@section('content')
 <div class="container mt-5 mb-5 rounded" style="background-color: black;">
-        <table class="table table-responsive">
+    <div class="container">
+        <div class="row row-cols-5" style="text-align: center; color: white;">
+            <div class="col"><b>Nombre</b></div>
+            <div class="col"><b>Apellidos</b></div>
+            <div class="col"><b>Email</b></div>
+            <div class="col"><b>DNI</b></div>
+            <div class="col"><b>Admin</b></div>
+        </div>
+        <div class="row row-cols-5" style="text-align: center; color: white;">
             @foreach ($users as $user)
-            <tr>
-                <td>
-                    <h1>Hola</h1>
-                </td>
-            </tr>
+            <div class="col">{{$user->name}}</div>
+            <div class="col">{{$user->surname}}</div>
+            <div class="col">{{$user->email}}</div>
+            <div class="col">{{$user->dni}}</div>
+            <div class="col">{{$user->admin}}</div>
             @endforeach
-        </table>
+        </div>
     </div>
+</div>
+@endsection
