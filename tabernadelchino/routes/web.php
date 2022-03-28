@@ -36,3 +36,7 @@ Route::get('/cart', function() {
 Route::get('/admin-menu', function () {
     return view('admin-menu');
 });
+
+Route::get('/admin-users', function(){
+    return view('admin-users');
+});
