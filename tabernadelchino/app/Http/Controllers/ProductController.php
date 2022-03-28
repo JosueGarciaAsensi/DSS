@@ -12,8 +12,9 @@ class ProductController extends Controller
         return view('products', ['products' => $products]);
     }
 
-    public function show($id) {
-        $product = Product::findOrFail($id);
-        return view('product.page', ['product' => $product]);
+    public function productShow($id) {
+        $products = Product::all();
+        $product = Product::find($id);
+        return view('product')->with('product', $product)->with('products', $products);
     }
 }
