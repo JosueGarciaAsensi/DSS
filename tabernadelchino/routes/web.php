@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,4 @@ Route::get('/admin-menu', function () {
     return view('admin-menu');
 });
 
-Route::get('/admin-users', function(){
-    return view('admin-users');
-});
+Route::get('/admin-users', [UsersController::class, 'index']);
