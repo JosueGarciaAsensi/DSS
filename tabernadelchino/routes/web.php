@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BeerTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,5 @@ Route::get('/cart', function() {
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
+
+Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
