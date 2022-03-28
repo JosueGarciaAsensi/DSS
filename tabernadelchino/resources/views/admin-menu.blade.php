@@ -4,7 +4,7 @@
     @parent
 @endsection
 @section('content')
-    <div class="container my-5 rounded" style="background-color:black;">
+    <div class="container" style="background-color:black;">
             <div class="row"> 
                 <div class="col">
                     <a>

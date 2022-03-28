@@ -27,6 +27,11 @@ Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
 
+Route::get('/cart', function() {
+    $products = [];
+    return view('cart')->with($products); 
+});
+
 // Admin routes
 Route::get('/admin-menu', function () {
     return view('admin-menu');
