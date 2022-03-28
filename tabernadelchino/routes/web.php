@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -34,8 +35,6 @@ Route::get('/cart', function() {
 });
 
 // Admin routes
-Route::get('/admin', function () {
-    return view('admin-menu');
-});
+Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
