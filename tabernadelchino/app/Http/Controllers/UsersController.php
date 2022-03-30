@@ -11,4 +11,10 @@ class UsersController extends Controller
         $users = User::all();
         return view('admin-users', ['users' => $users]);
     }
+
+    public function delete(Request $request) {
+        $user = User::find($request->input('id'));
+        $user->delete();
+        return redirect('/admin-users');
+    }
 }
