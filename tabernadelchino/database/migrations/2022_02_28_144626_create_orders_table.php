@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignId('users_id')->nullable();
             $table->string('state');
             $table->timestamps();
         });

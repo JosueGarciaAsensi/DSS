@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     public function index() {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('admin-users', ['users' => $users]);
     }
 
-    public function delete(Request $request) {
-        $user = User::find($request->input('id'));
+    public function delete($id) {
+        $user = User::find($id);
         $user->delete();
-        return redirect('/admin-users');
+        return redirect('/admin-users')->with('success', 'deleted succesfully!');
+    }
+
+    public function edit(Request $request, $id) {
+        $user = User::findOrFail($id);
+        if ($request->has('name' . $id)) {
+            $user->name = $request->input('name' . $id);
+            $user->surname = $request->input('surname' . $id);
+            $user->save();
+        }
+        return redirect('/admin-users')->with('success', 'deleted succesfully!');
     }
 }

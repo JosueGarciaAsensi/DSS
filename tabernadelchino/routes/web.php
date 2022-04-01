@@ -39,8 +39,7 @@ Route::get('/cart', function() {
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
-Route::post('/admin-users/delete', function () {
-    return redirect()->action([UsersController::class, 'delete'])->withInput();
-});
+Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
+Route::put('/admin-users/edit/{id}', [UsersController::class, 'edit']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
