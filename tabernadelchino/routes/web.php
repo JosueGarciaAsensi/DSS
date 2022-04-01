@@ -41,5 +41,6 @@ Route::get('/admin', [StatisticsController::class, 'statistics']);
 Route::get('/admin-users', [UsersController::class, 'index']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
 Route::put('/admin-users/edit/{id}', [UsersController::class, 'edit']);
+Route::put('/admin-users/create', [UsersController::class, 'create']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);

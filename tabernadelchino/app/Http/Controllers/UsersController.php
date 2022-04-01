@@ -33,6 +33,24 @@ class UsersController extends Controller
             }
             $user->save();
         }
-        return redirect('/admin-users')->with('success', 'deleted succesfully!');
+        return redirect('/admin-users')->with('success', 'edited succesfully!');
+    }
+
+    public function create(Request $request) {
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->password = $request->input('passwd');
+        $user->email = $request->input('email');
+        $user->dni = $request->input('dni');
+        if ($request->has('admin')) {
+            $user->admin = 1;
+        }
+        else {
+            $user->admin = 0;
+        }
+        $user->save();
+
+        return redirect('/admin-users')->with('success', 'created successfully!');
     }
 }
