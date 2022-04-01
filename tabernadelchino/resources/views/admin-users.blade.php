@@ -73,7 +73,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Editar usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -83,15 +83,37 @@
             @method('PUT')
             {{ csrf_field() }}
 
-            <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" placeholder="Nombre" value="{{$user->name}}">
-            <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" placeholder="Apellidos" value="{{$user->surname}}">
-
-            <button type="submit" class="btn btn-sucess">Aplicar cambios</button>
+            <div class="form-group">
+                <label for="name{{$user->id}}">Nombre: </label>
+                <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}">
+            </div>
+            <div class="form-group">
+                <label for="surname{{$user->id}}">Apellidos: </label>
+                <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}">
+            </div>
+            <div class="form-group">
+                <label for="email{{$user->id}}">Email: </label>
+                <input type="text" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}">
+            </div>
+            <div class="form-group">
+                <label for="dni{{$user->id}}">DNI: </label>
+                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}">
+            </div>
+            <br>
+            <div class="form-check">
+                @if ($user->admin == 1)
+                    <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input" checked>
+                @else
+                    <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
+                @endif
+                <label class="form-check-label" for="admin{{$user->id}}">¿Es administrador?</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Aplicar</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

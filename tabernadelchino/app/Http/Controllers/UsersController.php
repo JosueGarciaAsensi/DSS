@@ -23,6 +23,14 @@ class UsersController extends Controller
         if ($request->has('name' . $id)) {
             $user->name = $request->input('name' . $id);
             $user->surname = $request->input('surname' . $id);
+            $user->email = $request->input('email' . $id);
+            $user->dni = $request->input('dni' . $id);
+            if ($request->has('admin'. $id)) {
+                $user->admin = 1;
+            }
+            else {
+                $user->admin = 0;
+            }
             $user->save();
         }
         return redirect('/admin-users')->with('success', 'deleted succesfully!');
