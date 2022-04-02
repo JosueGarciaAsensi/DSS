@@ -108,10 +108,10 @@
                 <label class="form-check-label" for="admin">¿Es administrador?</label>
             </div>
             <br>
-            <bh></bh>
+            <h3>Dirección</h3>
             <div class="form-group">
-                <label for="tipo">Tipo: </label>
-                <select id="tipo" name="tipo">
+                <label for="type">Tipo: </label>
+                <select id="type" name="type">
                     <option value="Calle">Calle</option>
                     <option value="Avenida">Avenida</option>
                     <option value="Paseo">Paseo</option>
@@ -125,6 +125,7 @@
                 <label for="cp">Código postal: </label>
                 <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal">
             </div>
+            <br>
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
       </div>

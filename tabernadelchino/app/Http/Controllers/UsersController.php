@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -37,6 +39,16 @@ class UsersController extends Controller
     }
 
     public function create(Request $request) {
+        $address = new Address();
+        $address->type = $request->input('type');
+        $address->name = $request->input('address');
+        $address->pc = $request->input('cp');
+        $address->save();
+
+        $cart = new Cart();
+        $cart->status = 0;
+        $cart->save();
+
         $user = new User();
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
@@ -49,6 +61,9 @@ class UsersController extends Controller
         else {
             $user->admin = 0;
         }
+
+        $user->carts()->associate($cart);
+        $user->addresses()->associate($address);
         $user->save();
 
         return redirect('/admin-users')->with('success', 'created successfully!');
