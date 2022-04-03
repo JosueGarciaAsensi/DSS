@@ -66,6 +66,6 @@ class UsersController extends Controller
         $user->addresses()->associate($address);
         $user->save();
 
-        return redirect('/admin-users')->with('success', 'created successfully!');
+        return back();
     }
 }

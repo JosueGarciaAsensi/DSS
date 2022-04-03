@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,29 +20,22 @@ use App\Http\Controllers\BeerTypeController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/sobre-nosotros', function () {
-    return view('about');
-});
+Route::get('/sobre-nosotros', [HomeController::class, 'sobreNosotros']);
 
 Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
 
-Route::get('/cart', function() {
-    $products = [];
-    return view('cart')->with($products); 
-});
+Route::get('/cart/{id}', [CartController::class, 'showCart']);
 
 // Admin routes
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
-Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
-Route::put('/admin-users/edit/{id}', [UsersController::class, 'edit']);
-Route::put('/admin-users/create', [UsersController::class, 'create']);
+Route::post('/users/delete/{id}', [UsersController::class, 'delete']);
+Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
+Route::put('/users/create', [UsersController::class, 'create']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);

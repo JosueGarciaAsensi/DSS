@@ -31,7 +31,7 @@
                         </div>
                     </form>
                     <div class="navbar-nav">
-                        <a href="{{ url('/cart') }}" class="nav-item nav-link">
+                        <a href="{{ url('/cart/0') }}" class="nav-item nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag text-light mt-2" viewBox="0 0 16 16">
                                 <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                             </svg>
@@ -43,22 +43,116 @@
                                 </svg>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">Iniciar sesión</a>
-                                <a class="dropdown-item" href="#">Registrarse</a>
+                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</a>
+                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#createModal">Registrarse</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-
         @show
 
         <div class="container">
             @yield('content')
         </div>
 
-        
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalTitle">Iniciar sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/login')}}" method="POST">
+                        @method('PUT')
+                        {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd">Contraseña: </label>
+                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary" disabled>Iniciar sesión</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalTitle">Crear usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/users/create')}}" method="POST">
+                        @method('PUT')
+                        {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <label for="name">Nombre: </label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Apellidos: </label>
+                            <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd">Contraseña: </label>
+                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dni">DNI: </label>
+                            <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
+                        </div>
+                        <br>
+                        <h3>Dirección</h3>
+                        <div class="form-group">
+                            <label for="type">Tipo: </label>
+                            <select id="type" name="type">
+                                <option value="Calle">Calle</option>
+                                <option value="Avenida">Avenida</option>
+                                <option value="Paseo">Paseo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección: </label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cp">Código postal: </label>
+                            <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </body>
         <!-- Footer -->
         <footer class="text-center text-white mt-auto" style="background-color: black;">

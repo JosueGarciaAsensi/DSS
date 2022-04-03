@@ -42,7 +42,7 @@
                     @endif
                 </div>                    
                 <div class="col d-flex align-items-center">
-                    <form action="{{ url('/admin-users/delete/' . $user->id) }}" method="POST">
+                    <form action="{{ url('/users/delete/' . $user->id) }}" method="POST">
                         {{ csrf_field() }}
                         <button class="btn btn-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
@@ -78,7 +78,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('/admin-users/create')}}" method="POST">
+        <form action="{{ url('/users/create')}}" method="POST">
             @method('PUT')
             {{ csrf_field() }}
 
@@ -130,7 +130,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -148,7 +148,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('/admin-users/edit/' . $user->id)}}" method="POST">
+        <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
             @method('PUT')
             {{ csrf_field() }}
 
@@ -182,7 +182,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
