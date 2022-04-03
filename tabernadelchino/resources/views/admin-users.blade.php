@@ -84,23 +84,23 @@
 
             <div class="form-group">
                 <label for="name">Nombre: </label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
             </div>
             <div class="form-group">
                 <label for="surname">Apellidos: </label>
-                <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos">
+                <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
             </div>
             <div class="form-group">
                 <label for="passwd">Contraseña: </label>
-                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña">
+                <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
                 <label for="email">Email: </label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="dni">DNI: </label>
-                <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI">
+                <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
             </div>
             <br>
             <div class="form-check">
@@ -119,11 +119,11 @@
             </div>
             <div class="form-group">
                 <label for="address">Dirección: </label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Dirección">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
             </div>
             <div class="form-group">
                 <label for="cp">Código postal: </label>
-                <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal">
+                <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Crear</button>
@@ -154,19 +154,19 @@
 
             <div class="form-group">
                 <label for="name{{$user->id}}">Nombre: </label>
-                <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}">
+                <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
             </div>
             <div class="form-group">
                 <label for="surname{{$user->id}}">Apellidos: </label>
-                <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}">
+                <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}" required>
             </div>
             <div class="form-group">
                 <label for="email{{$user->id}}">Email: </label>
-                <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}">
+                <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
             </div>
             <div class="form-group">
                 <label for="dni{{$user->id}}">DNI: </label>
-                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}">
+                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
             </div>
             <br>
             <div class="form-check">
