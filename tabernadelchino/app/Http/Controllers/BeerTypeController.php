@@ -9,6 +9,6 @@ class BeerTypeController extends Controller
 {
     public function index() {
         $beertypes = BeerType::all();
-        return view('admin-beertypes', ['beer_types' => $beertypes]);
+        return view('admin-beertypes', ['beertypes' => $beertypes]);
     }
 }

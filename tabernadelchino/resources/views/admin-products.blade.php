@@ -13,7 +13,6 @@
         <div class="col"><b>Precio</b></div>
         <div class="col">
             <div class="row">
-                <div class="col"><b>Admin</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -24,6 +23,7 @@
             </div>
         </div>
     </div>
+
     <hr style="color:#acacac;"/>
     <div class="row row-cols-6" style="text-align: center; color: white;">
         @foreach ($products as $product)
@@ -33,10 +33,7 @@
         <div class="col">{{$product->stock}}</div>
         <div class="col">{{$product->price}}</div>
         <div class="col">
-            <div class="row" style="text-align: center;">
-                <div class="col">
-                    {{$product->users->email}}
-                </div>    
+            <div class="row"> 
                 <div class="col d-flex align-items-center">
                     <form action="{{ url('/products/delete/' . $product->id) }}" method="POST">
                         {{ csrf_field() }}
@@ -61,4 +58,54 @@
         @endforeach
     </div>
     {{ $products->links() }}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createModalTitle">Añadir cerveza</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url('/products/create')}}" method="POST">
+            @method('PUT')
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label for="name">Nombre: </label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Tipo: </label>
+                <input type="text" id="type" name="type" class="form-control" placeholder="Tipo" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción: </label>
+                <input type="text" id="description" name="description" class="form-control" placeholder="Descripción" required>
+            </div>
+            <div class="form-group">
+                <label for="stock">Stock: </label>
+                <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Precio: </label>
+                <input type="number" step="0.01" id="price" name="price" class="form-control" placeholder="Precio" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Imagen: </label>
+                <input type="image" id="image" name="image" class="form-control" placeholder="Imagen" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>

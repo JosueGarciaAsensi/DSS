@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\BeerType;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,9 +39,28 @@ class ProductController extends Controller
         return view('admin-products', ['products' => $products]);
     }
 
+    //No funciona
     public function delete($id) {
         $product = Product::find($id);
         $product->delete();
         return redirect('/admin-product')->with('success', 'deleted succesfully!');
+    }
+
+    //Cambiar el null y faltan cosas [es raro]
+    public function create(Request $request) {
+        $beertype = new BeerType();
+        $beertype->names = $request->input('type');
+
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->stock = $request->inpunt('stock');
+        $product->users_id = null;
+        $products->description = $request->input('description');
+        $products->price = $request->input('price');
+        $products->image = $request->input('image');
+        $product->beertypes()->associate($beertype);
+        $product->save();
+
+        return back();
     }
 }
