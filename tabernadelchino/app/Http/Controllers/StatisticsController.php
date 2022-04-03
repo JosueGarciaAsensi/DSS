@@ -12,12 +12,10 @@ class StatisticsController extends Controller
         $products = Product::all();
         $users = User::all();
         $orders = Order::all();
-        return view('admin-menu')->with('productsCount', count($products))->with('usersCount', count($users))->with('ordersCount', count($orders))->with('product', $this->productoEstrella());
+        return view('admin-menu')->with('productsCount', count($products))->with('usersCount', count($users))->with('ordersCount', count($orders))->with('product', $this->productoEstrella($orders, $products));
     }
 
-    public function productoEstrella() {
-        $orders = Order::all();
-        $products = Product::all();
+    protected function productoEstrella($orders, $products) {
         $points = array();
 
         foreach ($products as $p) {

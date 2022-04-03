@@ -15,6 +15,21 @@ class ProductController extends Controller
     public function productShow($id) {
         $products = Product::all();
         $product = Product::find($id);
-        return view('product')->with('product', $product)->with('products', $products);
+        return view('product')->with('product', $product)->with('products', $products)->with('productsAlt', $this->productAlt($products));
+    }
+
+    protected function productAlt($products) {
+        $indexes = array();
+        foreach (range(0, count($products) - 1) as $i) {
+            $indexes[] = $i;
+        }
+        shuffle($indexes);
+        $productsAlt = array();
+        $productsAlt[] = $products[$indexes[0]];
+        $productsAlt[] = $products[$indexes[1]];
+        $productsAlt[] = $products[$indexes[2]];
+        $productsAlt[] = $products[$indexes[3]];
+
+        return $productsAlt;
     }
 }

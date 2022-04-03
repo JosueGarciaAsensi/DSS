@@ -29,7 +29,7 @@
             <h1>Te podría interesar...</h1>
             <table class="table table-responsive">
                 @php($i = 1)
-                @foreach ($products as $productAlt)
+                @foreach ($productsAlt as $productAlt)
                     @if( $i == 1)
                         <tr>
                     @endif
