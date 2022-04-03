@@ -59,6 +59,7 @@ class ProductsTableSeeder extends Seeder
             $product->stock = random_int(1, 10);
             $product->description = $description[$i];
             $product->price = $price[$i];
+            $product->visible = true;
             $product->image = $images[$i];
             $product->users()->associate($this->getUsers());
             $product->beer_types()->associate($this->getBeerType());

@@ -18,7 +18,7 @@
                     <div class="navbar-nav">
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Inicio</a>
                         <a href="{{ url('/products') }}" class="nav-item nav-link">Productos</a>
-                        <a href="{{ url('/sobre-nosotros') }}" class="nav-item nav-link">Sobre nosotros</a>
+                        <a href="{{ url('/about') }}" class="nav-item nav-link">Sobre nosotros</a>
                     </div>
                     <form class="d-flex">
                         <div class="input-group mt-3">                    

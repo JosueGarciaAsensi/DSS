@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
             $table->double('price');
             $table->string('image');
+            $table->boolean('visible');
             $table->timestamps();
         });
     }

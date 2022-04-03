@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder {
             $user->password = Hash::make(Str::random(5));
             $user->dni = $dni[$i];
             $user->admin = true;
-
+            $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
 
             $user->carts()->associate($this->getCart());

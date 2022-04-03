@@ -22,7 +22,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/sobre-nosotros', [HomeController::class, 'sobreNosotros']);
+Route::get('/about', [HomeController::class, 'about']);
 
 Route::get('/products', [ProductController::class, 'index']);
 

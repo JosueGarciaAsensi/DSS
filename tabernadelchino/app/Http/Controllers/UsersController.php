@@ -33,6 +33,12 @@ class UsersController extends Controller
             else {
                 $user->admin = 0;
             }
+            if ($request->has('visible'. $id)) {
+                $user->visible = 1;
+            }
+            else {
+                $user->visible = 0;
+            }
             $user->save();
         }
         return redirect('/admin-users')->with('success', 'edited succesfully!');
@@ -60,6 +66,12 @@ class UsersController extends Controller
         }
         else {
             $user->admin = 0;
+        }
+        if ($request->has('visible')) {
+            $user->visible = 1;
+        }
+        else {
+            $user->visible = 0;
         }
 
         $user->carts()->associate($cart);

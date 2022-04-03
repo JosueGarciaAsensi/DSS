@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#" class="nav-item nav-link">
+                <a href="{{ url('/admin-products') }}" class="nav-item nav-link">
                     <div class="row">
                         <div class="col">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-cup text-light" viewBox="0 0 16 16">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#" class="nav-item nav-link">
+                <a href="{{ url('/admin-beertypes') }}" class="nav-item nav-link">
                     <div class="row">
                             <div class="col">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list-task text-light" viewBox="0 0 16 16">

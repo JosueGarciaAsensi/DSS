@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\BeerType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -36,29 +37,40 @@ class ProductController extends Controller
 
     public function adminShow() {
         $products = Product::paginate(10);
-        return view('admin-products', ['products' => $products]);
+        $beertypes = BeerType::all();
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
     }
 
-    //No funciona
+    //Funciona
     public function delete($id) {
         $product = Product::find($id);
         $product->delete();
         return redirect('/admin-product')->with('success', 'deleted succesfully!');
     }
 
-    //Cambiar el null y faltan cosas [es raro]
+    //Revisar
     public function create(Request $request) {
-        $beertype = new BeerType();
-        $beertype->names = $request->input('type');
-
         $product = new Product();
         $product->name = $request->input('name');
-        $product->stock = $request->inpunt('stock');
-        $product->users_id = null;
-        $products->description = $request->input('description');
-        $products->price = $request->input('price');
-        $products->image = $request->input('image');
-        $product->beertypes()->associate($beertype);
+        $product->stock = $request->input('stock');
+        
+        if ($request->has('visible')) {
+            $product->visible = 1;
+        }
+        else {
+            $product->visible = 0;
+        }
+        $product->description = $request->input('beertype');
+        $product->price = $request->input('price');
+        $product->image = $request->input('image');
+
+        $id = $request->input('beertype');
+        
+        $beertype = BeerType::find($id);
+        $product->beer_types()->associate($beertype);
+
+        $user = new User();
+        $product->users()->associate($user);
         $product->save();
 
         return back();

@@ -3,6 +3,7 @@
 @section('menu')
     @parent
 @endsection
+
 @section('content')
 <div class="container mt-5 mb-5 p-4 rounded" style="background-color: black;">
     <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
@@ -13,6 +14,7 @@
         <div class="col"><b>Precio</b></div>
         <div class="col">
             <div class="row">
+                <div class="col"><b>Visible</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -29,11 +31,22 @@
         @foreach ($products as $product)
         <div class="col">{{$product->id}}</div>
         <div class="col">{{$product->name}}</div>
-        <div class="col">{{$product->beer_types->names}}</div>
+        @if(is_null($product->beer_types))
+            <div class="col">-</div> 
+        @else
+            <div class="col">{{$product->beer_types->names}}</div>
+        @endif
         <div class="col">{{$product->stock}}</div>
         <div class="col">{{$product->price}}</div>
         <div class="col">
-            <div class="row"> 
+            <div class="row">
+                <div class="col">
+                        @if ($product->visible == 1)
+                            Sí
+                        @else
+                            No
+                        @endif
+                </div>    
                 <div class="col d-flex align-items-center">
                     <form action="{{ url('/products/delete/' . $product->id) }}" method="POST">
                         {{ csrf_field() }}
@@ -57,7 +70,7 @@
         </div>
         @endforeach
     </div>
-    {{ $products->links() }}
+    <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
 </div>
 
 <!-- Modal -->
@@ -79,9 +92,17 @@
                 <label for="name">Nombre: </label>
                 <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
             </div>
-            <div class="form-group">
-                <label for="type">Tipo: </label>
-                <input type="text" id="type" name="type" class="form-control" placeholder="Tipo" required>
+            <br>
+            <div>
+                <label for="beertype">Tipo: </label>
+                <select name="beertype" id="beertype">
+                @foreach($beertypes as $beertype)
+                    @if(!is_null($beertype->id))
+                        <option value="beertype_id{{$beertype->id}}">{{$beertype->names}}</option>   
+                    @endif
+                @endforeach
+                </select>
+                <br>
             </div>
             <div class="form-group">
                 <label for="description">Descripción: </label>
@@ -97,7 +118,12 @@
             </div>
             <div class="form-group">
                 <label for="image">Imagen: </label>
-                <input type="image" id="image" name="image" class="form-control" placeholder="Imagen" required>
+                <input type="text" id="image" name="image" class="form-control" placeholder="Imagen" required>
+            </div>
+            <br>
+            <div class="form-check">
+                <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                <label class="form-check-label" for="visible">¿Es visible?</label>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Crear</button>
@@ -109,3 +135,4 @@
     </div>
   </div>
 </div>
+@endsection

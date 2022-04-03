@@ -14,6 +14,7 @@
         <div class="col">
             <div class="row">
                 <div class="col"><b>Admin</b></div>
+                <div class="col"><b>Visible</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -36,6 +37,13 @@
             <div class="row">
                 <div class="col">
                     @if ($user->admin == 1)
+                        Sí
+                    @else
+                        No
+                    @endif
+                </div>
+                <div class="col">
+                    @if ($user->visible == 1)
                         Sí
                     @else
                         No
@@ -64,7 +72,7 @@
         </div>
         @endforeach
     </div>
-    {{ $users->links() }}
+    <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
 </div>
 
 <!-- Modal -->
@@ -101,6 +109,11 @@
             <div class="form-group">
                 <label for="dni">DNI: </label>
                 <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
+            </div>
+            <br>
+            <div class="form-check">
+                <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                <label class="form-check-label" for="visible">¿Es visible?</label>
             </div>
             <br>
             <div class="form-check">
@@ -167,6 +180,15 @@
             <div class="form-group">
                 <label for="dni{{$user->id}}">DNI: </label>
                 <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
+            </div>
+            <br>
+            <div class="form-check">
+                @if ($user->visible == 1)
+                    <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input" checked>
+                @else
+                    <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
+                @endif
+                <label class="form-check-label" for="visible{{$user->id}}">¿Es visible?</label>
             </div>
             <br>
             <div class="form-check">
