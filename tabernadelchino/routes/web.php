@@ -38,4 +38,7 @@ Route::post('/users/delete/{id}', [UsersController::class, 'delete']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::put('/users/create', [UsersController::class, 'create']);
 
+Route::get('/admin-products', [ProductController::class, 'adminShow']);
+Route::post('/products/delete/{id}', [ProductController::class, 'delete']);
+
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);

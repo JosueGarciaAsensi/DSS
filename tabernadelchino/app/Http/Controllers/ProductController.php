@@ -32,4 +32,15 @@ class ProductController extends Controller
 
         return $productsAlt;
     }
+
+    public function adminShow() {
+        $products = Product::paginate(10);
+        return view('admin-products', ['products' => $products]);
+    }
+
+    public function delete($id) {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/admin-product')->with('success', 'deleted succesfully!');
+    }
 }
