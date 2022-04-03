@@ -100,7 +100,7 @@
 
             <div class="form-group">
                 <label for="name{{$beertype->id}}">Nombre: </label>
-                <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
+                <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$beertype->name}}" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Aplicar</button>

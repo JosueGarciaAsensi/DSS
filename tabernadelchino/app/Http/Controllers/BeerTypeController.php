@@ -18,6 +18,15 @@ class BeerTypeController extends Controller
         return redirect('/admin-beertypes')->with('success', 'deleted succesfully!');
     }
 
+    public function edit(Request $request, $id){
+        $beertype = BeerType::findOrFail($id);
+        if ($request->has('name' . $id)) {
+            $beertype->names = $request->input('name' . $id);
+            $beertype->save();
+        }
+        return redirect('/admin-beertypes')->with('success', 'edited succesfully!');
+    }
+
     public function create(Request $request) {
         $tipoCerveza = new BeerType();
         $tipoCerveza->names = $request->input('type');
