@@ -44,4 +44,5 @@ Route::put('/products/create', [ProductController::class, 'create']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
 Route::post('beertypes/delete/{id}', [BeerTypeController::class, 'delete']);
+Route::put('/beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
 Route::put('/beertypes/create', [BeerTypeController::class, 'create']);

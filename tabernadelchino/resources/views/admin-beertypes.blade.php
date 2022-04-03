@@ -52,8 +52,6 @@
     </div>
 </div>
 
-@endsection
-
 <!-- Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -83,3 +81,37 @@
     </div>
   </div>
 </div>
+
+@foreach ($beertypes as $beertype)
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{$beertype->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$beertype->id}}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">Editar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url('/beertypes/edit/' . $beertype->id)}}" method="POST">
+            @method('PUT')
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label for="name{{$beertype->id}}">Nombre: </label>
+                <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Aplicar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endsection
+
