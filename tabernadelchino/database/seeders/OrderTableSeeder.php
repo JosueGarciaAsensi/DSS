@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Order;
 use App\Models\User;
-use App\Models\Cart;
+use App\Models\Product;
 
 class OrderTableSeeder extends Seeder
 {
@@ -15,9 +15,9 @@ class OrderTableSeeder extends Seeder
         return $users[random_int(0, count($users)-1)];
     }
 
-    protected function getCart() {
-        $carts = Cart::all();
-        return $carts[random_int(0, count($carts)-1)];
+    protected function getProducts() {
+        $products = Product::all();
+        return $products;
     }
 
     /**
@@ -35,6 +35,23 @@ class OrderTableSeeder extends Seeder
             $order->state = $states[$i];
 
             $order->save();
+            
+            $products = $this->getProducts();
+            $indexes = array();
+            foreach (range(0, count($products)-1) as $i) {
+                $indexes[] = $i;
+            }
+            shuffle($indexes);
+            foreach ($indexes as $i) {
+                $product = $products[$i];
+                if (!is_null($product)) {
+                    $order->products()->attach($product);
+                }
+                $test = random_int(0, 3);
+                if ($test == 0) {
+                    break;
+                }
+            }
         }
     }
 }

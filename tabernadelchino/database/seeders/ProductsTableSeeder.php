@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class ProductsTableSeeder extends Seeder
         $types = BeerType::all();
         return $types[random_int(0, count($types)-1)];
     }
+
     /**
      * Run the database seeds.
      *
