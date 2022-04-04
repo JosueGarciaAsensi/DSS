@@ -14,7 +14,11 @@
                 </td>
                 <td>
                     <h2 class="text-light">0,00€</h2>
-                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Realizar compra</button>
+                    @if (empty($products))
+                        <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>Realizar compra</button>
+                    @else
+                        <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Realizar compra</button>
+                    @endif
                 </td>
             </tr>
         </table>
