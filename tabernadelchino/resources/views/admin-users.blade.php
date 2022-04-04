@@ -11,7 +11,7 @@
             <div class="p-2" style="text-align: left; color: white;">
                 <b>Filtros</b>
             </div>
-            <hr style="color:#acacac; margin-top:26px;" />
+            <hr style="color:#acacac; margin-top:10px;" />
             <form action="{{ url('/admin-users/search/') }}" method="GET">
                 {{ csrf_field() }}
                 <div class="row">
@@ -19,9 +19,9 @@
                         <div class="form-check" style="text-align: center; color: white;">
                             <label class="form-check-label" for="search_admins">Administradores</label>
                             @if($search_admins == true)
-                                <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" checked>
+                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" checked>
                             @else
-                                <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input">
+                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input">
                             @endif
                         </div>
                     </div>
@@ -29,14 +29,14 @@
                         <div class="form-check" style="text-align: center; color: white;">
                             <label class="form-check-label" for="search_users">Usuarios</label>
                             @if($search_users == true)
-                                <input type="checkbox" id="search_users" name="search_users" class="form-check-input" checked>
+                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input" checked>
                             @else
-                                <input type="checkbox" id="search_users" name="search_users" class="form-check-input">
+                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input">
                             @endif
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row p-2 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Aplicar filtros</button>
                 </div>
             </form>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <hr style="color:#acacac;" />
-            <div class="row row-cols-5" style="text-align: center; color: white;">
+            <div class="row row-cols-6" style="text-align: center; color: white;">
                 @foreach ($users as $user)
                 <div class="col">{{$user->name}}</div>
                 <div class="col">{{$user->surname}}</div>
@@ -88,6 +88,10 @@
                             No
                             @endif
                         </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
                         <div class="col d-flex align-items-center">
                             <form action="{{ url('/admin-users/delete/' . $user->id) }}" method="POST">
                                 {{ csrf_field() }}
@@ -107,7 +111,6 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="col"> </div>
                     </div>
                 </div>
                 @endforeach
@@ -118,7 +121,6 @@
         @else
         <h1 class="text-light">No existen usuarios que coincidan con el criterio de búsqueda</h1>
         @endif
-    </div>
 </div>
 
 <!-- Modal -->
