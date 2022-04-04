@@ -24,12 +24,20 @@ class BeerTypeController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $this->validate($request, 
+        $beertypes = BeerType::all();
+        $sbeertypes = [];
+        foreach($beertypes as $beertype){
+            $sbeertypes += [$beertype->names];
+        }
+
+        $this->validate($request,
             [
-                'type' => 'regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'
+                'name'.$id => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/',
+                            Rule::notIn($sbeertypes)]
             ],
             [
                 'regex' => 'El campo formato del campo tipo debe ser alfabético.',
+                'not_in' => 'Este tipo ya existe en la lista.'
             ]
         );
 
@@ -48,9 +56,9 @@ class BeerTypeController extends Controller
     public function create(Request $request) {
         $beertypes = BeerType::all();
         
-        $sbeertypes = null;
-        for($i=0; $i<count($beertypes); $i++) {
-            $sbeertypes += $beertypes[$i]->type;
+        $sbeertypes = [];
+        foreach($beertypes as $beertype){
+            $sbeertypes += [$beertype->names];
         }
         
         $this->validate($request, 

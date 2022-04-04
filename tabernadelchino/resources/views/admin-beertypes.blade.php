@@ -23,7 +23,7 @@
       <div class="col">{{$beertype->names}}</div>
       <div class="col d-flex justify-content-center">
         <div class="row">
-          <form action="{{ url('/admin-beertypes/delete/' . $beertype->id) }}" method="POST">
+          <form action="{{ url('/admin-beertypes/delete/' . $beertype->id) }}" method="GET">
             {{ csrf_field() }}
             <button class="btn btn-danger" type="submit">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
@@ -70,7 +70,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/create')}}" method="POST, GET">
+          <form action="{{ url('/admin-beertypes/create')}}" method="GET, PUT">
             @method('PUT')
             {{ csrf_field() }}
             <div class="form-group">
@@ -100,7 +100,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="POST">
+          <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="GET, POST">
             @method('PUT')
             {{ csrf_field() }}
 
