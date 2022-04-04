@@ -46,6 +46,17 @@
       </div>
       @endforeach
     </div>
+    @if (count($errors) > 0)
+      <div class="alert alert-danger" role="alert">
+        @foreach ($errors->all() as $error)
+        {{ $error }}
+        @endforeach
+      </div>
+    @elseif(!is_null($status))
+      <div class="alert alert-success" role="alert">
+        {{ $status }}
+      </div>
+    @endif
   </div>
 
   <!-- Modal -->
@@ -59,13 +70,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/create')}}" method="POST">
+          <form action="{{ url('/admin-beertypes/create')}}" method="POST, GET">
             @method('PUT')
             {{ csrf_field() }}
-
             <div class="form-group">
               <label for="type">Tipo: </label>
-              <input type="text" id="type" name="type" class="form-control" placeholder="Tipo" required>
+              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control" placeholder="Tipo" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Crear</button>
