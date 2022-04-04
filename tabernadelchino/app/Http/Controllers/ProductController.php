@@ -10,28 +10,18 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::paginate(3);
+        $products = Product::where('visible', '!=', 0)->paginate(3);
         return view('products', ['products' => $products]);
     }
 
     public function productShow($id) {
         $products = Product::all();
         $product = Product::find($id);
-        return view('product')->with('product', $product)->with('products', $products)->with('productsAlt', $this->productAlt($products));
+        return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
 
-    protected function productAlt($products) {
-        $indexes = array();
-        foreach (range(0, count($products) - 1) as $i) {
-            $indexes[] = $i;
-        }
-        shuffle($indexes);
-        $productsAlt = array();
-        $productsAlt[] = $products[$indexes[0]];
-        $productsAlt[] = $products[$indexes[1]];
-        $productsAlt[] = $products[$indexes[2]];
-        $productsAlt[] = $products[$indexes[3]];
-
+    protected function productAlt() {
+        $productsAlt = Product::where('visible', '!=', 0)->get()->random(4);
         return $productsAlt;
     }
 
@@ -44,8 +34,9 @@ class ProductController extends Controller
     //Funciona
     public function delete($id) {
         $product = Product::find($id);
-        $product->delete();
-        return redirect('/admin-product')->with('success', 'deleted succesfully!');
+        $product->visible = false;
+        $product->save();
+        return redirect('/admin-products')->with('success', 'deleted succesfully!');
     }
 
     //Revisar
@@ -60,12 +51,11 @@ class ProductController extends Controller
         else {
             $product->visible = 0;
         }
-        $product->description = $request->input('beertype');
+        $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->image = $request->input('image');
 
         $id = $request->input('beertype');
-        
         $beertype = BeerType::find($id);
         $product->beer_types()->associate($beertype);
 
@@ -74,5 +64,29 @@ class ProductController extends Controller
         $product->save();
 
         return back();
+    }
+
+    public function edit(Request $request, $id) {
+        $product = Product::findOrFail($id);
+        if ($request->has('name' . $id)) {
+            $product->name = $request->input('name' . $id);
+            $product->stock = $request->input('stock' . $id);
+            $product->description = $request->input('description' . $id);
+            $product->price = $request->input('price' . $id);
+            $product->image = $request->input('image' . $id);
+            
+            if ($request->has('visible'. $id)) {
+                $product->visible = 1;
+            }
+            else {
+                $product->visible = 0;
+            }
+
+            $id = $request->input('beertype' . $id);
+            $beertype = BeerType::find($id);
+            $product->beer_types()->associate($beertype);
+            $product->save();
+        }
+        return redirect('/admin-products')->with('success', 'edited succesfully!');
     }
 }

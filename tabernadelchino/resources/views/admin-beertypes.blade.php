@@ -29,7 +29,7 @@
             <div class="col">
             <div class="row"> 
                 <div class="col d-flex align-items-center">
-                    <form action="{{ url('/beertypes/delete/' . $beertype->id) }}" method="POST">
+                    <form action="{{ url('/admin-beertypes/delete/' . $beertype->id) }}" method="POST">
                         {{ csrf_field() }}
                         <button class="btn btn-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
@@ -64,7 +64,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('/beertypes/create')}}" method="POST">
+        <form action="{{ url('/admin-beertypes/create')}}" method="POST">
             @method('PUT')
             {{ csrf_field() }}
 
@@ -89,19 +89,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">Editar usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">Editar tipo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('/beertypes/edit/' . $beertype->id)}}" method="POST">
+        <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="POST">
             @method('PUT')
             {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="name{{$beertype->id}}">Nombre: </label>
-                <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$beertype->name}}" required>
+                <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$beertype->names}}" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Aplicar</button>

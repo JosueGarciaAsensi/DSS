@@ -34,15 +34,16 @@ Route::get('/cart/{id}', [CartController::class, 'showCart']);
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
-Route::post('/users/delete/{id}', [UsersController::class, 'delete']);
+Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::put('/users/create', [UsersController::class, 'create']);
 
 Route::get('/admin-products', [ProductController::class, 'adminShow']);
-Route::post('/products/delete/{id}', [ProductController::class, 'delete']);
-Route::put('/products/create', [ProductController::class, 'create']);
+Route::post('/admin-products/delete/{id}', [ProductController::class, 'delete']);
+Route::put('/admin-products/create', [ProductController::class, 'create']);
+Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
-Route::post('beertypes/delete/{id}', [BeerTypeController::class, 'delete']);
-Route::put('/beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
-Route::put('/beertypes/create', [BeerTypeController::class, 'create']);
+Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'delete']);
+Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
+Route::put('/admin-beertypes/create', [BeerTypeController::class, 'create']);

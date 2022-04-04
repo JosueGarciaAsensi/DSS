@@ -50,7 +50,7 @@
                     @endif
                 </div>                    
                 <div class="col d-flex align-items-center">
-                    <form action="{{ url('/users/delete/' . $user->id) }}" method="POST">
+                    <form action="{{ url('/admin-users/delete/' . $user->id) }}" method="POST">
                         {{ csrf_field() }}
                         <button class="btn btn-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
