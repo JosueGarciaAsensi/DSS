@@ -34,6 +34,7 @@ Route::get('/cart/{id}', [CartController::class, 'showCart']);
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
+Route::get('/admin-users/search', [UsersController::class, 'search']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::put('/users/create', [UsersController::class, 'create']);

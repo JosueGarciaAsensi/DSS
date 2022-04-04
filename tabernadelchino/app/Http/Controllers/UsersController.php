@@ -11,7 +11,40 @@ class UsersController extends Controller
 {
     public function index() {
         $users = User::paginate(10);
-        return view('admin-users', ['users' => $users]);
+        $search_admins = true;
+        $search_users = true;
+        return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
+    }
+
+    public function search(Request $request) {
+        $search_admins = null;
+        if ($request->has('search_admins')) {
+            $search_admins = true;
+        }
+        else {
+            $search_admins = false;
+        }
+
+        $search_users = null;
+        if ($request->has('search_users')) {
+            $search_users = true;
+        }
+        else {
+            $search_users = false;
+        }
+        
+        $users = null;
+        if($search_admins != null && $search_users != null) {
+            $users = User::paginate(10);
+        }
+        elseif($search_admins != null){
+            $users = User::where('admin', '=', true)->paginate(10);
+        }
+        elseif ($search_users != null) {
+            $users = User::where('admin', '=', false)->paginate(10);
+        }
+        
+        return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
     public function delete($id) {
