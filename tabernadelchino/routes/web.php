@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BeerTypeController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +20,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home']);
+
+Route::get('/about', [HomeController::class, 'about']);
+
+Route::get('/products', [ProductController::class, 'index']);
+
+Route::get('/products/{id}', [ProductController::class, 'productShow']);
+
+Route::get('/cart/{id}', [CartController::class, 'showCart']);
+
+// Admin routes
+Route::get('/admin', [StatisticsController::class, 'statistics']);
+
+Route::get('/admin-users', [UsersController::class, 'index']);
+Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
+Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
+Route::put('/users/create', [UsersController::class, 'create']);
+
+Route::get('/admin-products', [ProductController::class, 'adminShow']);
+Route::post('/admin-products/delete/{id}', [ProductController::class, 'delete']);
+Route::put('/admin-products/create', [ProductController::class, 'create']);
+Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
+
+Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
+Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'delete']);
+Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
+Route::put('/admin-beertypes/create', [BeerTypeController::class, 'create']);

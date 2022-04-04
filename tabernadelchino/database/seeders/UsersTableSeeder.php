@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Order;
 
 class UsersTableSeeder extends Seeder {
     protected function getAddress($i) {
@@ -19,6 +20,11 @@ class UsersTableSeeder extends Seeder {
     protected function getCart() {
         $carts = Cart::all();
         return $carts[random_int(0, count($carts)-1)];
+    }
+
+    protected function getOrder() {
+        $orders = Order::all();
+        return $orders[random_int(0, count($orders)-1)];
     }
 
     /**
@@ -41,7 +47,7 @@ class UsersTableSeeder extends Seeder {
             $user->password = Hash::make(Str::random(5));
             $user->dni = $dni[$i];
             $user->admin = true;
-
+            $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
 
             $user->carts()->associate($this->getCart());

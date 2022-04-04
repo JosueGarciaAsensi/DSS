@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders_products', function (Blueprint $table) {
-            $table->primary(['products_id', 'orders_id']);
-            $table->foreignId('products_id')->constrained();
-            $table->foreignId('orders_id')->constrained();
+        Schema::create('order_product', function (Blueprint $table) {
+            $table->primary(['product_id', 'order_id']);
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('order_id')->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_products');
+        Schema::dropIfExists('order_product');
     }
 };

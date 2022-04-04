@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('dni');
             $table->string('surname');
             $table->boolean('admin');
+            $table->boolean('visible');
         });
     }
 
