@@ -90,8 +90,8 @@ class ProductController extends Controller
         return redirect('/admin-products')->with('success', 'edited succesfully!');
     }
 
+    //SIEMPRE PILLA EL NO
     public function search(Request $request){
-        $products = Product::all();
         $beertypes = BeerType::all();
         $product = new Product();
 
@@ -101,6 +101,8 @@ class ProductController extends Controller
         else{
             $product->visible = 0;
         }
+
+        $products = Product::where('visible', '==', $product->visible)->paginate(10);
 
         return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
     }
