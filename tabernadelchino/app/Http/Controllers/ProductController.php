@@ -102,7 +102,14 @@ class ProductController extends Controller
             $product->visible = 0;
         }
 
-        $products = Product::where('visible', '==', $product->visible)->paginate(10);
+        $sign = $_GET['sign'];
+        echo $sign;
+
+        $products = Product::where('visible', '=', $product->visible)
+            ->where('beer_types_id', '=', $request->input('beertype'))
+            ->where('price', $sign, $request->input('price'))
+            ->paginate(10);
+        
 
         return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
     }

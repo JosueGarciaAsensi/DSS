@@ -20,9 +20,38 @@
                         <label class="form-check-label" for="visible">Visible</label>
                         <input type="checkbox" id="visible" name="visible" class="form-check-input">
                     </div>
+                    
+                    
+                    <div>
+                        <label for="beertype">Tipo: </label>
+                        <select name="beertype" id="beertype">
+                        @foreach($beertypes as $beertype)
+                            @if(!is_null($beertype->id))
+                                <option value="{{$beertype->id}}">{{$beertype->names}}</option>   
+                            @endif
+                        @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="precio">Precio </label>
+
+                        
+                        <select name="sign" id="sign">
+                                <option value="greater"> > </option>
+                                <option value="equal"> = </option>
+                                <option value="less"> < </option>
+                        </select>
+
+
+                        <input type="number" id="price" name="price" class="form-control" placeholder="Price" required>
+                    </div>
+
+
                 </div>
+                <br>
                 <div class="row mb-4">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>  
+                    <button type="submit" class="btn btn-primary" name="submit">Aplicar filtros</button>  
                 </div>
             </form>
         </div>
