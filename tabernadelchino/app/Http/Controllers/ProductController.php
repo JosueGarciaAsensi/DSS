@@ -89,4 +89,19 @@ class ProductController extends Controller
         }
         return redirect('/admin-products')->with('success', 'edited succesfully!');
     }
+
+    public function search(Request $request){
+        $products = Product::all();
+        $beertypes = BeerType::all();
+        $product = new Product();
+
+        if ($request->has('visible')){
+            $product->visible = 1;
+        }
+        else{
+            $product->visible = 0;
+        }
+
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
+    }
 }

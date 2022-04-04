@@ -42,6 +42,7 @@ Route::get('/admin-products', [ProductController::class, 'adminShow']);
 Route::post('/admin-products/delete/{id}', [ProductController::class, 'delete']);
 Route::put('/admin-products/create', [ProductController::class, 'create']);
 Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
+Route::get('/admin-products/search', [ProductController::class, 'search']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
 Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'delete']);

@@ -12,18 +12,14 @@
                 <div class="col"><b>Filtros</b></div>
             </div>
             <hr style="color:#acacac; margin-top:26px;"/>
-            <form>
+            <form action="{{ url('/admin-products/search') }}" method="GET">
+                @method('GET')
+                {{ csrf_field() }}
                 <div class="row" style="text-align: center; color: white;">
                     <div class="form-check">
-                        <label class="form-check-label" for="visible">Administradores</label>
+                        <label class="form-check-label" for="visible">Visible</label>
                         <input type="checkbox" id="visible" name="visible" class="form-check-input">
                     </div>
-                </div>
-                <div class="row mb-4" style="text-align: center; color: white;"> 
-                    <div class="form-check">
-                        <label class="form-check-label" for="visible">Usuarios</label>
-                        <input type="checkbox" id="visible" name="visible" class="form-check-input">
-                    </div>             
                 </div>
                 <div class="row mb-4">
                     <button type="submit" class="btn btn-primary">Aplicar filtros</button>  
