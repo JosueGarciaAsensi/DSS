@@ -16,15 +16,10 @@
                 @method('GET')
                 {{ csrf_field() }}
                 <div class="row" style="text-align: center; color: white;">
-                    <div class="form-check">
-                        <label class="form-check-label" for="visible">Visible</label>
-                        <input type="checkbox" id="visible" name="visible" class="form-check-input">
-                    </div>
-                    
-                    
                     <div>
                         <label for="beertype">Tipo: </label>
                         <select name="beertype" id="beertype">
+                            <option value='null'></option>
                         @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
                                 <option value="{{$beertype->id}}">{{$beertype->names}}</option>   
@@ -33,20 +28,26 @@
                         </select>
                     </div>
 
+
                     <div class="form-group">
-                        <label for="precio">Precio </label>
-
-                        
+                        <label for="precio">Precio </label>                  
                         <select name="sign" id="sign">
-                                <option value="greater"> > </option>
-                                <option value="equal"> = </option>
-                                <option value="less"> < </option>
+                            <option value="empty"></option>
+                            <option value="greater"> > </option>
+                            <option value="equal"> = </option>
+                            <option value="less"> < </option>
                         </select>
-
-
-                        <input type="number" id="price" name="price" class="form-control" placeholder="Price" required>
+                        <input type="number" step="0.01" id="price" name="price" class="form-control" placeholder="Price">
                     </div>
 
+                    <div class="form-check">
+                        <label class="form-check-label" for="visible">Visible</label>
+                        <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="invisible">No visible</label>
+                        <input type="checkbox" id="invisible" name="invisible" class="form-check-input">
+                    </div>
 
                 </div>
                 <br>
