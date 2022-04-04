@@ -27,9 +27,7 @@
                         @endforeach
                         </select>
                     </div>
-
-
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="precio">Precio </label>                  
                         <select name="sign" id="sign">
                             <option value="empty"></option>
@@ -37,10 +35,9 @@
                             <option value="equal"> = </option>
                             <option value="less"> < </option>
                         </select>
-                        <input type="number" step="0.01" id="price" name="price" class="form-control" placeholder="Price">
+                        <input type="number" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Price">
                     </div>
-
-                    <div class="form-check">
+                    <div class="form-check mt-2">
                         <label class="form-check-label" for="visible">Visible</label>
                         <input type="checkbox" id="visible" name="visible" class="form-check-input">
                     </div>
@@ -48,7 +45,6 @@
                         <label class="form-check-label" for="invisible">No visible</label>
                         <input type="checkbox" id="invisible" name="invisible" class="form-check-input">
                     </div>
-
                 </div>
                 <br>
                 <div class="row mb-4">
