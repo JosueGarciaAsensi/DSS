@@ -39,11 +39,19 @@
                     </div>
                     <div class="form-check mt-2">
                         <label class="form-check-label" for="visible">Visible</label>
+                        @if($search_visibles == true)
+                        <input type="checkbox" id="visible" name="visible" class="form-check-input" checked>
+                        @else
                         <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                        @endif
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="invisible">No visible</label>
+                        @if($search_invisibles == true)
+                        <input type="checkbox" id="invisible" name="invisible" class="form-check-input" checked>
+                        @else
                         <input type="checkbox" id="invisible" name="invisible" class="form-check-input">
+                        @endif
                     </div>
                 </div>
                 <br>

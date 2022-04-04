@@ -28,7 +28,9 @@ class ProductController extends Controller
     public function adminShow() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
+        $search_visibles = true;
+        $search_invisibles = true;
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 
     //Funciona
@@ -92,9 +94,24 @@ class ProductController extends Controller
 
     public function search(Request $request){
         $beertypes = BeerType::all();
-        
         $sign = $_GET['sign'];
         $tipo = $request->input('beertype');
+
+        $search_visibles = null;
+        if ($request->has('visible')) {
+            $search_visibles = true;
+        }
+        else {
+            $search_visibles = false;
+        }
+
+        $search_invisibles = null;
+        if ($request->has('invisible')) {
+            $search_invisibles = true;
+        }
+        else {
+            $search_invisibles = false;
+        }
 
         if($sign == 'greater'){
             $sign = '>';
@@ -179,6 +196,6 @@ class ProductController extends Controller
                 }
             }
         }
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 }
