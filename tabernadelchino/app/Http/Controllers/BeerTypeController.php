@@ -32,7 +32,7 @@ class BeerTypeController extends Controller
 
         $this->validate($request,
             [
-                'name'.$id => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/',
+                'name' . $id => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/',
                             Rule::notIn($sbeertypes)]
             ],
             [
