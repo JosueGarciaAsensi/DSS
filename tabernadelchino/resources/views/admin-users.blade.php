@@ -118,8 +118,19 @@
                 @endforeach
                 <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
             </div>
-        </div>
-        @else
+            @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+            </div>
+            @elseif(Session::has('success'))
+            <div class="alert alert-success" role="alert">
+            {{ Session::get('success') }}
+            </div>
+            @endif
+            </div>
+            @else
         <h1 class="text-light">No existen usuarios que coincidan con el criterio de búsqueda</h1>
         @endif
     </div>
@@ -134,44 +145,43 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ url('/users/create')}}" method="POST">
-                        @method('PUT')
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             <label for="name">Nombre: </label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="surname">Apellidos: </label>
-                            <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
+                            <input type="text" id="surname" value="{{ old('surname') }}" name="surname" class="form-control" placeholder="Apellidos" required>
                         </div>
                         <div class="form-group">
                             <label for="passwd">Contraseña: </label>
-                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
+                            <input type="password" id="passwd" value="{{ old('passwd') }}" name="passwd" class="form-control" placeholder="Contraseña" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <label for="dni">DNI: </label>
-                            <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
+                            <input type="text" id="dni" name="dni" value="{{ old('dni') }}" class="form-control" placeholder="DNI" required>
                         </div>
                         <br>
                         <div class="form-check">
-                            <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                            <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
                             <label class="form-check-label" for="visible">¿Es visible?</label>
                         </div>
                         <br>
                         <div class="form-check">
-                            <input type="checkbox" id="admin" name="admin" class="form-check-input">
+                            <input type="checkbox" id="admin" value="{{ old('admin') }}" name="admin" class="form-check-input">
                             <label class="form-check-label" for="admin">¿Es administrador?</label>
                         </div>
                         <br>
                         <h3>Dirección</h3>
                         <div class="form-group">
                             <label for="type">Tipo: </label>
-                            <select  class="form-control" id="type" name="type">
+                            <select  class="form-control" id="type" value="{{ old('type') }}" name="type">
                                 <option value="Calle">Calle</option>
                                 <option value="Avenida">Avenida</option>
                                 <option value="Paseo">Paseo</option>
@@ -179,11 +189,11 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Dirección: </label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
+                            <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address" placeholder="Dirección" required>
                         </div>
                         <div class="form-group">
                             <label for="cp">Código postal: </label>
-                            <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
+                            <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="Código postal" required>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Crear</button>
@@ -210,7 +220,6 @@
                     <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
                         @method('PUT')
                         {{ csrf_field() }}
-
                         <div class="form-group">
                             <label for="name{{$user->id}}">Nombre: </label>
                             <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>

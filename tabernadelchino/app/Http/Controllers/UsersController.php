@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\User;
+use Illuminate\Validation\Rule;
+use App\Rules\DNIRule;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -51,10 +53,22 @@ class UsersController extends Controller
     public function delete($id) {
         $user = User::find($id);
         $user->delete();
-        return redirect('/admin-users')->with('success', 'deleted succesfully!');
+        return redirect('/admin-users')->with('success', '¡Usuario eliminado con éxito!');
     }
 
     public function edit(Request $request, $id) {
+        $this->validate($request,
+            [
+                'name' . $id  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'surname'. $id => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'dni'. $id   =>  [new DNIRule()],
+            ],
+            [
+                'name.regex' => 'El campo nombre debe ser alfabético.',
+                'surname.regex' => 'El campo apellido debe ser alfabético.',
+            ]
+        );
+
         $user = User::findOrFail($id);
         if ($request->has('name' . $id)) {
             $user->name = $request->input('name' . $id);
@@ -75,10 +89,32 @@ class UsersController extends Controller
             }
             $user->save();
         }
-        return redirect('/admin-users')->with('success', 'edited succesfully!');
+        return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
     }
 
     public function create(Request $request) {
+        $users = User::all();
+        $susers = [];
+        foreach($users as $user){
+            array_push($susers, $user->email);
+        }
+
+        $this->validate($request,
+            [
+                'name'  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'surname' => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'email' =>  [Rule::notIn($susers)],
+                'dni'   =>  [new DNIRule()],
+                'cp'    => ['regex:/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/']
+            ],
+            [
+                'name.regex' => 'El campo nombre debe ser alfabético.',
+                'surname.regex' => 'El campo apellido debe ser alfabético.',
+                'cp.regex'  =>  'El código postal no es válido.',
+                'not_in' => 'Este email ya está registrado.'
+            ]
+        );
+
         $address = new Address();
         $address->type = $request->input('type');
         $address->name = $request->input('address');
@@ -112,6 +148,6 @@ class UsersController extends Controller
         $user->addresses()->associate($address);
         $user->save();
 
-        return back();
+        return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
     }
 }
