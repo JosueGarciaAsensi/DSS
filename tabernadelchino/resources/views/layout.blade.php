@@ -20,10 +20,11 @@
                         <a href="{{ url('/products') }}" class="nav-item nav-link">Productos</a>
                         <a href="{{ url('/about') }}" class="nav-item nav-link">Sobre nosotros</a>
                     </div>
-                    <form class="d-flex">
-                        <div class="input-group mt-3">                    
-                            <input type="text" class="form-control" placeholder="Search">
-                            <button type="button" class="btn" style="background-color: #ffa834;">
+                    <form class="d-flex" action="{{ url('/search') }}" method="GET">
+                        {{ csrf_field() }}
+                        <div class="input-group mt-3">
+                            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar">
+                            <button type="submit" class="btn" style="background-color: #ffa834;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-light" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                 </svg>
@@ -182,40 +183,6 @@
             </a>
             </section>
             <!-- Section: Social media -->
-
-            <!-- Section: Form -->
-            <section class="">
-            <form action="">
-                <!--Grid row-->
-                <div class="row d-flex justify-content-center">
-                <!--Grid column-->
-                <div class="col-auto">
-                    <p class="pt-2">
-                    <strong>Recibe nuestras mejores ofertas</strong>
-                    </p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-5 col-12">
-                    <!-- Email input -->
-                    <div class="form-outline form-white mb-4">
-                        <input type="email" id="form5Example21" class="form-control" placeholder="Correo electrónico" />
-                    </div>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-auto">
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-outline-light mb-4">Suscríbete</button>
-                </div>
-                <!--Grid column-->
-                </div>
-                <!--Grid row-->
-            </form>
-            </section>
-            <!-- Section: Form -->
 
             <!-- Section: Text -->
             <section class="mb-2">

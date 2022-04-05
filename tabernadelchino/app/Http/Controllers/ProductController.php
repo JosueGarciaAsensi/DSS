@@ -15,7 +15,6 @@ class ProductController extends Controller
     }
 
     public function productShow($id) {
-        $products = Product::all();
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
@@ -92,7 +91,7 @@ class ProductController extends Controller
         return redirect('/admin-products')->with('success', 'edited succesfully!');
     }
 
-    public function search(Request $request){
+    public function filter(Request $request){
         $beertypes = BeerType::all();
         $sign = $_GET['sign'];
         $tipo = $request->input('beertype');
@@ -200,5 +199,11 @@ class ProductController extends Controller
             $products = null;
         }
         return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+    }
+  
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $products = Product::where('name', 'LIKE','%' . $search . '%')->paginate(3);
+        return view('products', ['products' => $products]);
     }
 }
