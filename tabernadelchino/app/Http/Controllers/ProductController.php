@@ -15,7 +15,6 @@ class ProductController extends Controller
     }
 
     public function productShow($id) {
-        $products = Product::all();
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
@@ -88,5 +87,11 @@ class ProductController extends Controller
             $product->save();
         }
         return redirect('/admin-products')->with('success', 'edited succesfully!');
+    }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $products = Product::where('name', 'LIKE','%' . $search . '%')->paginate(3);
+        return view('products', ['products' => $products]);
     }
 }

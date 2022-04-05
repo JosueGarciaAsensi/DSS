@@ -30,6 +30,8 @@ Route::get('/products/{id}', [ProductController::class, 'productShow']);
 
 Route::get('/cart/{id}', [CartController::class, 'showCart']);
 
+Route::get('/search', [ProductController::class, 'search']);
+
 // Admin routes
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
