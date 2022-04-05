@@ -9,9 +9,43 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    // Atributos para controlar filtros
+    private $search_admins = true;
+    private $search_users = true;
+
     public function index() {
         $users = User::paginate(10);
-        return view('admin-users', ['users' => $users]);
+        
+        return view('admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
+    }
+
+    public function search(Request $request) {
+        if ($request->has('search_admins')) {
+            $search_admins = true;
+        }
+        else {
+            $search_admins = false;
+        }
+
+        if ($request->has('search_users')) {
+            $search_users = true;
+        }
+        else {
+            $search_users = false;
+        }
+        
+        $users = null;
+        if($search_admins != null && $search_users != null) {
+            $users = User::paginate(10);
+        }
+        elseif($search_admins != null){
+            $users = User::where('admin', '=', true)->paginate(10);
+        }
+        elseif ($search_users != null) {
+            $users = User::where('admin', '=', false)->paginate(10);
+        }
+        
+        return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
     public function delete($id) {

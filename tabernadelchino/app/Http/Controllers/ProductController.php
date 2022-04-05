@@ -27,7 +27,9 @@ class ProductController extends Controller
     public function adminShow() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes]);
+        $search_visibles = true;
+        $search_invisibles = true;
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 
     //Funciona
@@ -89,6 +91,116 @@ class ProductController extends Controller
         return redirect('/admin-products')->with('success', 'edited succesfully!');
     }
 
+    public function filter(Request $request){
+        $beertypes = BeerType::all();
+        $sign = $_GET['sign'];
+        $tipo = $request->input('beertype');
+
+        $search_visibles = null;
+        if ($request->has('visible')) {
+            $search_visibles = true;
+        }
+        else {
+            $search_visibles = false;
+        }
+
+        $search_invisibles = null;
+        if ($request->has('invisible')) {
+            $search_invisibles = true;
+        }
+        else {
+            $search_invisibles = false;
+        }
+
+        if($sign == 'greater'){
+            $sign = '>';
+        }
+        elseif($sign == 'less'){
+            $sign = '<';
+        }
+        elseif($sign == 'equal'){
+            $sign = '=';
+        }
+        else{
+            $sign =  null;
+        }
+
+        if($request->has('visible') and $request->has('invisible')){
+            if($sign != null and $request->input('price') != ""){
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('price', $sign, $request->input('price'))
+                    ->where('beer_types_id', '=', $request->input('beertype'))
+                    ->paginate(10);
+                }
+                else{
+                    $products = Product::where('price', $sign, $request->input('price'))->paginate(10);
+                }
+            }
+            else{
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->paginate(10);
+                }
+                else{
+                    $products = Product::paginate(10);
+                }
+            }
+        }
+        elseif($request->has('visible')){
+            if($sign != null and $request->input('price') != ""){
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('price', $sign, $request->input('price'))
+                    ->where('beer_types_id', '=', $request->input('beertype'))
+                    ->where('visible', '=', 1)
+                    ->paginate(10);
+                }
+                else{
+                    $products = Product::where('price', $sign, $request->input('price'))
+                    ->where('visible', '=', 1)
+                    ->paginate(10);
+                }
+            }
+            else{
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))
+                    ->where('visible', '=', 1)
+                    ->paginate(10);
+                }
+                else{
+                    $products = Product::where('visible', '=', 1)->paginate(10);
+                }
+            }
+        }
+        elseif($request->has('invisible')){
+            if($sign != null and $request->input('price') != ""){
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('price', $sign, $request->input('price'))
+                    ->where('beer_types_id', '=', $request->input('beertype'))
+                    ->where('visible', '=', 0)
+                    ->paginate(10);
+                }
+                else{
+                    $products = Product::where('price', $sign, $request->input('price'))
+                    ->where('visible', '=', 0)
+                    ->paginate(10);
+                }
+            }
+            else{
+                if($request->input('beertype') != 'null'){
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))
+                    ->where('visible', '=', 0)
+                    ->paginate(10);
+                }
+                else{
+                    $products = Product::where('visible', '=', 0)->paginate(10);
+                }
+            }
+        }
+        else{
+            $products = null;
+        }
+        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+    }
+  
     public function search(Request $request) {
         $search = $request->input('search');
         $products = Product::where('name', 'LIKE','%' . $search . '%')->paginate(3);
