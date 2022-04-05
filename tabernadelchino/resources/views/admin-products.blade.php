@@ -122,6 +122,17 @@
                 </div>
                 @endforeach
             </div>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+                </div>
+                @elseif(Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                {{ Session::get('success') }}
+                @endif
+                </div>
             <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
             @else
             <h1 class="text-light">No existen productos que coincidan con el criterio de búsqueda</h1>
@@ -140,16 +151,15 @@
             </div>
             <div class="modal-body">
                 <form action="{{ url('/admin-products/create')}}" method="POST">
-                    @method('PUT')
                     {{ csrf_field() }}
 
                     <div class="form-group">
                         <label for="name">Nombre: </label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+                        <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Nombre" required>
                     </div>
                     <div>
                         <label for="beertype">Tipo: </label>
-                        <select class="form-control"  name="beertype" id="beertype">
+                        <select class="form-control" value="{{ old('beertype') }}"  name="beertype" id="beertype">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
                             <option value="{{$beertype->id}}">{{$beertype->names}}</option>
@@ -159,23 +169,23 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Descripción: </label>
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Descripción" required>
+                        <input type="text" id="description" value="{{ old('description') }}" name="description" class="form-control" placeholder="Descripción" required>
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock: </label>
-                        <input type="number" min="0" id="stock" name="stock" default="0" class="form-control" placeholder="Stock" required>
+                        <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="Stock" required>
                     </div>
                     <div class="form-group">
                         <label for="price">Precio: </label>
-                        <input type="number" min="0" step="0.01" id="price" name="price" default="0" class="form-control" placeholder="Precio" required>
+                        <input type="number" min="0" step="0.01" id="price" value="{{ old('price') }}" name="price" default="0" class="form-control" placeholder="Precio" required>
                     </div>
                     <div class="form-group">
                         <label for="image">Imagen: </label>
-                        <input type="text" id="image" name="image" class="form-control" placeholder="Imagen" required>
+                        <input type="text" id="image" value="{{ old('image') }}" name="image" class="form-control" placeholder="Imagen" required>
                     </div>
                     <br>
                     <div class="form-check">
-                        <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                        <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
                         <label class="form-check-label" for="visible">¿Es visible?</label>
                     </div>
                     <br>

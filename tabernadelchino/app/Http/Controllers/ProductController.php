@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\BeerType;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -37,11 +38,31 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->visible = false;
         $product->save();
-        return redirect('/admin-products')->with('success', 'deleted succesfully!');
+        return redirect('/admin-products')->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
     }
 
-    //Revisar
+    //Funciona
     public function create(Request $request) {
+        //VALIDACIONES
+        $products = Product::all();
+        $sproducts = [];     
+        
+        foreach($products as $product){
+            if ($product->name == $request->name and $product->beer_types_id == $request->beertype) {
+                    array_push($sproducts, $product->name);
+            }
+        }
+
+        $this->validate($request,
+        [
+            'name'  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/',
+                        Rule::notIn($sproducts)],
+        ],
+        [
+            'name.regex' => 'El campo nombre debe ser alfabético.',
+            'name.not_in'    =>  'Ya existe un producto con este nombre y tipo en la lista.',
+        ]);
+
         $product = new Product();
         $product->name = $request->input('name');
         $product->stock = $request->input('stock');
@@ -64,10 +85,38 @@ class ProductController extends Controller
         $product->users()->associate($user);
         $product->save();
 
-        return back();
+        return redirect('/admin-products')->with('success', '¡Producto creado con éxito!');
     }
 
     public function edit(Request $request, $id) {
+        $products = Product::all();
+        $sproducts = [];
+
+        foreach($products as $product){
+            if ($product->name == $request->input('name' . $id) and $product->id == $id and $product->beer_types_id == $request->input('beertype' . $id)) { 
+                    array_push($sproducts, $product->name);
+            }
+        }
+
+        $products = Product::all();
+        $sproducts = [];     
+        
+        foreach($products as $product){
+            if ($product->name == $request->input('name' . $id) and $product->beer_types_id == $request->input('beertype' . $id) and $product->id != $id) {
+                    array_push($sproducts, $product->name);
+            }
+        }
+
+        $this->validate($request,
+        [
+            'name' . $id  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/',
+                        Rule::notIn($sproducts)],
+        ],
+        [
+            'name' . $id . '.regex' => 'El campo nombre debe ser alfabético.',
+            'name' . $id . '.not_in'    =>  'Ya existe un producto con este nombre y tipo en la lista.',
+        ]);
+
         $product = Product::findOrFail($id);
         if ($request->has('name' . $id)) {
             $product->name = $request->input('name' . $id);
@@ -88,13 +137,12 @@ class ProductController extends Controller
             $product->beer_types()->associate($beertype);
             $product->save();
         }
-        return redirect('/admin-products')->with('success', 'edited succesfully!');
+        return redirect('/admin-products')->with('success', '¡Producto editado con éxito!');
     }
 
     public function filter(Request $request){
         $beertypes = BeerType::all();
         $sign = $_GET['sign'];
-        $tipo = $request->input('beertype');
 
         $search_visibles = null;
         if ($request->has('visible')) {

@@ -57,15 +57,24 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request, $id) {
+        $users = User::all();
+        $susers = [];
+        foreach($users as $user){
+            if($user->email == $request->input('email' . $id) and $user->id != $id) {
+                array_push($susers, $user->email);
+            }
+        }
         $this->validate($request,
             [
                 'name' . $id  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
                 'surname'. $id => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'email' . $id   => [Rule::notIn($susers)],
                 'dni'. $id   =>  [new DNIRule()],
             ],
             [
                 'name.regex' => 'El campo nombre debe ser alfabético.',
                 'surname.regex' => 'El campo apellido debe ser alfabético.',
+                'not_in'    =>  'El email ya está registrado.'
             ]
         );
 
