@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use App\Models\Bill;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\User;
@@ -14,16 +13,6 @@ use App\Models\Order;
 
 class OrderTest extends TestCase
 {
-    /**
-     * A bill test.
-     *
-     * @return void
-     */
-    public function test_bill()
-    {
-        $this->assertEquals(Order::find(1)->bill, Bill::find(1));
-    }
-
     /**
      * A product test.
      *

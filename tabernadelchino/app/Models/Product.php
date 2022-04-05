@@ -9,13 +9,11 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function beer_type() { return $this->belongsTo('App\Models\BeerType'); }
+    public function beer_types() { return $this->belongsTo('App\Models\BeerType'); }
     
-    public function user() { return $this->belongsTo('App\Models\User'); }
+    public function users() { return $this->belongsTo('App\Models\User'); }
 
-    public function cart() { return $this->belongsToMany('App\Models\Cart'); }
+    public function carts() { return $this->belongsToMany('App\Models\Cart'); }
 
-    public function order() { return $this->belongsToMany('App\Models\Order'); }
-
-    public function bill() { return $this->belongsToMany('App\Models\Bill'); }
+    public function orders() { return $this->belongsToMany('App\Models\Order'); }
 }

@@ -2,15 +2,29 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use App\Models\User;
+use App\Models\Address;
+use App\Models\Cart;
+use App\Models\Order;
+
 class UsersTableSeeder extends Seeder {
-    public static function obtenerSiguienteIndice($indiceDirecciones) {
-        return DB::table('addresses')->where('id', '>', 0)->pluck('id')->toArray()[$indiceDirecciones - 1];
+    protected function getAddress($i) {
+        $direcciones = Address::all();
+        return $direcciones[$i];
+    }
+
+    protected function getCart() {
+        $carts = Cart::all();
+        return $carts[random_int(0, count($carts)-1)];
+    }
+
+    protected function getOrder() {
+        $orders = Order::all();
+        return $orders[random_int(0, count($orders)-1)];
     }
 
     /**
@@ -23,24 +37,22 @@ class UsersTableSeeder extends Seeder {
         $names = ['Francisco', 'Josué', 'Jordi', 'David', 'Ángel'];
         $surnames = ['Ferrández Martínez', 'García Asensi', 'Sellés Enríquez', 'Pastor Crespo', 'León Cerdán'];
         $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
-        $dni = ['55391233J', '51253198K', '23421897W', '384230271P', '891238421O'];
+        $dni = ['55391233J', '51253198K', '23421897W', '384230271P', '891238421H'];
 
-        DB::table('users')->delete();
-        // Añadimos una entrada a esta tabla
-        foreach (range(0, 4) as $index) {
-            DB::table('users')->insert(
-                [
-                    'name' => $names[$index],
-                    'surname' => $surnames[$index],
-                    'email' => $emails[$index],
-                    'password' => Hash::make(Str::random(5)),
-                    'dni' => $dni[$index],
-                    'admin' => true,
-                    'address_id' => $index+1, 
-                    'cart_id' => $index+1
-                ]
-            );
-            
+        foreach (range(0,4) as $i) {
+            $user = new User();
+            $user->name = $names[$i];
+            $user->surname = $surnames[$i];
+            $user->email = $emails[$i];
+            $user->password = Hash::make(Str::random(5));
+            $user->dni = $dni[$i];
+            $user->admin = true;
+            $user->visible = true;
+            $user->addresses()->associate($this->getAddress($i));
+
+            $user->carts()->associate($this->getCart());
+
+            $user->save();
         }
     }
 }

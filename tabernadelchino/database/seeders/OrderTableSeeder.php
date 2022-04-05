@@ -2,32 +2,56 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+
+use App\Models\Order;
+use App\Models\User;
+use App\Models\Product;
 
 class OrderTableSeeder extends Seeder
 {
+    protected function getUsers() {
+        $users = User::all();
+        return $users[random_int(0, count($users)-1)];
+    }
+
+    protected function getProducts() {
+        $products = Product::all();
+        return $products;
+    }
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run()
-    {
-        DB::table('orders')->delete();
-        
+    { 
         $states = ['Pendiente pago', 'Pago realizado', 'Enviado', 'Entregado', 'Devuelto'];
-        
-        foreach (range(0,4) as $index) {                
-                DB::table('orders')->insert(
-                    [    
-                        'cart_id' => $index+1,
-                        'user_id' => $index+1,
-                        'state' => $states[$index]
-                    ]
-                );
+
+        foreach (range(0,4) as $i) {
+            $order = new Order();
+            $order->users()->associate($this->getUsers());
+            $order->state = $states[$i];
+
+            $order->save();
+            
+            $products = $this->getProducts();
+            $indexes = array();
+            foreach (range(0, count($products)-1) as $i) {
+                $indexes[] = $i;
+            }
+            shuffle($indexes);
+            foreach ($indexes as $i) {
+                $product = $products[$i];
+                if (!is_null($product)) {
+                    $order->products()->attach($product);
+                }
+                $test = random_int(0, 3);
+                if ($test == 0) {
+                    break;
+                }
+            }
         }
     }
 }
