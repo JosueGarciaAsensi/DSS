@@ -130,9 +130,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createModalTitle">Crear usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ url('/users/create')}}" method="POST">
@@ -173,7 +171,7 @@
                         <h3>Dirección</h3>
                         <div class="form-group">
                             <label for="type">Tipo: </label>
-                            <select id="type" name="type">
+                            <select  class="form-control" id="type" name="type">
                                 <option value="Calle">Calle</option>
                                 <option value="Avenida">Avenida</option>
                                 <option value="Paseo">Paseo</option>
@@ -206,9 +204,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Editar usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">

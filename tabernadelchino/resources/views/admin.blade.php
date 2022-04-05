@@ -11,9 +11,7 @@
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
                 <a href="{{ url('/') }}" class="navbar-brand">La Taberna del Chino</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"></button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="nav"></div>
                     <div class="nav pull-right">
