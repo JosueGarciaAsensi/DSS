@@ -19,7 +19,7 @@ class UsersController extends Controller
         return view('admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
-    public function search(Request $request) {
+    public function filter(Request $request) {
         if ($request->has('search_admins')) {
             $search_admins = true;
         }

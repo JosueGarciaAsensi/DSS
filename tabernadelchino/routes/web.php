@@ -36,7 +36,7 @@ Route::get('/search', [ProductController::class, 'search']);
 Route::get('/admin', [StatisticsController::class, 'statistics']);
 
 Route::get('/admin-users', [UsersController::class, 'index']);
-Route::get('/admin-users/search', [UsersController::class, 'search']);
+Route::get('/admin-users/search', [UsersController::class, 'filter']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'delete']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::post('/users/create', [UsersController::class, 'create']);
@@ -45,7 +45,7 @@ Route::get('/admin-products', [ProductController::class, 'adminShow']);
 Route::post('/admin-products/delete/{id}', [ProductController::class, 'delete']);
 Route::post('/admin-products/create', [ProductController::class, 'create']);
 Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
-Route::get('/admin-products/search', [ProductController::class, 'search']);
+Route::get('/admin-products/search', [ProductController::class, 'filter']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
 Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'delete']);
