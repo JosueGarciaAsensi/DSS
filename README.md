@@ -51,7 +51,11 @@ Fecha límite de entrega: _08/04/2022_
 
 Contenido:
 - _Diagrama de clases_ (completo)
-- _Aplicación funcional sin autenticación de usuarios_
+- _Implementación mínima_
+- _Implementación opcional_
+- _Presentación_
+- _Video demo_
 
 Entregado:
 - [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
+- Presentación y video demo en Google Drive.
