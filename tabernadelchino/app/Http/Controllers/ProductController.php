@@ -196,6 +196,9 @@ class ProductController extends Controller
                 }
             }
         }
+        else{
+            $products = null;
+        }
         return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 }

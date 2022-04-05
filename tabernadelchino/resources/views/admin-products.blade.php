@@ -38,8 +38,7 @@
                                     <option value="equal"> = </option>
                                     <option value="less"> < </option>
                                 </select>
-                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Precio">
-                            
+                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Precio">               
                         </div>
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
@@ -69,6 +68,7 @@
         </div>
         <br>
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
+            @if(!is_null($products))
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>Nombre</b></div>
                 <div class="col"><b>Tipo</b></div>
@@ -123,6 +123,9 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+            @else
+            <h1 class="text-light">No existen productos que coincidan con el criterio de búsqueda</h1>
+            @endif
         </div>
     </div>
 </div>
@@ -188,6 +191,7 @@
     </div>
 </div>
 
+@if(!is_null($products))
 @foreach ($products as $product)
 <!-- Modal -->
 <div class="modal fade" id="editModal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="editModalTitle{{$product->id}}" aria-hidden="true">
@@ -254,4 +258,5 @@
     </div>
 </div>
 @endforeach
+@endif
 @endsection
