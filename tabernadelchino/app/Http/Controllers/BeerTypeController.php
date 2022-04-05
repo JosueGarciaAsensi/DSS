@@ -8,25 +8,23 @@ use App\Models\BeerType;
 
 class BeerTypeController extends Controller
 {
-    private $status = null;
     public function index() {
         $beertypes = BeerType::all();
-        return view('admin-beertypes', ['beertypes' => $beertypes, 'status' => $this->status]);
+        return view('admin-beertypes', ['beertypes' => $beertypes]);
     }
 
     public function delete($id) {
         $beertype = BeerType::find($id);
         $beertype->delete();
         
-        $this->status = "¡Tipo eliminado con éxito!";
-        return redirect('/admin-beertypes')->with('success', 'deleted succesfully!');
+        return redirect('/admin-beertypes')->with('success', '¡Tipo eliminado con éxito!');
     }
 
     public function edit(Request $request, $id){
         $beertypes = BeerType::all();
         $sbeertypes = [];
         foreach($beertypes as $beertype){
-            $sbeertypes += [$beertype->names];
+            array_push($sbeertypes, $beertype->names);
         }
 
         $this->validate($request,
@@ -46,16 +44,16 @@ class BeerTypeController extends Controller
             $beertype->save();
         }
 
-        $this->status = "¡Tipo editado con éxito!";
-        return redirect('/admin-beertypes')->with('success', 'edited succesfully!');
+        return redirect('/admin-beertypes')->with('success', '¡Tipo editado con éxito!');
     }
 
     public function create(Request $request) {
         $beertypes = BeerType::all();
         
         $sbeertypes = [];
+        
         foreach($beertypes as $beertype){
-            $sbeertypes += [$beertype->names];
+            array_push($sbeertypes, $beertype->names);
         }
         
         $this->validate($request, 
@@ -73,8 +71,6 @@ class BeerTypeController extends Controller
         
         $tipoCerveza->save();
         
-        $this->status = "¡Nuevo tipo añadido con éxito!";
-        //return redirect('/admin-beertypes')->with('success', 'created succesfully!');
-        return back();
+        return redirect('/admin-beertypes')->with('success', '¡Nuevo tipo añadido con éxito!');
     }
 }

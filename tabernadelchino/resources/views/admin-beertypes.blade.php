@@ -52,9 +52,9 @@
         {{ $error }}
         @endforeach
       </div>
-    @elseif(!is_null($status))
+    @elseif(Session::has('success'))
       <div class="alert alert-success" role="alert">
-        {{ $status }}
+        {{ Session::get('success') }}
       </div>
     @endif
   </div>
@@ -70,8 +70,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/create')}}" method="GET, PUT">
-            @method('POST')
+          <form action="{{ url('/admin-beertypes/create')}}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
               <label for="type">Tipo: </label>
@@ -100,7 +99,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="GET, POST">
+          <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="POST">
             @method('PUT')
             {{ csrf_field() }}
 
