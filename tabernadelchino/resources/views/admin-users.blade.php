@@ -13,6 +13,7 @@
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
             <form action="{{ url('/admin-users/search/') }}" method="GET">
+                @method('GET')
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="p-2">
@@ -36,6 +37,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row p-2 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Aplicar filtros</button>
                 </div>
@@ -121,143 +123,143 @@
         @else
         <h1 class="text-light">No existen usuarios que coincidan con el criterio de búsqueda</h1>
         @endif
-</div>
+    </div>
 
-<!-- Modal -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createModalTitle">Crear usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ url('/users/create')}}" method="POST">
-                    @method('PUT')
-                    {{ csrf_field() }}
+    <!-- Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalTitle">Crear usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/users/create')}}" method="POST">
+                        @method('PUT')
+                        {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="name">Nombre: </label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="surname">Apellidos: </label>
-                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="passwd">Contraseña: </label>
-                        <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email: </label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dni">DNI: </label>
-                        <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
-                    </div>
-                    <br>
-                    <div class="form-check">
-                        <input type="checkbox" id="visible" name="visible" class="form-check-input">
-                        <label class="form-check-label" for="visible">¿Es visible?</label>
-                    </div>
-                    <br>
-                    <div class="form-check">
-                        <input type="checkbox" id="admin" name="admin" class="form-check-input">
-                        <label class="form-check-label" for="admin">¿Es administrador?</label>
-                    </div>
-                    <br>
-                    <h3>Dirección</h3>
-                    <div class="form-group">
-                        <label for="type">Tipo: </label>
-                        <select id="type" name="type">
-                            <option value="Calle">Calle</option>
-                            <option value="Avenida">Avenida</option>
-                            <option value="Paseo">Paseo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Dirección: </label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cp">Código postal: </label>
-                        <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <div class="form-group">
+                            <label for="name">Nombre: </label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Apellidos: </label>
+                            <input type="text" id="surname" name="surname" class="form-control" placeholder="Apellidos" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd">Contraseña: </label>
+                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dni">DNI: </label>
+                            <input type="text" id="dni" name="dni" class="form-control" placeholder="DNI" required>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            <input type="checkbox" id="visible" name="visible" class="form-check-input">
+                            <label class="form-check-label" for="visible">¿Es visible?</label>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            <input type="checkbox" id="admin" name="admin" class="form-check-input">
+                            <label class="form-check-label" for="admin">¿Es administrador?</label>
+                        </div>
+                        <br>
+                        <h3>Dirección</h3>
+                        <div class="form-group">
+                            <label for="type">Tipo: </label>
+                            <select id="type" name="type">
+                                <option value="Calle">Calle</option>
+                                <option value="Avenida">Avenida</option>
+                                <option value="Paseo">Paseo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección: </label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cp">Código postal: </label>
+                            <input type="text" class="form-control" id="cp" name="cp" placeholder="Código postal" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@if(!is_null($users))
-@foreach ($users as $user)
-<!-- Modal -->
-<div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Editar usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
-                    @method('PUT')
-                    {{ csrf_field() }}
+    @if(!is_null($users))
+    @foreach ($users as $user)
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Editar usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
+                        @method('PUT')
+                        {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="name{{$user->id}}">Nombre: </label>
-                        <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="surname{{$user->id}}">Apellidos: </label>
-                        <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email{{$user->id}}">Email: </label>
-                        <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dni{{$user->id}}">DNI: </label>
-                        <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
-                    </div>
-                    <br>
-                    <div class="form-check">
-                        @if ($user->visible == 1)
-                        <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input" checked>
-                        @else
-                        <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
-                        @endif
-                        <label class="form-check-label" for="visible{{$user->id}}">¿Es visible?</label>
-                    </div>
-                    <br>
-                    <div class="form-check">
-                        @if ($user->admin == 1)
-                        <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input" checked>
-                        @else
-                        <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
-                        @endif
-                        <label class="form-check-label" for="admin{{$user->id}}">¿Es administrador?</label>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Aplicar</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <div class="form-group">
+                            <label for="name{{$user->id}}">Nombre: </label>
+                            <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname{{$user->id}}">Apellidos: </label>
+                            <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email{{$user->id}}">Email: </label>
+                            <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dni{{$user->id}}">DNI: </label>
+                            <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            @if ($user->visible == 1)
+                            <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input" checked>
+                            @else
+                            <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
+                            @endif
+                            <label class="form-check-label" for="visible{{$user->id}}">¿Es visible?</label>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            @if ($user->admin == 1)
+                            <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input" checked>
+                            @else
+                            <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
+                            @endif
+                            <label class="form-check-label" for="admin{{$user->id}}">¿Es administrador?</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Aplicar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@endforeach
-@endif
-@endsection
+    @endforeach
+    @endif
+    @endsection
