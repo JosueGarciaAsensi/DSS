@@ -47,15 +47,15 @@
       @endforeach
     </div>
     @if (count($errors) > 0)
-      <div class="alert alert-danger" role="alert">
-        @foreach ($errors->all() as $error)
-        {{ $error }}
-        @endforeach
-      </div>
+    <div class="alert alert-danger" role="alert">
+      @foreach ($errors->all() as $error)
+      {{ $error }}
+      @endforeach
+    </div>
     @elseif(Session::has('success'))
-      <div class="alert alert-success" role="alert">
-        {{ Session::get('success') }}
-      </div>
+    <div class="alert alert-success" role="alert">
+      {{ Session::get('success') }}
+    </div>
     @endif
   </div>
 
