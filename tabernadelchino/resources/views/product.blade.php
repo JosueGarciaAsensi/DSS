@@ -43,18 +43,19 @@
                             <a href="{{ url('products/' . $productAlt->id) }}">
                                 <div style="text-align:center;">
                                     <img src="{{ $productAlt->image }}" height="400px">
-                                </div>
                                 <h4 class="text-light">{{ $productAlt->name }}</h4>
-                                @if (!is_null($product->beer_types))
-                                    <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names }}
+                                @if (!is_null($productAlt->beer_types))
+                                    <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $productAlt->beer_types->names }}
                                     </h4>
                                 @else
                                     <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
                                 @endif
+                                </div>
                             </a>
+                            <div style="text-align:center;">
                             <p class="text-light">{{ $productAlt->description }}</p>
                             <h4 class="text-light">{{ $productAlt->price }}€</h4>
-
+                            </div>
                         </td>
                         @php($i = $i + 1)
                         @if ($i == 4)
