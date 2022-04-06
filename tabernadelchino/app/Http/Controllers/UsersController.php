@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use App\Rules\DNIRule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -137,7 +138,7 @@ class UsersController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
-        $user->password = Hash::hash("sha256", $request->input('passwd'));
+        $user->password = Hash::make($request->input('passwd'));
         $user->email = $request->input('email');
         $user->dni = $request->input('dni');
         if ($request->has('admin')) {
