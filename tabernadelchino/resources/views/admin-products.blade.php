@@ -38,7 +38,7 @@
                                     <option value="equal"> = </option>
                                     <option value="less"> < </option>
                                 </select>
-                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Precio">               
+                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Precio">
                         </div>
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
@@ -121,19 +121,18 @@
                     </form>
                 </div>
                 @endforeach
+
             </div>
             @if (count($errors) > 0)
                 <div class="alert alert-danger" role="alert">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
                 </div>
                 @elseif(Session::has('success'))
-                <div class="alert alert-success" role="alert">
-                {{ Session::get('success') }}
+                    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
                 @endif
-                </div>
-            <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+                <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
             @else
             <h1 class="text-light">No existen productos que coincidan con el criterio de búsqueda</h1>
             @endif

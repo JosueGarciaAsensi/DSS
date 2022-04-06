@@ -34,7 +34,7 @@ class ProductController extends Controller
     }
 
     //Funciona
-    public function delete($id) {
+    public function destroy($id) {
         $product = Product::find($id);
         $product->visible = false;
         $product->save();

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use App\Rules\DNIRule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -50,7 +51,7 @@ class UsersController extends Controller
         return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
-    public function delete($id) {
+    public function destroy($id) {
         $user = User::find($id);
         $user->delete();
         return redirect('/admin-users')->with('success', '¡Usuario eliminado con éxito!');
@@ -137,7 +138,7 @@ class UsersController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
-        $user->password = $request->input('passwd');
+        $user->password = Hash::make($request->input('passwd'));
         $user->email = $request->input('email');
         $user->dni = $request->input('dni');
         if ($request->has('admin')) {
