@@ -137,7 +137,7 @@ class UsersController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
-        $user->password = $request->input('passwd');
+        $user->password = Hash::hash("sha256", $request->input('passwd'));
         $user->email = $request->input('email');
         $user->dni = $request->input('dni');
         if ($request->has('admin')) {
