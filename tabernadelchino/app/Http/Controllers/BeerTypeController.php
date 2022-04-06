@@ -13,7 +13,7 @@ class BeerTypeController extends Controller
         return view('admin-beertypes', ['beertypes' => $beertypes]);
     }
 
-    public function delete($id) {
+    public function destroy($id) {
         $beertype = BeerType::find($id);
         $beertype->delete();
         

@@ -51,7 +51,7 @@ class UsersController extends Controller
         return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
-    public function delete($id) {
+    public function destroy($id) {
         $user = User::find($id);
         $user->delete();
         return redirect('/admin-users')->with('success', '¡Usuario eliminado con éxito!');
