@@ -15,7 +15,11 @@
                     </td>
                     <td>
                         <h1 class="text-light mt-2 mb-3">{{ $product->name; }}</h1>
-                        <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names; }}</h4>
+                        @if(!is_null($product->beer_types))
+                            <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names; }}</h4>
+                        @else
+                            <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
+                        @endif
                         <p class="text-light mt-2 mb-4">{{ $product->description; }}</p>
                         <h2 class="text-light mt-2 mb-5">{{ $product->price; }}€</h2>
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Añadir al carrito</button>
