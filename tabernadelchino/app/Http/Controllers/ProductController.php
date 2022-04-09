@@ -251,7 +251,7 @@ class ProductController extends Controller
   
     public function search(Request $request) {
         $search = $request->input('search');
-        $products = Product::where('name', 'LIKE','%' . $search . '%')->paginate(3);
+        $products = Product::where('name', 'LIKE','%' . $search . '%', 'and', 'visible', '!=', 'false')->paginate(3);
         return view('products', ['products' => $products]);
     }
 }
