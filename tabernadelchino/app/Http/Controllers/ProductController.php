@@ -45,8 +45,8 @@ class ProductController extends Controller
     public function create(Request $request) {
         //VALIDACIONES
         $products = Product::all();
-        $sproducts = [];     
-        
+        $sproducts = [];
+
         foreach($products as $product){
             if ($product->name == $request->name and $product->beer_types_id == $request->beertype) {
                     array_push($sproducts, $product->name);
@@ -66,7 +66,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->input('name');
         $product->stock = $request->input('stock');
-        
+
         if ($request->has('visible')) {
             $product->visible = 1;
         }
@@ -93,14 +93,14 @@ class ProductController extends Controller
         $sproducts = [];
 
         foreach($products as $product){
-            if ($product->name == $request->input('name' . $id) and $product->id == $id and $product->beer_types_id == $request->input('beertype' . $id)) { 
+            if ($product->name == $request->input('name' . $id) and $product->id == $id and $product->beer_types_id == $request->input('beertype' . $id)) {
                     array_push($sproducts, $product->name);
             }
         }
 
         $products = Product::all();
-        $sproducts = [];     
-        
+        $sproducts = [];
+
         foreach($products as $product){
             if ($product->name == $request->input('name' . $id) and $product->beer_types_id == $request->input('beertype' . $id) and $product->id != $id) {
                     array_push($sproducts, $product->name);
@@ -124,7 +124,7 @@ class ProductController extends Controller
             $product->description = $request->input('description' . $id);
             $product->price = $request->input('price' . $id);
             $product->image = $request->input('image' . $id);
-            
+
             if ($request->has('visible'. $id)) {
                 $product->visible = 1;
             }
@@ -248,10 +248,10 @@ class ProductController extends Controller
         }
         return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
-  
+
     public function search(Request $request) {
         $search = $request->input('search');
-        $products = Product::where('name', 'LIKE','%' . $search . '%', 'and', 'visible', '!=', 'false')->paginate(3);
+        $products = Product::where('name', 'LIKE','%' . $search . '%')->where('visible', '!=', '0')->paginate(3);
         return view('products', ['products' => $products]);
     }
 }
