@@ -19,7 +19,7 @@ class UsersController extends Controller
     public function index() {
         $users = User::paginate(10);
         
-        return view('admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
     public function filter(Request $request) {
@@ -48,7 +48,7 @@ class UsersController extends Controller
             $users = User::where('admin', '=', false)->paginate(10);
         }
         
-        return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
     public function destroy($id) {

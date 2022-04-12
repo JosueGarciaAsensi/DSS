@@ -30,7 +30,7 @@ class ProductController extends Controller
         $beertypes = BeerType::all();
         $search_visibles = true;
         $search_invisibles = true;
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 
     //Funciona

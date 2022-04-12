@@ -52,3 +52,4 @@ Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy
 Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
 Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
