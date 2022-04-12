@@ -10,7 +10,7 @@ class BeerTypeController extends Controller
 {
     public function index() {
         $beertypes = BeerType::all();
-        return view('admin-beertypes', ['beertypes' => $beertypes]);
+        return view('admin.admin-beertypes', ['beertypes' => $beertypes]);
     }
 
     public function destroy($id) {

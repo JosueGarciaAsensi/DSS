@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.master')
 @section('title', $product->name . ' - La Taberna del Chino')
 @section('menu')
     @parent

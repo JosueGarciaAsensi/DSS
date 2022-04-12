@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('layouts.admin')
 @section('title', 'Tipo Cerveza - La Taberna del Chino')
 @section('menu')
 @parent

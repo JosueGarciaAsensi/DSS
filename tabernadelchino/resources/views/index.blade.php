@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.master')
 @section('title', 'Inicio - La Taberna del Chino')
 @section('menu')
     @parent
