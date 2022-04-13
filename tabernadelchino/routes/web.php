@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,37 +20,37 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', [HomeController::class, 'home']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 
-Route::get('/about', [HomeController::class, 'about']);
-
-Route::get('/products', [ProductController::class, 'index']);
-
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 Route::get('/cart/{id}', [CartController::class, 'showCart']);
 
-Route::get('/search', [ProductController::class, 'search']);
+// Authentication
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::get('/register', [HomeController::class, 'reguster'])->name('register');
 
 // Admin routes
-Route::get('/admin', [StatisticsController::class, 'statistics']);
+Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin')->middleware('auth');
 
-Route::get('/admin-users', [UsersController::class, 'index']);
+Route::get('/admin-users', [UsersController::class, 'index'])->middleware('auth');
 Route::get('/admin-users/search', [UsersController::class, 'filter']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::post('/users/create', [UsersController::class, 'create']);
 
-Route::get('/admin-products', [ProductController::class, 'adminShow']);
+Route::get('/admin-products', [ProductController::class, 'adminShow'])->middleware('auth');
 Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
 Route::post('/admin-products/create', [ProductController::class, 'create']);
 Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
 Route::get('/admin-products/search', [ProductController::class, 'filter']);
 
-Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
+Route::get('/admin-beertypes', [BeerTypeController::class, 'index'])->middleware('auth');
 Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
 Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
 Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

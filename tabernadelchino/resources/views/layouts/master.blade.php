@@ -10,15 +10,15 @@
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
-                <a href="{{ url('/') }}" class="navbar-brand">La Taberna del Chino</a>
+                <a href="{{ route('index') }}" class="navbar-brand">La Taberna del Chino</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"></button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">Inicio</a>
-                        <a href="{{ url('/products') }}" class="nav-item nav-link">Productos</a>
-                        <a href="{{ url('/about') }}" class="nav-item nav-link">Sobre nosotros</a>
+                        <a href="{{ route('index') }}" class="nav-item nav-link active">Inicio</a>
+                        <a href="{{ route('products') }}" class="nav-item nav-link">Productos</a>
+                        <a href="{{ route('about') }}" class="nav-item nav-link">Sobre nosotros</a>
                     </div>
-                    <form class="d-flex" action="{{ url('/search') }}" method="GET">
+                    <form class="d-flex" action="{{ route('search') }}" method="GET">
                         {{ csrf_field() }}
                         <div class="input-group mt-3">
                             <input type="text" id="search" name="search" class="form-control" placeholder="Buscar">
@@ -42,8 +42,10 @@
                                 </svg>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</a>
-                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#createModal">Registrarse</a>
+                                <!-- <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</a>
+                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#createModal">Registrarse</a> -->
+                                <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
+                                <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
                             </div>
                         </div>
                     </div>
