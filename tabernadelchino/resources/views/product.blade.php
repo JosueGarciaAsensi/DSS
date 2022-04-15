@@ -21,9 +21,13 @@
                             <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
                         @endif
                         <p class="text-light mt-2 mb-4">{{ $product->description }}</p>
-                        <h2 class="text-light mt-2 mb-5">{{ $product->price }}€</h2>
-                        <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Añadir
-                            al carrito</button>
+                        <h2 class="text-light mt-2">{{ $product->price }}€</h2>
+                        @if($product->stock > 0)
+                            <h3 style="color: #69BA83">Stock: {{$product->stock}} unidades</h3>
+                            <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Añadir al carrito</button>
+                        @else
+                            <h3 style="color: #BA6969">No hay unidades disponibles</h3>
+                        @endif
                     </td>
                 </tr>
             </table>
@@ -55,6 +59,11 @@
                             <div style="text-align:center;">
                             <p class="text-light">{{ $productAlt->description }}</p>
                             <h4 class="text-light">{{ $productAlt->price }}€</h4>
+                            @if($productAlt->stock > 0)
+                                <h3 style="color: #69BA83">Disponible</h3>                                
+                            @else
+                                <h3 style="color: #BA6969">Sin stock</h3>
+                            @endif
                             </div>
                         </td>
                         @php($i = $i + 1)
