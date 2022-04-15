@@ -28,7 +28,6 @@
                                 </div>
                             </a>
                             <div style="text-align:center;">
-                            <p class="text-light">{{ $product->description; }}</p>
                             <h3 class="text-light">{{ $product->price; }}€</h3>
                             @if($product->stock > 0)
                                 <h3 style="color: #69BA83">Disponible</h3>
