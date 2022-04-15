@@ -71,7 +71,7 @@
                         <h1>Pedidos por usuario</h1>
                     </div>
                     <div class="col d-flex justify-content-end my-auto">
-                        <h1>{{ $ordersCount/$usersCount }}</h1>
+                        <h1>{{ round($ordersCount/$usersCount, 2) }}</h1>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center" height="600px" width="400px">
-                <a href="{{ url('products/' . $product->id) }}">
+                <a style="text-decoration:none;" href="{{ url('products/' . $product->id) }}">
                     <div style="text-align:center;">
                         <img src="{{ $product->image; }}" height="400px">
                     <h3 class="text-light">{{ $product->name; }}</h3>
@@ -96,14 +96,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
-                <p class="text-light">{{ $product->description; }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <h3 class="text-light">{{ $product->price; }}€</h3>
-            </div>
-        </div>
+        <h3 class="text-light d-flex justify-content-center">
+                        <div class="mx-4">{{ $product->price; }}€</div>
+                        @if($product->stock > 0 && $product->stock < 5)
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-warning align-self-center" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="8" />
+                        </svg>
+                        @elseif($product->stock > 0)
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-success align-self-center" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="8" />
+                        </svg>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-danger align-self-center" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="8" />
+                        </svg>
+                        @endif
+                    </h3>
+                 </div>
     </div>
 @endsection
