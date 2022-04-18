@@ -10,7 +10,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
-                <a href="{{ url('/') }}" class="navbar-brand">La Taberna del Chino</a>
+                <a href="{{ route('home') }}" class="navbar-brand">La Taberna del Chino</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"></button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="nav"></div>

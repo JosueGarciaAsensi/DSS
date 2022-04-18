@@ -31,6 +31,6 @@ class StatisticsController extends Controller
 
         $index = array_search(max($points), $points);
 
-        return $products[$index+1];
+        return $products[$index];
     }
 }

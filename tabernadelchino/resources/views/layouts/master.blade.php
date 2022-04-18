@@ -10,15 +10,15 @@
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
             <div class="container-fluid">
                 <img src="{{ asset('img/logo.png') }}" width=80>
-                <a href="{{ url('/') }}" class="navbar-brand">La Taberna del Chino</a>
+                <a href="{{ route('home') }}" class="navbar-brand">La Taberna del Chino</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"></button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">Inicio</a>
-                        <a href="{{ url('/products') }}" class="nav-item nav-link">Productos</a>
-                        <a href="{{ url('/about') }}" class="nav-item nav-link">Sobre nosotros</a>
+                        <a href="{{ route('home') }}" class="nav-item nav-link active">Inicio</a>
+                        <a href="{{ route('products') }}" class="nav-item nav-link">Productos</a>
+                        <a href="{{ route('about') }}" class="nav-item nav-link">Sobre nosotros</a>
                     </div>
-                    <form class="d-flex" action="{{ url('/search') }}" method="GET">
+                    <form class="d-flex" action="{{ route('search') }}" method="GET">
                         {{ csrf_field() }}
                         <div class="input-group mt-3">
                             <input type="text" id="search" name="search" class="form-control" placeholder="Buscar">
@@ -30,11 +30,19 @@
                         </div>
                     </form>
                     <div class="navbar-nav">
-                        <a href="{{ url('/cart/0') }}" class="nav-item nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag text-light mt-2" viewBox="0 0 16 16">
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                            </svg>
-                        </a>
+                        @guest
+                        @else
+                            <a href="{{ route('cart') }}" class="nav-item nav-link" onclick="event.preventDefault();
+                                                     document.getElementById('getCart-form').submit();">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag text-light mt-2" viewBox="0 0 16 16">
+                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                </svg>
+                            </a>
+                            <form id="getCart-form" action="{{ route('cart') }}" method="POST" class="d-none">
+                                @csrf
+                                <input type="hidden" id="id" name="id" text="{{ Auth::user()->id }}">
+                            </form>
+                        @endif
                         <div class="dropdown nav-item nav-link">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-person text-light mt-2" viewBox="0 0 16 16">
@@ -42,8 +50,23 @@
                                 </svg>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar sesión</a>
-                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#createModal">Registrarse</a>
+                                @guest
+                                    <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
+                                @else
+                                    <a class="dropdown-item" href="#">Mi Perfil</a>
+                                    <a class="dropdown-item" href="#">Mis Pedidos</a>
+                                    @if (Auth::user()->admin == 1)
+                                        <a class="dropdown-item" href="{{ route('admin') }}">Administración</a>
+                                    @endif
+                                    <a class="dropdown-divider"></a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Cerrar sesión</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -56,37 +79,6 @@
             @yield('content')
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalTitle">Iniciar sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('/login')}}" method="POST">
-                        @method('PUT')
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label for="email">Email: </label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="passwd">Contraseña: </label>
-                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary" disabled>Iniciar sesión</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-                </div>
-            </div>
-        </div>
         <!-- Modal -->
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
