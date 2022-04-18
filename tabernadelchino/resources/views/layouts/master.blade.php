@@ -80,37 +80,6 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalTitle">Iniciar sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('/login')}}" method="POST">
-                        @method('PUT')
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label for="email">Email: </label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="passwd">Contraseña: </label>
-                            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="Contraseña" required>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary" disabled>Iniciar sesión</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

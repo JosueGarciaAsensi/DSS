@@ -34,7 +34,7 @@ Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
-Route::get('/register', [HomeController::class, 'reguster'])->name('register');
+Route::get('/register', [HomeController::class, 'register'])->name('register');
 
 // Admin routes
 Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin')->middleware('auth');
