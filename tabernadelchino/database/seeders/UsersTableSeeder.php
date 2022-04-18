@@ -44,8 +44,7 @@ class UsersTableSeeder extends Seeder {
             $user->admin = true;
             $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
-
-            $user->carts()->associate($i+1);
+            $user->carts()->associate(Cart::find($i+1));
 
             $user->save();
         }

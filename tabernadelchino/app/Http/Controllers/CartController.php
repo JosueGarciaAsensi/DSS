@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
 
@@ -16,14 +15,18 @@ class CartController extends Controller
     }
 
     public function listCart(Request $request) {
-        $user = User::where('name', '=', $request->input('name'))->get();
+        $user = User::find($request->input('id'));
+        $products = [];
 
         if(!is_null($user)) {
-            $cart = $user->carts;
-            return view('cart')->with('products', $cart->products);
+            $products = $user->carts()->first()->products()->get();
         }
 
-        return view('cart')->with('products', []);
+        if (count($products) == 0) {
+            $products = [];
+        }
+
+        return view('cart')->with('products', $products);
     }
 
     public function addToCart(Request $request) {
@@ -34,7 +37,7 @@ class CartController extends Controller
         $product = Product::find($product_id);
 
         if (!is_null($user))
-            $user->carts()->products()->attach($product);
+            $user->carts()->first()->products()->attach($product);
         
         return back();
     }

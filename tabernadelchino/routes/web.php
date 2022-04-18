@@ -1,14 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------

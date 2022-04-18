@@ -8,7 +8,7 @@
         <table class="table table-responsive">
             <tr style="border-bottom: none;">
                 <td>
-                    @if(empty($products))
+                    @if($products == [])
                         <h1 class="text-light">No hay productos en la cesta...</h1>
                     @else
                         @foreach($products as $product)
@@ -18,7 +18,7 @@
                 </td>
                 <td>
                     <h2 class="text-light">0,00€</h2>
-                    @if (empty($products))
+                    @if ($products == [])
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>Realizar compra</button>
                     @else
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Realizar compra</button>
