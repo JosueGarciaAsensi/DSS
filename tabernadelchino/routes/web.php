@@ -22,14 +22,15 @@ use App\Http\Controllers\MainController;
 */
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
-Route::get('/cart/{id}', [CartController::class, 'showCart']);
+Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');

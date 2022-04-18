@@ -12,9 +12,10 @@ class CartController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function showCart($id) {
-        $cart = Cart::find($id);
+
+    public function listCart(Request $request) {
+        $user_id = $request->input('id');
+        $cart = Cart::where('user_id', '=', $user_id)->get();
         if(!$cart) {
             return view('cart')->with('products', []);
         } else {

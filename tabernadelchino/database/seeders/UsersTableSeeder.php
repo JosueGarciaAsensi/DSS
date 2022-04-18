@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder {
             $user->name = $names[$i];
             $user->surname = $surnames[$i];
             $user->email = $emails[$i];
-            $user->password = Hash::make(Str::random(5));
+            $user->password = Hash::make('123');
             $user->dni = $dni[$i];
             $user->admin = true;
             $user->visible = true;
