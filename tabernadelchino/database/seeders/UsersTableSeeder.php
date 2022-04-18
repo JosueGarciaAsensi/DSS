@@ -17,11 +17,6 @@ class UsersTableSeeder extends Seeder {
         return $direcciones[$i];
     }
 
-    protected function getCart() {
-        $carts = Cart::all();
-        return $carts[random_int(0, count($carts)-1)];
-    }
-
     protected function getOrder() {
         $orders = Order::all();
         return $orders[random_int(0, count($orders)-1)];
@@ -50,7 +45,7 @@ class UsersTableSeeder extends Seeder {
             $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
 
-            $user->carts()->associate($this->getCart());
+            $user->carts()->associate($i+1);
 
             $user->save();
         }

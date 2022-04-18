@@ -40,7 +40,7 @@
                             </a>
                             <form id="getCart-form" action="{{ route('cart') }}" method="POST" class="d-none">
                                 @csrf
-                                <input type="hidden" id="id" name="id" text="{{ Auth::user()->id }}">
+                                <input type="hidden" id="id" name="id" text="{{ Auth::user()->name }}">
                             </form>
                         @endif
                         <div class="dropdown nav-item nav-link">

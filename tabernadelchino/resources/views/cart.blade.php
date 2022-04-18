@@ -10,6 +10,10 @@
                 <td>
                     @if(empty($products))
                         <h1 class="text-light">No hay productos en la cesta...</h1>
+                    @else
+                        @foreach($products as $product)
+                            <h2 class="text-light">{{ $product->name }}</h2>
+                        @endforeach
                     @endif
                 </td>
                 <td>
