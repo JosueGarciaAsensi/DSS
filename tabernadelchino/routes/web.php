@@ -30,6 +30,7 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');

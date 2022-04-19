@@ -41,4 +41,15 @@ class CartController extends Controller
         
         return back();
     }
+
+    public function removeFromCart(Request $request) {
+        $user_id = $request->input('user_id');
+        $product_id = $request->input('product_id');
+
+        $user = User::find($user_id);
+
+        $user->carts()->first()->products()->where('product_id', '=', $product_id)->delete();
+
+        return redirect('cart');
+    }
 }
