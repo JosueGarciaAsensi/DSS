@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder {
     {
         $names = ['Francisco', 'Josué', 'Jordi', 'David', 'Ángel'];
         $surnames = ['Ferrández Martínez', 'García Asensi', 'Sellés Enríquez', 'Pastor Crespo', 'León Cerdán'];
-        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
+        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse20@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
         $dni = ['50503584T', '51253198K', '48759207N', '48763949Q', '74379711B'];
 
         foreach (range(0,4) as $i) {
