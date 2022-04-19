@@ -14,7 +14,7 @@
                     @foreach($products as $product)
                         <div class="row text-light align-items-center">
                             <div class="col">
-                                <img src="{{ $product->image }}" width="100">
+                                <img src="{{ $product->image }}" height="250px">
                             </div>
                             <div class="col float-start text-start ms-auto">
                                 <h4>{{ $product->name }}</h4>
