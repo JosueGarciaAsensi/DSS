@@ -5,21 +5,21 @@
 @endsection
 @section('content')
     @php($total = 0.0)
-    <div class="container mt-5 mb-5 rounded" style="background-color: black;">
-        <div class="row p-3" style="border-bottom: none;">
-            <div class="col">
+    <div class="container mt-5 mb-5 p-3 rounded" style="background-color: black;">
+        <div class="row" style="border-bottom: none;">
+            <div class="col col-xl-12 border-bottom">
                 @if($products == [])
                     <h1 class="text-light">No hay productos en la cesta...</h1>
                 @else
                     @foreach($products as $product)
-                        <div class="row text-light align-items-center">
-                            <div class="col">
-                                <img src="{{ $product->image }}" height="250px">
+                        <div class="row border-bottom border-secondary text-light align-items-center p-3">
+                            <div class="col col-lg-5">
+                                <img src="{{ $product->image }}" height="300px">
                             </div>
-                            <div class="col float-start text-start ms-auto">
+                            <div class="col col-lg-4">
                                 <h4>{{ $product->name }}</h4>
                             </div>
-                            <div class="col float-end text-end ms-auto">
+                            <div class="col">
                                 <h4>{{ $product->price }}€</h4>
                                 @php($total += $product->price)
                             </div>
@@ -50,5 +50,14 @@
                 @endif
             </div>
         </div>
+        @if($products != [])
+            <div class="row mt-3">
+                <form action="{{ route('emptyCart') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                    <button type="submit" class="btn btn-danger">Vaciar carrito</button>
+                </form>
+            </div>
+        @endif
     </div>
 @endsection

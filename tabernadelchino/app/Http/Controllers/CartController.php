@@ -36,8 +36,7 @@ class CartController extends Controller
         $user = User::find($user_id);
         $product = Product::find($product_id);
 
-        if (!is_null($user))
-            $user->carts()->first()->products()->attach($product);
+        $user->carts()->first()->products()->attach($product);
         
         return back();
     }
@@ -47,9 +46,31 @@ class CartController extends Controller
         $product_id = $request->input('product_id');
 
         $user = User::find($user_id);
+        $product = Product::find($product_id);
 
-        $user->carts()->first()->products()->where('product_id', '=', $product_id)->delete();
+        $user->carts()->first()->products()->detach($product);
 
-        return redirect('cart');
+        $products = $user->carts()->first()->products()->get();
+
+        if (count($products) == 0) {
+            $products = [];
+        }
+
+        return view('cart')->with('products', $products);
+    }
+
+    public function emptyCart(Request $request) {
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+
+        $user->carts()->first()->products()->sync([]);
+
+        $products = $user->carts()->first()->products()->get();
+
+        if (count($products) == 0) {
+            $products = [];
+        }
+
+        return view('cart')->with('products', $products);
     }
 }
