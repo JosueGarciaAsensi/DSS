@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id')->nullable();
             $table->string('state');
+            $table->double('total');
             $table->timestamps();
         });
     }

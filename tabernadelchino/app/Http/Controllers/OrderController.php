@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -17,7 +18,7 @@ class OrderController extends Controller
         $orders = [];
 
         if(!is_null($user)) {
-            $orders = $user->orders()->get();
+            $orders = Order::where('users_id', $user->id)->get();
         }
 
         if (count($orders) == 0) {
