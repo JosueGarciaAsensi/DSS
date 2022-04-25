@@ -42,7 +42,7 @@
                             @csrf
                             <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
                         </form>
-                        
+
                         @endif
                         <div class="dropdown nav-item nav-link">
                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,7 +56,11 @@
                                     <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
                                 @else
                                     <a class="dropdown-item" href="#">Mi Perfil</a>
-                                    <a class="dropdown-item" href="#">Mis Pedidos</a>
+                                    <a class="dropdown-item" href="route('myorders')" onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis Pedidos</a>
+                                    <form id="getOrders-form" action="{{ route('myorders') }}" method="POST" class="d-none">
+                                        @csrf
+                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
+                                    </form>
                                     @if (Auth::user()->admin == 1)
                                         <a class="dropdown-item" href="{{ route('admin') }}">Administración</a>
                                     @endif

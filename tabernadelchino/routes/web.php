@@ -7,6 +7,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
 Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
+
+Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
 
 
 // Authentication
