@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -16,7 +15,7 @@ class OrderController extends Controller
 
     public function index() {
         $orders = Order::paginate(10);
-        
+
         return view('admin.admin-orders', ['orders' => $orders]);
     }
 
@@ -76,15 +75,15 @@ class OrderController extends Controller
             if($state != null){
                 $orders = Order::where('total', $sign, $request->input('price'))->paginate(10)
                 ->where('state', '=', $state);
-            }            
+            }
             else{
                 $orders = Order::where('total', $sign, $request->input('price'))->paginate(10);
             }
         }
         else{
             if($state != null){
-                $orders = Order::where('state', '=', $state)->paginate(10);                
-            }            
+                $orders = Order::where('state', '=', $state)->paginate(10);
+            }
             else{
                 $orders = Order::paginate(10);
             }
