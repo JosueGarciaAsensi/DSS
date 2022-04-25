@@ -62,3 +62,6 @@ Route::get('/admin-beertypes', [BeerTypeController::class, 'index'])->middleware
 Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
 Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
 Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
+
+Route::get('/admin-orders', [OrderController::class, 'index'])->middleware('auth');
+Route::get('/admin-orders/search', [OrderController::class, 'filter']);
