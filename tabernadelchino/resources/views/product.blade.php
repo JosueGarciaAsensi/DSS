@@ -23,7 +23,7 @@
                     <p class="text-light mt-2 mb-4">{{ $product->description }}</p>
                     <h2 class="text-light mt-2">{{ $product->price }}€</h2>
                     <br>
-                    @if($product->stock > 5)
+                    @if($product->stock >= 5)
                     <h3 class="text-success">
                         ¡Hay unidades disponibles!
                         @guest
@@ -91,15 +91,16 @@
                     </a>
                     <h3 class="text-light d-flex justify-content-center">
                         <div class="mx-4">{{ $productAlt->price }}€</div>
-                        @if($productAlt->stock > 0 && $productAlt->stock < 5) <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-warning align-self-center" viewBox="0 0 16 16">
-                            <circle cx="8" cy="8" r="8" />
+                            @if($productAlt->stock < 0) 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-danger align-self-center" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
                             </svg>
-                            @elseif($productAlt->stock > 0)
+                            @elseif($productAlt->stock >= 5)
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-success align-self-center" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8" />
                             </svg>
                             @else
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-danger align-self-center" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-circle-fill text-warning align-self-center" viewBox="0 0 16 16">
                                 <circle cx="8" cy="8" r="8" />
                             </svg>
                             @endif
