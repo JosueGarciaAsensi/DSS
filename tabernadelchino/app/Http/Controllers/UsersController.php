@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Rules\DNIRule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class UsersController extends Controller
 {
@@ -163,6 +164,27 @@ class UsersController extends Controller
 
     public function myProfile(Request $request) {
         $user = User::find($request->input('id'));
-        return view('myprofile', ['user' => $user]);
+        $address = Address::find($user->addresses_id);
+        return view('myprofile', ['user' => $user, 'address' => $address]);
+    }
+
+    public function updateName(Request $request) {
+        $user = User::find($request->input('id'));
+        $this->validate($request,
+            [
+                'name'  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+                'surname' => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
+            ],
+            [
+                'name.regex' => 'El campo nombre debe ser alfabético.',
+                'surname.regex' => 'El campo apellido debe ser alfabético.',
+            ]
+        );
+
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->save();
+
+        return redirect('/myprofile')->with('success', '¡Nombre actualizado con éxito!');
     }
 }

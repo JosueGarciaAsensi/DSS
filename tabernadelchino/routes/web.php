@@ -38,6 +38,8 @@ Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart
 Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
 Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
 
+Route::post('/updateName', [UsersController::class, 'updateName'])->name('updateName');
+
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
