@@ -55,7 +55,12 @@
                                     <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
                                     <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
                                 @else
-                                    <a class="dropdown-item" href="#">Mi Perfil</a>
+                                    <a class="dropdown-item" href="route('myprofile')" onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">Mi Perfil</a>
+                                    <form id="getProfile-form" action="{{ route('myprofile') }}" method="POST" class="d-none">
+                                        @csrf
+                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
+                                    </form>
+
                                     <a class="dropdown-item" href="route('myorders')" onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis Pedidos</a>
                                     <form id="getOrders-form" action="{{ route('myorders') }}" method="POST" class="d-none">
                                         @csrf
