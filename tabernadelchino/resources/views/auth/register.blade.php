@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container mt-5 p-3 rounded" style="background-color:black;">
+<div class="container m-5 p-3 rounded" style="background-color:black;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row mb-3">
@@ -9,7 +9,7 @@
                     <h1 class="text-light">Registrarse</h1>
                 </div>
             </div>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ url('users/create') }}">
                 @csrf
 
                 <div class="row mb-3">
@@ -89,6 +89,61 @@
                         @enderror
                     </div>
                 </div>
+
+                <br>
+
+                <h3 class="text-light">Dirección</h3>
+
+                <div class="row mb-3">
+                    <label for="type" class="col-md-4 col-form-label text-md-end text-light">Tipo: </label>
+
+                    <div class="col-md-6">
+                        <select id="type" name="type">
+                            <option value="Calle">Calle</option>
+                            <option value="Avenida">Avenida</option>
+                            <option value="Paseo">Paseo</option>
+                        </select>
+
+                        @error('tipo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>                    
+                </div>
+
+                <div class="row mb-3">
+                    <label for="address" class="col-md-4 col-form-label text-md-end text-light">Dirección: </label>
+
+                    <div class="col-md-6">
+                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address">
+
+                        @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="cp" class="col-md-4 col-form-label text-md-end text-light">Código postal: </label>
+
+                    <div class="col-md-6">
+                        <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror" name="cp" required autocomplete="cp">
+
+                        @error('cp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                
+                <input type="hidden" id="visible" name="visible" value="1">
+                <input type="hidden" id="register" name="register" value="1">
+                
+                <br>
 
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">
