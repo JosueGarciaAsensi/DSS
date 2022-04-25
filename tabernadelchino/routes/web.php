@@ -36,6 +36,7 @@ Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->nam
 Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
 
 Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
+Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
 
 
 // Authentication

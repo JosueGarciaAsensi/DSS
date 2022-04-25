@@ -18,7 +18,7 @@ class UsersController extends Controller
 
     public function index() {
         $users = User::paginate(10);
-        
+
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
@@ -36,7 +36,7 @@ class UsersController extends Controller
         else {
             $search_users = false;
         }
-        
+
         $users = null;
         if($search_admins != null && $search_users != null) {
             $users = User::paginate(10);
@@ -47,7 +47,7 @@ class UsersController extends Controller
         elseif ($search_users != null) {
             $users = User::where('admin', '=', false)->paginate(10);
         }
-        
+
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
@@ -159,5 +159,10 @@ class UsersController extends Controller
         $user->save();
 
         return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
+    }
+
+    public function myProfile(Request $request) {
+        $user = User::find($request->input('id'));
+        return view('myprofile', ['user' => $user]);
     }
 }
