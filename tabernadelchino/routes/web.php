@@ -45,7 +45,7 @@ Route::get('/admin-users', [UsersController::class, 'index'])->middleware('auth'
 Route::get('/admin-users/search', [UsersController::class, 'filter']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
-Route::post('/users/create', [UsersController::class, 'create']);
+Route::post('/users/create', [UsersController::class, 'create'])->name('create');
 
 Route::get('/admin-products', [ProductController::class, 'adminShow'])->middleware('auth');
 Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);

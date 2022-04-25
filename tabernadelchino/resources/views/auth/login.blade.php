@@ -69,6 +69,13 @@
                 </div>
             </form>
         </div>
+        @isset($success)
+        <div class="row mt-3">
+            <div class="alert alert-success" role="alert">
+                {{ $success }}
+            </div>
+        </div>
+        @endisset
     </div>
 </div>
 @endsection
