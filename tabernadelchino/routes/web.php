@@ -1,14 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +29,10 @@ Route::get('/products/{id}', [ProductController::class, 'productShow']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
+
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
