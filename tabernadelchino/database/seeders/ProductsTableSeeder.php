@@ -28,7 +28,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $names = ['Heineken', 'Mahou', 'Estrella Galicia', 'Estrella Levante', 'Paulaner', 'San Miguel', 'CruzCampo', 'Voll Damm', 'Franciskaner'];
+        $names = ['Heineken', 'Mahou', 'Estrella Galicia', 'Estrella Levante', 'Paulaner', 'San Miguel', 'Cruzcampo', 'Voll Damm', 'Franciskaner'];
         $description = [
             'Es una cerveza de tipo Lager y estilo Pilsen de color amarillo claro y brillante, con una espuma blanca intensa, cremosa y persistente en el vaso.',
             'Soy la caña',
@@ -36,7 +36,7 @@ class ProductsTableSeeder extends Seeder
             'Si es de la huerta, es que está muy buena',
             'Esto está a otro nivel, sólo para los verdaderos amantes de la cerveza',
             'Estará a la misma altura que el arcangel Miguel?',
-            'La favorita de Jordi',
+            'La favorita de David',
             'No hay descripcion que describa esta cerveza',
             'Hmmmm........'
         ];

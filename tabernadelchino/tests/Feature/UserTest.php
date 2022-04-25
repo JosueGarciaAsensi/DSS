@@ -70,4 +70,10 @@ class UserTest extends TestCase
         }
         $this->assertTrue($found);
     }
+
+    public function test_cart_product()
+    {
+        $user = User::where('id', '=', 1)->first();
+        print($user->carts()->first()->products()->get());
+    }
 }

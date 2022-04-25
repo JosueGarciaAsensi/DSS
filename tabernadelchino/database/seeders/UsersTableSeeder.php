@@ -17,11 +17,6 @@ class UsersTableSeeder extends Seeder {
         return $direcciones[$i];
     }
 
-    protected function getCart() {
-        $carts = Cart::all();
-        return $carts[random_int(0, count($carts)-1)];
-    }
-
     protected function getOrder() {
         $orders = Order::all();
         return $orders[random_int(0, count($orders)-1)];
@@ -36,7 +31,7 @@ class UsersTableSeeder extends Seeder {
     {
         $names = ['Francisco', 'Josué', 'Jordi', 'David', 'Ángel'];
         $surnames = ['Ferrández Martínez', 'García Asensi', 'Sellés Enríquez', 'Pastor Crespo', 'León Cerdán'];
-        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
+        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse20@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
         $dni = ['50503584T', '51253198K', '48759207N', '48763949Q', '74379711B'];
 
         foreach (range(0,4) as $i) {
@@ -49,8 +44,7 @@ class UsersTableSeeder extends Seeder {
             $user->admin = true;
             $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
-
-            $user->carts()->associate($this->getCart());
+            $user->carts()->associate(Cart::find($i+1));
 
             $user->save();
         }
