@@ -88,6 +88,7 @@
             </div>
             <div class="modal-body">
                 <form action="{{ route('resetPassword') }}" method="POST">
+                    @csrf
                     <b>¡Ojo!</b> Tu contraseña pasará a ser tu DNI, inicia sesión y cambiala cuanto antes.
                     <br>
                     <p>A continuación, introduce tu email:</p>
