@@ -9,7 +9,6 @@ use Illuminate\Validation\Rule;
 use App\Rules\DNIRule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Laravel\Ui\Presets\React;
 
 class UsersController extends Controller
 {
@@ -59,6 +58,12 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request, $id) {
+
+        $http_host = $_SERVER["HTTP_HOST"];
+        $url = url()->previous();
+        $url = str_replace("http://$http_host", '', $url);
+        error_log('Venimos de: ' . $url);
+
         $users = User::all();
         $susers = [];
         foreach($users as $user){
@@ -86,21 +91,22 @@ class UsersController extends Controller
             $user->surname = $request->input('surname' . $id);
             $user->email = $request->input('email' . $id);
             $user->dni = $request->input('dni' . $id);
-            if ($request->has('admin'. $id)) {
-                $user->admin = 1;
-            }
-            else {
-                $user->admin = 0;
-            }
-            if ($request->has('visible'. $id)) {
-                $user->visible = 1;
-            }
-            else {
-                $user->visible = 0;
+            if ($url == '/admin-users') {
+                if ($request->has('admin' . $id)) {
+                    $user->admin = 1;
+                } else {
+                    $user->admin = 0;
+                }
+                if ($request->has('visible' . $id)) {
+                    $user->visible = 1;
+                } else {
+                    $user->visible = 0;
+                }
             }
             $user->save();
         }
-        return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
+        //return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
+        return redirect($url)->with('success', '¡Usuario editado con éxito!');
     }
 
     public function create(Request $request) {
