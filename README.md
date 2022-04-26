@@ -44,6 +44,7 @@ Entregado:
 - [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
 - [\_documentacion/ER.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/ER.png)
 
+<br>
 
 ### :three: Segunda entrega ✔️
 
@@ -61,6 +62,7 @@ Entregado:
 - [\_documentacion/Mockups.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Mockups.pdf)
 - Presentación y video demo en Google Drive.
 
+<br>
 
 ### 4️⃣ Entrega final ⏰
 
