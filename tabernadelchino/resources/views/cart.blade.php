@@ -9,7 +9,7 @@
         <div class="row" style="border-bottom: none;">
             <div class="col col-xl-12 border-bottom">
                 @if($products == [])
-                    <h1 class="text-light">No hay productos en la cesta...</h1>
+                    <h1 class="text-light">{{__('text.noproducts')}}</h1>
                 @else
                     @foreach($products as $product)
                         <div class="row border-bottom border-secondary text-light align-items-center p-3">
@@ -44,9 +44,9 @@
             <div class="col float-end text-end ms-auto">
                 <h2 class="text-light">Total: {{ $total }}€</h2>
                 @if ($products == [])
-                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>Realizar compra</button>
+                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>{{__('text.buy')}}</button>
                 @else
-                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">Realizar compra</button>
+                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">{{__('text.buy')}}</button>
                 @endif
             </div>
         </div>
@@ -55,7 +55,7 @@
                 <form action="{{ route('emptyCart') }}" method="POST">
                     @csrf
                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" class="btn btn-danger">Vaciar carrito</button>
+                    <button type="submit" class="btn btn-danger">{{__('text.emptycart')}}</button>
                 </form>
             </div>
         @endif

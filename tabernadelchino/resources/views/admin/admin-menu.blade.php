@@ -14,7 +14,7 @@
                         </svg>
                     </div>
                     <div class="col my-auto">
-                        <h1>Usuarios</h1>
+                        <h1>{{__('text.users')}}</h1>
                     </div>
                     <div class="col d-flex justify-content-end my-auto">
                         <h1>{{ $usersCount }}</h1>
@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                     <div class="col my-auto">
-                        <h1>Productos</h1>
+                        <h1>{{__('text.products')}}</h1>
                     </div>
                     <div class="col d-flex justify-content-end my-auto">
                         <h1>{{ $productsCount }}</h1>
@@ -45,7 +45,7 @@
                         </svg>
                     </div>
                     <div class="col my-auto">
-                        <h1>Pedidos</h1>
+                        <h1>{{__('text.orders')}}</h1>
                     </div>
                     <div class="col d-flex justify-content-end my-auto">
                         <h1>{{ $ordersCount }}</h1>
@@ -68,7 +68,7 @@
                         </svg>
                     </div>
                     <div class="col my-auto">
-                        <h1>Pedidos por usuario</h1>
+                        <h1>{{__('text.ordersperuser')}}</h1>
                     </div>
                     <div class="col d-flex justify-content-end my-auto">
                         <h1>{{ round($ordersCount/$usersCount, 2) }}</h1>
@@ -78,7 +78,7 @@
         </div>
         <hr style="color:#acacac"/>
         <div class="row mt-4">
-            <h1 class="text-light">Producto Estrella</h1>
+            <h1 class="text-light">{{__('text.bestproduct')}}</h1>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center" height="600px" width="400px">
@@ -89,7 +89,7 @@
                     @if (!is_null($product->beer_types))
                         <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names }}</h4>
                     @else
-                        <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
+                        <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('notype')}}</h4>
                     @endif
                     </div>
                 </a>

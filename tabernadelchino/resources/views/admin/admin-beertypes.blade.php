@@ -8,7 +8,7 @@
 <div class="container mt-5 mb-5 p-4 rounded" style="background-color: black;">
   <div class="container">
     <div class="row row-cols-2" style="text-align: center; color: white;">
-      <div class="col"><b>Tipo</b></div>
+      <div class="col"><b>{{__('text.type')}}</b></div>
       <div class="col">
         <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -64,22 +64,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createModalTitle">Añadir tipo de cerveza</h5>
+          <h5 class="modal-title" id="createModalTitle">{{__('text.addbeertype')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form action="{{ url('/admin-beertypes/create')}}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-              <label for="type">Tipo: </label>
-              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control" placeholder="Tipo" required>
+              <label for="type">{{__('text.type')}}: </label>
+              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control" placeholder="{{__('text.type')}}" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">Editar tipo</h5>
+          <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">{{__('text.editbeertype')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -100,15 +100,15 @@
             {{ csrf_field() }}
 
             <div class="form-group">
-              <label for="name{{$beertype->id}}">Nombre: </label>
-              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$beertype->names}}" required>
+              <label for="name{{$beertype->id}}">{{__('text.name')}}: </label>
+              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$beertype->names}}" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Aplicar</button>
+            <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
         </div>
       </div>
     </div>
