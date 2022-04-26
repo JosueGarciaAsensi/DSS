@@ -37,6 +37,7 @@ Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
+Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 
 // Admin routes
 Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin')->middleware('auth');
