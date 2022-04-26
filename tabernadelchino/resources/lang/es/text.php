@@ -14,7 +14,7 @@ return [
     'contact' => 'Contáctanos',
     'recommend' => 'La taberna del Chino recomienda el consumo responsable',
     'slogan1' => 'Elaborado con clase,',
-    'slogan2' => 'servidor con elegancia',
+    'slogan2' => 'servido con elegancia',
     'notype' => 'Sin tipo',
     'plentystock' => '¡Hay unidades disponibles!',
     'nostock' => 'No hay unidades disponibles',
