@@ -11,52 +11,53 @@
             </div>
             <div class="panel-body">
                 <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <h5>Nombre: </h5>
-                        </div>
-                        <div class="col">
-                            <p>{{ $user->name }}</p>
+                    <form action="{{ url('/users/edit') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="row form-group">
+                            <div class="col">
+                                <!-- <label for="name">Nombre: </label> -->
+                                <h5>Nombre: </h5>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{ $user->name }}">
+                            </div>
 
-                            <form id="updateName-form" action="{{ route('updateName') }}" method="POST" class="d-none">
-                                @csrf
-                                <input type="text" id="name" class="form-control" placeholder="Nombre" name="name" value="{{ $user->name }}">
-                            </form> <!-- Esto está sin terminar -->
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>Apellidos: </h5>
+                            </div>
+                            <div class="col">
+                                <p>{{ $user->surname }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>DNI: </h5>
+                            </div>
+                            <div class="col">
+                                <p>{{ $user->dni }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>Email: </h5>
+                            </div>
+                            <div class="col">
+                                <p>{{ $user->email }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h5>Dirección: </h5>
+                            </div>
+                            <div class="col">
+                                <p>{{ $address->type }} {{ $address->name }} {{ $address->pc }}</p>
+                            </div>
+                        </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5>Apellidos: </h5>
-                        </div>
-                        <div class="col">
-                            <p>{{ $user->surname }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5>DNI: </h5>
-                        </div>
-                        <div class="col">
-                            <p>{{ $user->dni }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5>Email: </h5>
-                        </div>
-                        <div class="col">
-                            <p>{{ $user->email }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5>Dirección: </h5>
-                        </div>
-                        <div class="col">
-                            <p>{{ $address->type }}  {{ $address->name }} {{ $address->pc }}</p>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios del perfil</button>
+                    </form>
                 </div>
             </div>
         </div>
