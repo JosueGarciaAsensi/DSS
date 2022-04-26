@@ -45,7 +45,7 @@ Entregado:
 - [\_documentacion/ER.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/ER.png)
 
 
-### :three: Segunda entrega ⏰
+### :three: Segunda entrega ✔️
 
 Fecha límite de entrega: _08/04/2022_
 
@@ -59,4 +59,18 @@ Contenido:
 Entregado:
 - [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
 - [\_documentacion/Mockups.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Mockups.pdf)
+- Presentación y video demo en Google Drive.
+
+
+### 4️⃣ Entrega final ⏰
+
+Fecha límite de entrega: _25/05/2022_
+
+Contenido:
+- _Autenticación usuarios_
+- _Terminar implementación_
+- _Presentación_
+- _Video demo_
+
+Entregado:
 - Presentación y video demo en Google Drive.
