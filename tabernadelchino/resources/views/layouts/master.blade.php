@@ -36,6 +36,8 @@
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         @if (App::getLocale() == 'es')
                         <img src="{{ asset('img/espana.png')}}" width="20px">
+                        @elseif (App::getLocale() == 'cn')
+                        <img src="{{ asset('img/china.png')}}" width="20">
                         @else
                         <img src="{{ asset('img/english.png')}}" width="20">
                         @endif
@@ -49,6 +51,10 @@
                         <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
                             <img src="{{ asset('img/english.png')}}" width="20px">
                             English
+                        </a>
+                        <a class="dropdown-item" href="{{ route('lang.switch', 'cn') }}">
+                            <img src="{{ asset('img/china.png')}}" width="20px">
+                            中文
                         </a>
                     </ul>
                 </div>
