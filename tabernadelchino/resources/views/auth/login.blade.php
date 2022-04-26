@@ -7,7 +7,7 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <h1 class="text-light">Iniciar sesión</h1>
+                    <h1 class="text-light">{{__('text.login')}}</h1>
                 </div>
             </div>
 
@@ -15,7 +15,7 @@
                 @csrf
 
                 <div class="row mb-3">
-                    <label for="email" class="col-md-4 col-form-label text-md-end text-light">{{ __('Email Address') }}</label>
+                    <label for="email" class="col-md-4 col-form-label text-md-end text-light">Email</label>
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="password" class="col-md-4 col-form-label text-md-end text-light">{{ __('Password') }}</label>
+                    <label for="password" class="col-md-4 col-form-label text-md-end text-light">{{ __('text.password') }}</label>
 
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -48,7 +48,7 @@
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                             <label class="form-check-label text-light" for="remember">
-                                {{ __('Remember Me') }}
+                                {{ __('text.rememberme') }}
                             </label>
                         </div>
                     </div>
@@ -57,12 +57,12 @@
                 <div class="row mb-0">
                     <div class="col-md-8 offset-md-4">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Login') }}
+                            {{ __('text.login') }}
                         </button>
 
                         @if (Route::has('password.request'))
                         <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="http://127.0.0.1:8000/password/reset">
-                            {{ __('Forgot Your Password?') }}
+                            {{ __('text.forgotpassword') }}
                         </a>
                         @endif
                     </div>
@@ -83,21 +83,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('text.resetpassword')}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('resetPassword') }}" method="POST">
                     @csrf
-                    <b>¡Ojo!</b> Tu contraseña pasará a ser tu DNI, inicia sesión y cambiala cuanto antes.
+                    <b>{{__('text.caution')}}</b> {{__('text.resetmsg')}}
                     <br>
-                    <p>A continuación, introduce tu email:</p>
+                    <p>{{__('text.inputemail')}}:</p>
                     <input type="text" id="email" name="email" required>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
             </div>
         </div>
     </div>

@@ -56,4 +56,11 @@ return [
     'editbeer' => 'Edit beer',
     'addbeertype' => 'Add beer type',
     'editbeertype' => 'Edit beer type',
+    'caution' => 'Warning!',
+    'forgotpassword' => 'Forgot password?',
+    'resetpassword' => 'Reset password',
+    'resetmsg' => 'Your password will now be your DNI, login and change it as soon as possible.',
+    'inputemail' => 'Now, please enter your email',
+    'rememberme' => 'Remember me',
+    'confirmpassword' => 'Confirm password',
 ];

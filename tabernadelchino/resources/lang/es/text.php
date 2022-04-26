@@ -56,4 +56,11 @@ return [
     'editbeer' => 'Editar cerveza',
     'addbeertype' => 'Añadir tipo de cerveza',
     'editbeertype' => 'Editar tipo de cerveza',
+    'caution' => '¡Ojo!',
+    'forgotpassword' => '¿Has olvidado tu contraseña?',
+    'resetpassword' => 'Restablecer contraseña',
+    'resetmsg' => 'Tu contraseña pasará a ser tu DNI, inicia sesión y cambiala cuanto antes.',
+    'inputemail' => 'A continuación, introduce tu email',
+    'rememberme' => 'Recuérdame',
+    'confirmpassword' => 'Confirmar contraseña',
 ];
