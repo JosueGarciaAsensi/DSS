@@ -18,14 +18,14 @@
                     @if (!is_null($product->beer_types))
                     <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names }}</h4>
                     @else
-                    <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
+                    <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('text.notype')}}</h4>
                     @endif
                     <p class="text-light mt-2 mb-4">{{ $product->description }}</p>
                     <h2 class="text-light mt-2">{{ $product->price }}€</h2>
                     <br>
                     @if($product->stock >= 5)
                     <h3 class="text-success">
-                        ¡Hay unidades disponibles!
+                        {{__('text.plentystock')}}
                         @guest
                             <h4 class="text-light mt-5">Inicia sesión para realizar compras...</h4>
                         @else
@@ -43,7 +43,7 @@
                     </h3>
                     @elseif($product->stock > 0 && $product->stock < 5) 
                     <h3 class="text-warning">
-                        ¡Últimas unidades!
+                        {{__('text.laststock')}}
                         @guest
                             <h4 class="text-light mt-5">Inicia sesión para realizar compras...</h4>
                         @else
@@ -60,7 +60,7 @@
                         @endif
                     </h3>
                     @else
-                    <h3 class="text-danger">¡No hay unidades disponibles!</h3>
+                    <h3 class="text-danger">{{__('nostock')}}</h3>
                     @endif
                 </td>
             </tr>
@@ -69,7 +69,7 @@
 </div>
 <div class="container text-light row justify-content-center mt-5 mb-5 rounded" style="background-color: #000;">
     <div class="col-auto">
-        <h1>Te podría interesar...</h1>
+        <h1>{{__('text.interest')}}</h1>
         <table class="table table-responsive">
             @php($i = 1)
             @foreach ($productsAlt as $productAlt)
@@ -85,7 +85,7 @@
                             <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $productAlt->beer_types->names }}
                             </h4>
                             @else
-                            <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
+                            <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('text.notype')}}</h4>
                             @endif
                         </div>
                     </a>

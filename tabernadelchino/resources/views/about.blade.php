@@ -4,12 +4,32 @@
     @parent
 @endsection
 @section('content')
-    <h1>Sobre nosotros</h1>
+    <h1 class="mt-5">{{ __('text.about') }}</h1>
     <p class="mb-5">
-    La informática, también llamada computación, es el área de la ciencia que se encarga de estudiar la administración de métodos, técnicas y procesos con el fin de almacenar, procesar y transmitir información y datos en formato digital.
+    Los ejemplos de apartados “Sobre nosotros” demuestran que no hay una plantilla universal para un texto “Acerca de nosotros” perfecto. Además, no debería haberlo. Tu empresa esúnica y deberías reflejar esta individualidad en tus textos “Sobre nosotros”.
 
-De esta manera, la informática se refiere al procesamiento automático de información mediante dispositivos electrónicos y sistemas computacionales. Los sistemas informáticos deben contar con la capacidad de cumplir tres tareas básicas: entrada (input, captación de la información), procesamiento y salida (transmisión de los resultados).
+No obstante, hay algunos temas que, en cualquier caso, debes abordar. En lugar de pasar horas entreteniéndote con un borrador, utiliza las siguientes preguntas orientativas como plantilla para crear tu página “Sobre nosotros”. En tu texto “Sobre nosotros”, responde a los aspectos individuales en orden o elige la disposición que te convenga.
 
-No existe una definición consensuada sobre el término. Sin embargo, la Asociación de Docentes de Informática y Computación de la República Argentina ha tomado una posición, definiéndola de la siguiente manera: «La informática es la disciplina o campo de estudio que abarca el conjunto de conocimientos, métodos y técnicas referentes al tratamiento automático de la información, junto con sus teorías y aplicaciones prácticas, con el fin de almacenar, procesar y transmitir datos e información en formato digital utilizando sistemas computacionales. Los datos son la materia prima para que, mediante su proceso, se obtenga como resultado información. Para ello, la informática crea y/o emplea sistemas de procesamiento de datos, que incluyen medios físicos (hardware) en interacción con medios lógicos (software) y las personas que los programan y/o los usan (humanware)».
+Pregunta orientativa 1: ¿cuál es nuestra filosofía de empresa?
+Los visitantes que acceden a tu página “Acerca de nosotros” quieren entender quién se encuentra detrás de los productos: ¿quién impulsa la empresa? ¿Qué valores la encarnan? ¿Qué objetivos sigues con tu empresa?
+
+Estas declaraciones de misión y visión son una parte de la filosofía de la empresa: resume para los visitantes de tu página web en dos precisas frases quién eres, qué haces y cuál es tu filosofía de empresa. Con esto, ofreces a los lectores una visión general rápida para que decidan si están en el lugar correcto para cumplir sus deseos contigo.
+
+Pregunta orientativa 2: ¿qué ofrecemos y cómo funciona nuestro modelo de empresa?
+Lo que ya has abordado en tu declaración de misión, necesita un par de explicaciones más: ¿qué productos ofreces? ¿Cuál es tu público objetivo?
+
+Para muchas empresas es lógico usar el apartado “Sobre nosotros” para explicar de manera corta a los nuevos clientes y socios potenciales cómo funciona su modelo de empresa. Esta transparencia aumenta la confianza en tu empresa y puede ser un rasgo distintivo convincente con el que poder ganar nuevos clientes. Describe tu modelo de empresa tan detalladamente como sea necesario, pero también tan conciso como sea posible. Para información más detallada, enlaza subpáginas a tu página web.
+
+Pregunta orientativa 3: ¿cuál es la historia de nuestra empresa?
+Las personas compran a personas. Es por eso por lo que debes contar cómo llegaste, como fundador, a tu idea de empresa. Dependiendo del sector que sea, usa la técnica del storytelling para crear imágenes en la mente del lector y establecer una conexión emocional. Para ello, bastan unas pocas frases, nadie tiene tiempo de leer una novela larga.
+
+Describe otros hitos importantes en el desarrollo de la empresa. Vincula mientras tanto los acontecimientos con los valores de tu empresa. Por ejemplo: ¿por qué has trasladado tu producción a España? ¿Qué problemas querías resolver con el nuevo producto?
+
+Tu apartado “Sobre nosotros” no es una crónica de la empresa. Comprueba que cada frase de la historia de tu empresa es relevante para el visitante. ¿Lo que escribes hace referencia a tus conocimientos, despierta la simpatía del cliente o muestra fiabilidad?
+
+Pregunta orientativa 4: ¿qué personas trabajan en nuestra empresa y cómo trabajan?
+Presenta a las personas de tu empresa en tu apartado “Sobre nosotros”, ya sea tu equipo o, dependiendo del tamaño de la empresa, las posiciones de equipo más importantes. En función de si quieres resaltar sus competencias o despertar la simpatía de los clientes, puedes añadir información corta sobre los trabajadores: escribir sobre su carrera y puestos de trabajo anteriores demuestra sus competencias. Usar citas que describan la motivación y la cultura organizativa dan más personalidad a tu empresa.
+
+Si quieres usar los textos “Acerca de nosotros” para tu branding de empleador, describe la cultura de tu empresa y el sistema de trabajo y enlázalo con tus ofertas de trabajo. Elige un tono que le dé a los solicitantes una idea de cuál es tu ánimo y tu mentalidad.
     </p>
 @endsection
