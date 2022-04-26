@@ -17,10 +17,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->isAdmin()){
+        if (Auth::check() && Auth::user()->admin == 1){
             return $next($request);
         }else{
-            return redirect('home');
+            return abort(403, 'Unauthorized');
         }
     }
 }
