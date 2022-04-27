@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
@@ -37,23 +39,31 @@ Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
+Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
+
+Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
+Route::post('/users/create', [UsersController::class, 'create'])->name('create');
+
+
 
 // Admin routes
-Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin')->middleware('auth');
+Route::middleware('admin')->group(function(){
+    Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
 
-Route::get('/admin-users', [UsersController::class, 'index'])->middleware('auth');
-Route::get('/admin-users/search', [UsersController::class, 'filter']);
-Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
-Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
-Route::post('/users/create', [UsersController::class, 'create']);
 
-Route::get('/admin-products', [ProductController::class, 'adminShow'])->middleware('auth');
-Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
-Route::post('/admin-products/create', [ProductController::class, 'create']);
-Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
-Route::get('/admin-products/search', [ProductController::class, 'filter']);
+    Route::get('/admin-users', [UsersController::class, 'index']);
+    Route::get('/admin-users/search', [UsersController::class, 'filter']);
+    Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
 
-Route::get('/admin-beertypes', [BeerTypeController::class, 'index'])->middleware('auth');
-Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
-Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
-Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
+    Route::get('/admin-products', [ProductController::class, 'adminShow']);
+    Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
+    Route::post('/admin-products/create', [ProductController::class, 'create']);
+    Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
+    Route::get('/admin-products/search', [ProductController::class, 'filter']);
+
+    Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
+    Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
+    Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
+    Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
+
+});
