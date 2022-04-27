@@ -80,7 +80,7 @@
                     <label for="dni" class="col-md-4 col-form-label text-md-end text-light">DNI</label>
 
                     <div class="col-md-6">
-                        <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" required autocomplete="dni">
+                        <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" name="dni" required autocomplete="dni">
 
                         @error('dni')
                             <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                     <label for="address" class="col-md-4 col-form-label text-md-end text-light">{{__('text.address')}}: </label>
 
                     <div class="col-md-6">
-                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address">
+                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" name="address" required autocomplete="address">
 
                         @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -130,7 +130,7 @@
                     <label for="cp" class="col-md-4 col-form-label text-md-end text-light">{{__('text.postal')}}: </label>
 
                     <div class="col-md-6">
-                        <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror" name="cp" required autocomplete="cp">
+                        <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror" value="{{ old('cp') }}" name="cp" required autocomplete="cp">
 
                         @error('cp')
                             <span class="invalid-feedback" role="alert">
