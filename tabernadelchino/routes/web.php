@@ -41,6 +41,8 @@ Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 
+Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
+Route::post('/users/create', [UsersController::class, 'create'])->name('create');
 
 
 
@@ -52,8 +54,6 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin-users', [UsersController::class, 'index']);
     Route::get('/admin-users/search', [UsersController::class, 'filter']);
     Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
-    Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
-    Route::post('/users/create', [UsersController::class, 'create'])->name('create');
 
     Route::get('/admin-products', [ProductController::class, 'adminShow']);
     Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
