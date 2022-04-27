@@ -5,6 +5,7 @@
 @endsection
 @section('content')
     @php($total = 0.0)
+    @php($nostocks = 0)
     <div class="container mt-5 mb-5 p-3 rounded" style="background-color: black;">
         <div class="row" style="border-bottom: none;">
             <div class="col col-xl-12 border-bottom">
@@ -19,10 +20,18 @@
                             <div class="col col-lg-4">
                                 <h4>{{ $product->name }}</h4>
                             </div>
-                            <div class="col">
-                                <h4>{{ $product->price }}€</h4>
-                                @php($total += $product->price)
-                            </div>
+                            @if($product->stock != 0)
+                                <div class="col">
+                                    <h4>{{ $product->price }}€</h4>
+                                    @php($total += $product->price)
+                                </div>
+                            @else
+                                <div class="col">
+                                    <h4 class="text-danger">{{ __('text.nostock') }}</h4>
+                                </div>
+                                @php($nostocks += 1)
+                            @endif
+
                             <div class="col">
                                 <a href="" class="nav-item nav-link" onclick="event.preventDefault();
                                                             document.getElementById('removeFrom-form<?php echo $product->id ?>').submit();">
@@ -47,7 +56,7 @@
                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" id="total" name="total" value="{{ $total }}">
                     @csrf
-                    @if ($products == [])
+                    @if ($products == [] || $nostocks > 0)
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>{{__('text.buy')}}</button>
                     @else
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">{{__('text.buy')}}</button>

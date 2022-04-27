@@ -85,12 +85,13 @@
                             <a class="dropdown-item" href="{{ route('login') }}">{{__('text.login')}}</a>
                             <a class="dropdown-item" href="{{ route('register') }}">{{__('text.register')}}</a>
                             @else
+                            <h4 class="dropdown-item">{{ Auth::user()->name }}</h4>
+                            <hr class="dropdown-divider">
                             <a class="dropdown-item" href="#">{{__('text.profile')}}</a>
                             <a class="dropdown-item" href="#">{{__('text.myorders')}}</a>
                             @if (Auth::user()->admin == 1)
                             <a class="dropdown-item" href="{{ route('admin') }}">{{__('text.admin')}}</a>
                             @endif
-                            <a class="dropdown-divider"></a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">{{__('text.logout')}}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
