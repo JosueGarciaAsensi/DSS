@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
 
 class CartController extends Controller
 {
@@ -72,5 +73,32 @@ class CartController extends Controller
         }
 
         return view('cart')->with('products', $products);
+    }
+
+    public function buy(Request $request) {
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+
+        $products = $user->carts()->first()->products()->get();
+
+        $order = new Order();
+        $order->state = 'pending';
+        $order->users()->associate($user);
+        $order->total = floatval($request->input('total'));
+        $order->save();
+
+        // agregar productos al pedido
+        foreach ($products as $product) {
+            $order->products()->attach($product);
+        }
+
+        foreach ($products as $product) {
+            $product->stock -= 1;
+            $product->save();
+        }
+
+        $user->carts()->first()->products()->sync([]);
+
+        return redirect('/');
     }
 }

@@ -34,6 +34,7 @@ Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
 Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
+Route::post('/buy', [CartController::class, 'buy'])->name('buy');
 
 
 // Authentication

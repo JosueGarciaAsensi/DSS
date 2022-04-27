@@ -43,11 +43,16 @@
             </div>
             <div class="col float-end text-end ms-auto">
                 <h2 class="text-light">Total: {{ $total }}€</h2>
-                @if ($products == [])
-                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>{{__('text.buy')}}</button>
-                @else
-                    <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">{{__('text.buy')}}</button>
-                @endif
+                <form action="{{ route('buy') }}" method="POST">
+                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" id="total" name="total" value="{{ $total }}">
+                    @csrf
+                    @if ($products == [])
+                        <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>{{__('text.buy')}}</button>
+                    @else
+                        <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c">{{__('text.buy')}}</button>
+                    @endif
+                </form>
             </div>
         </div>
         @if($products != [])
