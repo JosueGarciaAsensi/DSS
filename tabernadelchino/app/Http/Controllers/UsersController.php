@@ -105,8 +105,19 @@ class UsersController extends Controller
             }
             $user->save();
         }
-        //return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
-        return redirect($url)->with('success', '¡Usuario editado con éxito!');
+
+        if ($url == '/admin-users') {
+            return redirect($url)->with('success', '¡Usuario editado con éxito!');
+        } else if ($url == '/myprofile') {
+            $address = Address::find($user->addresses_id);
+            return view('myprofile', ['user' => $user, 'address' => $address]);
+            //return redirect()->route('myprofile', ['user' => $user, 'address' => $address]);
+            //return back()->with('success', '¡Datos actualizados con éxito!');
+            //return redirect()->action([UsersController::class, 'myProfile'], ['user' => $user, 'address' => $address]);
+
+        } else {
+            return redirect('/index');
+        }
     }
 
     public function create(Request $request) {
@@ -172,25 +183,5 @@ class UsersController extends Controller
         $user = User::find($request->input('id'));
         $address = Address::find($user->addresses_id);
         return view('myprofile', ['user' => $user, 'address' => $address]);
-    }
-
-    public function updateName(Request $request) {
-        $user = User::find($request->input('id'));
-        $this->validate($request,
-            [
-                'name'  => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
-                'surname' => ['regex:/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$/'],
-            ],
-            [
-                'name.regex' => 'El campo nombre debe ser alfabético.',
-                'surname.regex' => 'El campo apellido debe ser alfabético.',
-            ]
-        );
-
-        $user->name = $request->input('name');
-        $user->surname = $request->input('surname');
-        $user->save();
-
-        return redirect('/myprofile')->with('success', '¡Nombre actualizado con éxito!');
     }
 }
