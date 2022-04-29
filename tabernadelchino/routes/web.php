@@ -31,12 +31,13 @@ Route::get('/products/{id}', [ProductController::class, 'productShow']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
-Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
-Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart'); // Patch
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart'); // Delete id
+Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart'); // delete
 
 Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
 Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
+Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
 
 
 // Authentication
@@ -51,6 +52,7 @@ Route::get('/admin-users/search', [UsersController::class, 'filter']);
 Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
 Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::post('/users/create', [UsersController::class, 'create']);
+Route::post('/users', [UsersController::class, 'login']);
 
 Route::get('/admin-products', [ProductController::class, 'adminShow'])->middleware('auth');
 Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
@@ -60,8 +62,11 @@ Route::get('/admin-products/search', [ProductController::class, 'filter']);
 
 Route::get('/admin-beertypes', [BeerTypeController::class, 'index'])->middleware('auth');
 Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
+Route::delete('/admin-beertypes', [BeerTypeController::class, 'destroy']);  // Deberíamos tener las rutas así
 Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
 Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
 
 Route::get('/admin-orders', [OrderController::class, 'index'])->middleware('auth');
 Route::get('/admin-orders/search', [OrderController::class, 'filter']);
+
+
