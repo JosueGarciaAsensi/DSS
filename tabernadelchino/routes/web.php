@@ -7,9 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\OrderController;
-
 use App\Http\Controllers\LanguageController;
 
 
@@ -23,6 +21,7 @@ use App\Http\Controllers\LanguageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -45,9 +44,6 @@ Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders
 Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
 Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
 
-
-
-
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
@@ -57,12 +53,9 @@ Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
 Route::post('/users/create', [UsersController::class, 'create'])->name('create');
 
 
-
 // Admin routes
-Route::middleware('admin')->group(function(){
+Route::middleware('admin')->group(function () {
     Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
-
-
 
     Route::get('/admin-users', [UsersController::class, 'index']);
     Route::get('/admin-users/search', [UsersController::class, 'filter']);
@@ -78,7 +71,7 @@ Route::middleware('admin')->group(function(){
     Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
     Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
     Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
-  
+
     Route::get('/admin-orders', [OrderController::class, 'index']);
     Route::get('/admin-orders/search', [OrderController::class, 'filter']);
 });
