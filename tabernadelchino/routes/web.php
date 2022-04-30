@@ -33,6 +33,16 @@ Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'productShow']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
+/*
+ * Lógica
+ *
+ * get -> crear o leer objeto
+ * post -> crear o leer objeto protegiendo la query
+ * put -> actualizar puntero al objeto
+ * patch -> actualizar objeto
+ * delete -> borrar objeto
+ */
+
 Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart'); // Patch
