@@ -7,7 +7,11 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\LanguageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +35,17 @@ Route::get('/products/{id}', [ProductController::class, 'productShow']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
-Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
-Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart');
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart'); // Patch
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart'); // Delete id
+Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart'); // delete
 Route::post('/buy', [CartController::class, 'buy'])->name('buy');
+
+Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
+Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
+Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
+
+
 
 
 // Authentication
@@ -52,6 +63,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
 
 
+
     Route::get('/admin-users', [UsersController::class, 'index']);
     Route::get('/admin-users/search', [UsersController::class, 'filter']);
     Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
@@ -66,5 +78,7 @@ Route::middleware('admin')->group(function(){
     Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
     Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
     Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
-
+  
+    Route::get('/admin-orders', [OrderController::class, 'index']);
+    Route::get('/admin-orders/search', [OrderController::class, 'filter']);
 });

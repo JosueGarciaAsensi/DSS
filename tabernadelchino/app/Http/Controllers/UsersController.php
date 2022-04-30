@@ -18,7 +18,7 @@ class UsersController extends Controller
 
     public function index() {
         $users = User::paginate(10);
-        
+
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
@@ -36,7 +36,7 @@ class UsersController extends Controller
         else {
             $search_users = false;
         }
-        
+
         $users = null;
         if($search_admins != null && $search_users != null) {
             $users = User::paginate(10);
@@ -47,7 +47,7 @@ class UsersController extends Controller
         elseif ($search_users != null) {
             $users = User::where('admin', '=', false)->paginate(10);
         }
-        
+
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
     }
 
@@ -58,6 +58,12 @@ class UsersController extends Controller
     }
 
     public function edit(Request $request, $id) {
+
+        $http_host = $_SERVER["HTTP_HOST"];
+        $url = url()->previous();
+        $url = str_replace("http://$http_host", '', $url);
+        error_log('Venimos de: ' . $url);
+
         $users = User::all();
         $susers = [];
         foreach($users as $user){
@@ -85,21 +91,33 @@ class UsersController extends Controller
             $user->surname = $request->input('surname' . $id);
             $user->email = $request->input('email' . $id);
             $user->dni = $request->input('dni' . $id);
-            if ($request->has('admin'. $id)) {
-                $user->admin = 1;
-            }
-            else {
-                $user->admin = 0;
-            }
-            if ($request->has('visible'. $id)) {
-                $user->visible = 1;
-            }
-            else {
-                $user->visible = 0;
+            if ($url == '/admin-users') {
+                if ($request->has('admin' . $id)) {
+                    $user->admin = 1;
+                } else {
+                    $user->admin = 0;
+                }
+                if ($request->has('visible' . $id)) {
+                    $user->visible = 1;
+                } else {
+                    $user->visible = 0;
+                }
             }
             $user->save();
         }
-        return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
+
+        if ($url == '/admin-users') {
+            return redirect($url)->with('success', '¡Usuario editado con éxito!');
+        } else if ($url == '/myprofile') {
+            $address = Address::find($user->addresses_id);
+            return view('myprofile', ['user' => $user, 'address' => $address]);
+            //return redirect()->route('myprofile', ['user' => $user, 'address' => $address]);
+            //return back()->with('success', '¡Datos actualizados con éxito!');
+            //return redirect()->action([UsersController::class, 'myProfile'], ['user' => $user, 'address' => $address]);
+
+        } else {
+            return redirect('/index');
+        }
     }
 
     public function create(Request $request) {
@@ -163,5 +181,11 @@ class UsersController extends Controller
         } else {
             return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
         }
+    }
+
+    public function myProfile(Request $request) {
+        $user = User::find($request->input('id'));
+        $address = Address::find($user->addresses_id);
+        return view('myprofile', ['user' => $user, 'address' => $address]);
     }
 }

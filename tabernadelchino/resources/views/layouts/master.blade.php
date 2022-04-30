@@ -80,24 +80,46 @@
                                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                             </svg>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                            @guest
-                            <a class="dropdown-item" href="{{ route('login') }}">{{__('text.login')}}</a>
-                            <a class="dropdown-item" href="{{ route('register') }}">{{__('text.register')}}</a>
-                            @else
-                            <h4 class="dropdown-item">{{ Auth::user()->name }}</h4>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="#">{{__('text.profile')}}</a>
-                            <a class="dropdown-item" href="#">{{__('text.myorders')}}</a>
-                            @if (Auth::user()->admin == 1)
-                            <a class="dropdown-item" href="{{ route('admin') }}">{{__('text.admin')}}</a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">{{__('text.logout')}}</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                            @endif
+                        <form id="getCart-form" action="{{ route('cart') }}" method="POST" class="d-none">
+                            @csrf
+                            <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
+                        </form>
+
+                        @endif
+                        <div class="dropdown nav-item nav-link">
+                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-person text-light mt-2" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                </svg>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                                @guest
+                                    <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
+                                @else
+                                    <a class="dropdown-item" href="route('myprofile')" onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">Mi Perfil</a>
+                                    <form id="getProfile-form" action="{{ route('myprofile') }}" method="POST" class="d-none">
+                                        @csrf
+                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
+                                    </form>
+
+                                    <a class="dropdown-item" href="route('myorders')" onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis Pedidos</a>
+                                    <form id="getOrders-form" action="{{ route('myorders') }}" method="POST" class="d-none">
+                                        @csrf
+                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
+                                    </form>
+                                    @if (Auth::user()->admin == 1)
+                                        <a class="dropdown-item" href="{{ route('admin') }}">Administración</a>
+                                    @endif
+                                    <a class="dropdown-divider"></a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Cerrar sesión</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
