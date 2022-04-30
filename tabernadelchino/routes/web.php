@@ -51,11 +51,6 @@ Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name(
 Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
 Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
 
-
-//Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
-//Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
-//Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
-
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
