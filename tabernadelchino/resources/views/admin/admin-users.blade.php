@@ -116,7 +116,6 @@
                     </div>
                 </div>
                 @endforeach
-                <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
             </div>
             @if (count($errors) > 0)
             <div class="alert alert-danger" role="alert">
@@ -129,7 +128,7 @@
             {{ Session::get('success') }}
             </div>
             @endif
-            </div>
+            <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
             @else
         <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
         @endif
