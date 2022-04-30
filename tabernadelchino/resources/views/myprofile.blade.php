@@ -11,8 +11,8 @@
             </div>
             <div class="panel-body">
                 <div class="col">
-                    <form action="{{ url('/users/edit/' . $user->id) }}" method="POST">
-                        @method('PUT')
+                    <form action="{{ route('user-edit', ['id' => $user->id]) }}" method="POST">
+                        @method('PATCH')
                         {{ csrf_field() }}
                         <div class="row">
                             <h4>Usuario</h4>
@@ -52,8 +52,8 @@
                         <button type="submit" class="btn btn-primary">Guardar cambios del perfil</button>
                     </form>
                     <br>
-                    <form action="">
-                        @method('PUT')
+                    <form action="{{ route('user-address', ['id' => Auth::user()->addresses()->first()->id]) }}" method="POST">
+                        @method('PATCH')
                         {{ csrf_field() }}
                         <div class="row">
                             <h4>Dirección</h4>
@@ -63,10 +63,13 @@
                                 <h5>Tipo: </h5>
                             </div>
                             <div class="col">
-                                <select  class="form-control" id="addresstype{{$address->id}}" value="{{ $address->type }}" name="type">
-                                    <option value="Calle">Calle</option>
-                                    <option value="Avenida">Avenida</option>
-                                    <option value="Paseo">Paseo</option>
+                                <select  class="form-control" id="addresstype{{$address->id}}" value="{{ $address->type }}" name="addresstype{{$address->id}}">
+                                    @php
+                                        $addressTypes = array('Calle', 'Avenida', 'Paseo');
+                                    @endphp
+                                    @foreach ($addressTypes as $addressType)
+                                        <option value="{{ $addressType }}" @if ($address->type == $addressType) selected @endif>{{ $addressType }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

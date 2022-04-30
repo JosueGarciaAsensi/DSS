@@ -85,16 +85,14 @@
                                     <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
                                     <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
                                 @else
-                                    <a class="dropdown-item" href="route('myprofile')" onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">Mi Perfil</a>
-                                    <form id="getProfile-form" action="{{ route('myprofile') }}" method="POST" class="d-none">
+                                    <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">Mi Perfil</a>
+                                    <form id="getProfile-form" action="{{ route('user-profile', ['id' => Auth::user()->id]) }}" method="GET" class="d-none">
                                         @csrf
-                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
                                     </form>
 
-                                    <a class="dropdown-item" href="route('myorders')" onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis Pedidos</a>
-                                    <form id="getOrders-form" action="{{ route('myorders') }}" method="POST" class="d-none">
+                                    <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis Pedidos</a>
+                                    <form id="getOrders-form" action="{{ route('user-orders', ['id' => Auth::user()->id]) }}" method="GET" class="d-none">
                                         @csrf
-                                        <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
                                     </form>
                                     @if (Auth::user()->admin == 1)
                                         <a class="dropdown-item" href="{{ route('admin') }}">Administración</a>

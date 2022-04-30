@@ -19,8 +19,8 @@ class OrderController extends Controller
         return view('admin.admin-orders', ['orders' => $orders]);
     }
 
-    public function listOrders(Request $request) {
-        $user = User::find($request->input('id'));
+    public function listOrders($id) {
+        $user = User::find($id);
         $orders = [];
 
         if(!is_null($user)) {

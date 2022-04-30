@@ -95,8 +95,9 @@
                 <div class="col">
                     <div class="row">
                         <div class="col d-flex align-items-center">
-                            <form action="{{ url('/admin-users/delete/' . $user->id) }}" method="POST">
+                            <form action="{{ route('user-delete', ['id' => $user->id]) }}" method="POST">
                                 {{ csrf_field() }}
+                                @method('DELETE')
                                 <button class="btn btn-danger" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -144,9 +145,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/users/create')}}" method="POST">
+                    <form action="{{ route('user-create, ['id' => $user->id])}}" method="POST">
                         {{ csrf_field() }}
-
                         <div class="form-group">
                             <label for="name">{{__('text.name')}}: </label>
                             <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
@@ -217,9 +217,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
-                        @method('PUT')
+                    <form action="{{ route('user-edit', ['id' => $user->id]) }}" method="POST">
                         {{ csrf_field() }}
+                        @method('PATCH')
                         <div class="form-group">
                             <label for="name{{$user->id}}">{{__('text.name')}}: </label>
                             <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$user->name}}" required>

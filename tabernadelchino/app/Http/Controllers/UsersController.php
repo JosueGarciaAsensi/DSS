@@ -18,7 +18,6 @@ class UsersController extends Controller
 
     public function index() {
         $users = User::paginate(10);
-
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
@@ -106,18 +105,7 @@ class UsersController extends Controller
             $user->save();
         }
 
-        if ($url == '/admin-users') {
-            return redirect($url)->with('success', '¡Usuario editado con éxito!');
-        } else if ($url == '/myprofile') {
-            $address = Address::find($user->addresses_id);
-            return view('myprofile', ['user' => $user, 'address' => $address]);
-            //return redirect()->route('myprofile', ['user' => $user, 'address' => $address]);
-            //return back()->with('success', '¡Datos actualizados con éxito!');
-            //return redirect()->action([UsersController::class, 'myProfile'], ['user' => $user, 'address' => $address]);
-
-        } else {
-            return redirect('/index');
-        }
+        return redirect()->back();
     }
 
     public function create(Request $request) {
@@ -183,8 +171,8 @@ class UsersController extends Controller
         }
     }
 
-    public function myProfile(Request $request) {
-        $user = User::find($request->input('id'));
+    public function myProfile($id) {
+        $user = User::find($id);
         $address = Address::find($user->addresses_id);
         return view('myprofile', ['user' => $user, 'address' => $address]);
     }

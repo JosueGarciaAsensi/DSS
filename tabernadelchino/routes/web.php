@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticsController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LanguageController;
-
+use App\Models\Address;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +52,8 @@ Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-em
 Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
 
 
-Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
-Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
+//Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
+//Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
 //Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
 
 // Authentication
@@ -60,9 +61,38 @@ Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 
-Route::put('/users/edit/{id}', [UsersController::class, 'edit']);
-Route::post('/users/create', [UsersController::class, 'create'])->name('create');
+// Usuario
+Route::get('/user/{id}', [UsersController::class, 'myProfile'])->name('user-profile');
+Route::get('/user/{id}/orders', [OrderController::class, 'listOrders'])->name('user-orders');
+Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
+Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
+Route::post('/user', [UsersController::class, 'create'])->name('user-create');
+Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user-delete');
 
+/*
+// Usuario admistrador
+Route::middleware('/user/{id}/admin')->group(function () {
+    $useridinroute = '/user/{id}';
+    Route::get($useridinroute.'/admin', [StatisticsController::class, 'statistics'])->name('admin');
+
+    Route::get($useridinroute.'/admin/users', [UsersController::class, 'index'])->name('admin-users');
+    Route::get($useridinroute.'/admin/users', [UsersController::class, 'filter'])->name('admin-users-filter');
+    Route::delete($useridinroute.'/admin/users/{id}', [UsersController::class, 'destroy'])->name('admin-users-delete');
+
+    Route::get($useridinroute.'/admin/products', [ProductController::class, 'adminShow'])->name('admin-products');
+    Route::patch($useridinroute.'/admin/products/{id}', [ProductController::class, 'edit'])->name('admin-products-edit');
+    Route::delete($useridinroute.'/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin-products-delete');
+    Route::post($useridinroute.'/admin/products', [ProductController::class, 'create'])->name('admin-products-create');
+    Route::get($useridinroute.'/admin/products/', [ProductController::class, 'filter'])->name('admin-products-filter');
+
+    Route::get($useridinroute.'/admin/beertypes', [BeerTypeController::class, 'index'])->name('admin-beertypes');
+    Route::delete($useridinroute.'/admin/beertypes', [BeerTypeController::class, 'destroy'])->name('admin-beertypes-destroy');
+    Route::post($useridinroute.'/admin/beertypes', [BeerTypeController::class, 'create'])->name('admin-beertypes-create');
+    Route::patch($useridinroute.'/admin/beertypes/{id}', [BeerTypeController::class, 'edit'])->name('admin-beertypes-edit');
+
+    Route::get($useridinroute.'/admin/orders', [OrderController::class, 'index'])->name('admin-orders');
+    Route::get($useridinroute.'/admin/orders', [OrderController::class, 'filter'])->name('admin-orders-filter');
+}); */
 
 // Admin routes
 Route::middleware('admin')->group(function () {
