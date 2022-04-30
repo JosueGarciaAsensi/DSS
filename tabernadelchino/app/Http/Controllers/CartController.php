@@ -33,7 +33,7 @@ class CartController extends Controller
 
         $cart->products()->attach($product);
 
-        return back();
+        return redirect()->back();
     }
 
     public function removeFromCart($id, $idItem) {
