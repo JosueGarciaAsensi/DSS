@@ -50,12 +50,6 @@ Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name(
 Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
 Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
 
-/*
-Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart'); // Patch
-Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart'); // Delete id
-Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart'); // delete
-Route::post('/buy', [CartController::class, 'buy'])->name('buy'); */
 
 Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
 Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
