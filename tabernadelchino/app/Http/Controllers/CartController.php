@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -15,75 +16,51 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
-    public function listCart(Request $request) {
-        $user = User::find($request->input('id'));
+    public function listCart($id) {
+        $cart = Cart::find($id);
         $products = [];
 
-        if(!is_null($user)) {
-            $products = $user->carts()->first()->products()->get();
-        }
-
-        if (count($products) == 0) {
-            $products = [];
+        foreach ($cart->products as $product) {
+            $products[] = $product;
         }
 
         return view('cart')->with('products', $products);
     }
 
-    public function addToCart(Request $request) {
-        $user_id = $request->input('user_id');
-        $product_id = $request->input('product_id');
+    public function addToCart($id, $idItem) {
+        $cart = Cart::find($id);
+        $product = Product::find($idItem);
 
-        $user = User::find($user_id);
-        $product = Product::find($product_id);
+        $cart->products()->attach($product);
 
-        $user->carts()->first()->products()->attach($product);
-        
         return back();
     }
 
-    public function removeFromCart(Request $request) {
-        $user_id = $request->input('user_id');
-        $product_id = $request->input('product_id');
+    public function removeFromCart($id, $idItem) {
+        $cart = Cart::find($id);
+        $product = Product::find($idItem);
 
-        $user = User::find($user_id);
-        $product = Product::find($product_id);
+        $cart->products()->detach($product);
 
-        $user->carts()->first()->products()->detach($product);
-
-        $products = $user->carts()->first()->products()->get();
-
-        if (count($products) == 0) {
-            $products = [];
-        }
-
-        return view('cart')->with('products', $products);
+        return redirect()->back();
     }
 
-    public function emptyCart(Request $request) {
-        $user_id = $request->input('user_id');
-        $user = User::find($user_id);
+    public function emptyCart($id) {
+        $cart = Cart::find($id);
 
-        $user->carts()->first()->products()->sync([]);
+        $cart->products()->sync([]);
 
-        $products = $user->carts()->first()->products()->get();
-
-        if (count($products) == 0) {
-            $products = [];
-        }
-
-        return view('cart')->with('products', $products);
+        return redirect()->back();
     }
 
-    public function buy(Request $request) {
-        $user_id = $request->input('user_id');
-        $user = User::find($user_id);
+    public function buy($id, Request $request) {
+        $cart = Cart::find($id);
 
-        $products = $user->carts()->first()->products()->get();
+        $products = $cart->products()->get();
 
         $order = new Order();
         $order->state = 'pending';
-        $order->users()->associate($user);
+        $order->users()->associate($request->input('user'));
         $order->total = floatval($request->input('total'));
         $order->save();
 
@@ -97,8 +74,8 @@ class CartController extends Controller
             $product->save();
         }
 
-        $user->carts()->first()->products()->sync([]);
+        $cart->products()->sync([]);
 
-        return redirect('/');
+        return redirect()->back();
     }
 }

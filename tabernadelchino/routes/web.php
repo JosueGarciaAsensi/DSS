@@ -43,16 +43,23 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
  * delete -> borrar objeto
  */
 
-Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
+// Carrito
+Route::get('/cart/{id}', [CartController::class, 'listCart'])->name('cart-list');
+Route::post('/cart/{id}', [CartController::class, 'buy'])->name('cart-buy');
+Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name('cart-add');
+Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
+Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
 
+/*
+Route::post('/cart', [CartController::class, 'listCart'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart'); // Patch
 Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart'); // Delete id
 Route::post('/emptyCart', [CartController::class, 'emptyCart'])->name('emptyCart'); // delete
-Route::post('/buy', [CartController::class, 'buy'])->name('buy');
+Route::post('/buy', [CartController::class, 'buy'])->name('buy'); */
 
 Route::post('/myorders', [OrderController::class, 'listOrders'])->name('myorders');
 Route::post('/myprofile', [UsersController::class, 'myProfile'])->name('myprofile');
-Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
+//Route::patch('/myprofile/{id}', [UserController::class, 'edit'])->name('myprofile');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
@@ -70,6 +77,11 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin-users', [UsersController::class, 'index']);
     Route::get('/admin-users/search', [UsersController::class, 'filter']);
     Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
+
+    // /admin
+    // /admin/products
+    // /admin/beertypes
+    // /admin/orders
 
     Route::get('/admin-products', [ProductController::class, 'adminShow']);
     Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
