@@ -9,7 +9,7 @@
     <div class="row">
         <div class="container col-lg-2 d-flex align-items-left flex-column mt-5 mb-5 p-4 rounded" style="background-color: black;">
             <div class="p-2" style="text-align: left; color: white;">
-                <b>Filtros</b>
+                <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
             <form action="{{ url('/admin-products/search') }}" method="GET">
@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
-                            <label class="form-check-label" for="beertype">Tipo: </label>
+                            <label class="form-check-label" for="beertype">{{__('text.type')}}: </label>
                             <select class="form-control" name="beertype" id="beertype">
                                 <option value='null'></option>
                                 @foreach($beertypes as $beertype)
@@ -31,14 +31,14 @@
                     </div>
                     <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
-                            <label class="form-check-label" for="precio">Precio: </label>
+                            <label class="form-check-label" for="precio">{{__('text.price')}}: </label>
                                 <select class="form-control" name="sign" id="sign">
                                     <option value="empty"></option>
                                     <option value="greater"> > </option>
                                     <option value="equal"> = </option>
                                     <option value="less"> < </option>
                                 </select>
-                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="Precio">
+                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
                         </div>
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
@@ -51,7 +51,7 @@
                             @endif
                         </div>
                         <div class="form-check">
-                            <label class="form-check-label" for="invisible">No visible</label>
+                            <label class="form-check-label" for="invisible">{{__('text.notvisible')}}</label>
                             @if($search_invisibles == true)
                             <input type="checkbox" id="invisible" name="invisible" class="form-check-input" checked>
                             @else
@@ -62,7 +62,7 @@
                 </div>
                 <br>
                 <div class="row p-2 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary" name="submit">Aplicar filtros</button>
+                    <button type="submit" class="btn btn-primary" name="submit">{{__('text.applyfilters')}}</button>
                 </div>
             </form>
         </div>
@@ -70,10 +70,10 @@
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($products))
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
-                <div class="col"><b>Nombre</b></div>
-                <div class="col"><b>Tipo</b></div>
+                <div class="col"><b>{{__('text.name')}}</b></div>
+                <div class="col"><b>{{__('text.type')}}</b></div>
                 <div class="col"><b>Stock</b></div>
-                <div class="col"><b>Precio</b></div>
+                <div class="col"><b>{{__('text.price')}}</b></div>
                 <div class="col"><b>Visible</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
@@ -96,9 +96,9 @@
                 <div class="col">{{$product->price}}</div>
                 <div class="col">
                     @if ($product->visible == 1)
-                    Sí
+                    {{__('text.yes')}}
                     @else
-                    No
+                    {{__('text.no')}}
                     @endif
                 </div>
                 <div class="col d-flex align-items-center">
@@ -134,7 +134,7 @@
                 @endif
                 <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
             @else
-            <h1 class="text-light">No existen productos que coincidan con el criterio de búsqueda</h1>
+            <h1 class="text-light">{{__('text.noresults')}}</h1>
             @endif
         </div>
     </div>
@@ -145,7 +145,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalTitle">Añadir cerveza</h5>
+                <h5 class="modal-title" id="createModalTitle">{{__('text.addbeer')}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -153,11 +153,11 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="name">Nombre: </label>
-                        <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Nombre" required>
+                        <label for="name">{{__('text.name')}}: </label>
+                        <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
                     </div>
                     <div>
-                        <label for="beertype">Tipo: </label>
+                        <label for="beertype">{{__('text.type')}}: </label>
                         <select class="form-control" value="{{ old('beertype') }}"  name="beertype" id="beertype">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
@@ -167,32 +167,32 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description">Descripción: </label>
-                        <input type="text" id="description" value="{{ old('description') }}" name="description" class="form-control" placeholder="Descripción" required>
+                        <label for="description">{{__('text.description')}}: </label>
+                        <input type="text" id="description" value="{{ old('description') }}" name="description" class="form-control" placeholder="{{__('text.description')}}" required>
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock: </label>
                         <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="Stock" required>
                     </div>
                     <div class="form-group">
-                        <label for="price">Precio: </label>
-                        <input type="number" min="0" step="0.01" id="price" value="{{ old('price') }}" name="price" default="0" class="form-control" placeholder="Precio" required>
+                        <label for="price">{{__('text.price')}}: </label>
+                        <input type="number" min="0" step="0.01" id="price" value="{{ old('price') }}" name="price" default="0" class="form-control" placeholder="{{__('text.price')}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="image">Imagen: </label>
-                        <input type="text" id="image" value="{{ old('image') }}" name="image" class="form-control" placeholder="Imagen" required>
+                        <label for="image">{{__('text.image')}}: </label>
+                        <input type="text" id="image" value="{{ old('image') }}" name="image" class="form-control" placeholder="{{__('text.image')}}" required>
                     </div>
                     <br>
                     <div class="form-check">
                         <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
-                        <label class="form-check-label" for="visible">¿Es visible?</label>
+                        <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
             </div>
         </div>
     </div>
@@ -205,7 +205,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalTitle{{$product->id}}">Editar cerveza</h5>
+                <h5 class="modal-title" id="editModalTitle{{$product->id}}">{{__('text.editbeer')}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -214,11 +214,11 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="name{{$product->id}}">Nombre: </label>
-                        <input type="text" id="name{{$product->id}}" name="name{{$product->id}}" class="form-control" placeholder="Nombre" value="{{$product->name}}" required>
+                        <label for="name{{$product->id}}">{{__('text.name')}}: </label>
+                        <input type="text" id="name{{$product->id}}" name="name{{$product->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$product->name}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="beertype{{$product->id}}">Tipo: </label>
+                        <label for="beertype{{$product->id}}">{{__('text.type')}}: </label>
                         <select class="form-control" name="beertype{{$product->id}}" id="beertype{{$product->id}}">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
@@ -228,20 +228,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description{{$product->id}}">Descripción: </label>
-                        <input type="text" id="description{{$product->id}}" name="description{{$product->id}}" class="form-control" placeholder="Descripción" value="{{$product->description}}" required>
+                        <label for="description{{$product->id}}">{{__('text.description')}}: </label>
+                        <input type="text" id="description{{$product->id}}" name="description{{$product->id}}" class="form-control" placeholder="{{__('text.description')}}" value="{{$product->description}}" required>
                     </div>
                     <div class="form-group">
                         <label for="stock{{$product->id}}">Stock: </label>
                         <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="Stock" value="{{$product->stock}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="price{{$product->id}}">Precio: </label>
-                        <input type="number" min="0" step="0.01" id="price{{$product->id}}" name="price{{$product->id}}" class="form-control" placeholder="Precio" value="{{$product->price}}" required>
+                        <label for="price{{$product->id}}">{{__('text.price')}}: </label>
+                        <input type="number" min="0" step="0.01" id="price{{$product->id}}" name="price{{$product->id}}" class="form-control" placeholder="{{__('text.price')}}" value="{{$product->price}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="image{{$product->id}}">Imagen: </label>
-                        <input type="text" id="image{{$product->id}}" name="image{{$product->id}}" class="form-control" placeholder="Imagen" value="{{$product->image}}" required>
+                        <label for="image{{$product->id}}">{{__('text.image')}}: </label>
+                        <input type="text" id="image{{$product->id}}" name="image{{$product->id}}" class="form-control" placeholder="{{__('text.image')}}" value="{{$product->image}}" required>
                     </div>
                     <br>
                     <div class="form-check">
@@ -250,14 +250,14 @@
                         @else
                         <input type="checkbox" id="visible{{$product->id}}" name="visible{{$product->id}}" class="form-check-input">
                         @endif
-                        <label class="form-check-label" for="visible{{$product->id}}">¿Es visible?</label>
+                        <label class="form-check-label" for="visible{{$product->id}}">{{__('text.isvisible')}}</label>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Aplicar</button>
+                    <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
             </div>
         </div>
     </div>

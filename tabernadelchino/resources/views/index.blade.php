@@ -12,8 +12,8 @@
                 <img src="{{ asset('img/index/banner.jpg') }}" class="d-block w-100" alt="Slide 1">
             </div>
             <div class="carousel-caption d-none d-md-block text-light" style="top: 55%; transform: translateY(-50%)">
-                <p style="text-shadow: 3px 3px #000000; font-size: 42px;">Elaborado con clase,</p>
-                <p style="text-shadow: 3px 3px #000000; font-size: 42px;">servido con elegancia</p> 
+                <p style="text-shadow: 3px 3px #000000; font-size: 42px;">{{__('text.slogan1')}}</p>
+                <p style="text-shadow: 3px 3px #000000; font-size: 42px;">{{__('text.slogan2')}}</p> 
             </div>
         </div>
     </div>

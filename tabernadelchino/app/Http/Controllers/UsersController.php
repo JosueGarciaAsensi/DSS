@@ -176,7 +176,11 @@ class UsersController extends Controller
         $user->addresses()->associate($address);
         $user->save();
 
-        return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
+        if ($request->has('register')) {
+            return redirect('login')->with('success', '¡Usuario registrado con éxito!');
+        } else {
+            return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
+        }
     }
 
     public function myProfile(Request $request) {

@@ -9,7 +9,7 @@
     <div class="row">
         <div class="container col-lg-2 d-flex align-items-left flex-column mt-5 mb-5 p-4 rounded" style="background-color: black;">
             <div class="p-2" style="text-align: left; color: white;">
-                <b>Filtros</b>
+                <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
             <form action="{{ url('/admin-users/search/') }}" method="GET">
@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
-                            <label class="form-check-label" for="search_admins">Administradores</label>
+                            <label class="form-check-label" for="search_admins">{{__('text.administrators')}}</label>
                             @if($search_admins == true)
                             <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" checked>
                             @else
@@ -28,7 +28,7 @@
                     </div>
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
-                            <label class="form-check-label" for="search_users">Usuarios</label>
+                            <label class="form-check-label" for="search_users">{{__('text.users')}}</label>
                             @if($search_users == true)
                             <input type="checkbox" id="search_users" name="search_users" class="form-check-input" checked>
                             @else
@@ -39,7 +39,7 @@
                 </div>
                 <br>
                 <div class="row p-2 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                    <button type="submit" class="btn btn-primary">{{__('text.applyfilters')}}</button>
                 </div>
             </form>
         </div>
@@ -49,8 +49,8 @@
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($users))
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
-                <div class="col"><b>Nombre</b></div>
-                <div class="col"><b>Apellidos</b></div>
+                <div class="col"><b>{{__('text.name')}}</b></div>
+                <div class="col"><b>{{__('text.surname')}}</b></div>
                 <div class="col"><b>Email</b></div>
                 <div class="col"><b>DNI</b></div>
                 <div class="col">
@@ -78,16 +78,16 @@
                     <div class="row">
                         <div class="col">
                             @if ($user->admin == 1)
-                            Sí
+                            {{__('text.yes')}}
                             @else
-                            No
+                            {{__('text.no')}}
                             @endif
                         </div>
                         <div class="col">
                             @if ($user->visible == 1)
-                            Sí
+                            {{__('text.yes')}}
                             @else
-                            No
+                            {{__('text.no')}}
                             @endif
                         </div>
                     </div>
@@ -131,7 +131,7 @@
             @endif
             </div>
             @else
-        <h1 class="text-light">No existen usuarios que coincidan con el criterio de búsqueda</h1>
+        <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
         @endif
     </div>
 
@@ -140,7 +140,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createModalTitle">Crear usuario</h5>
+                    <h5 class="modal-title" id="createModalTitle">{{__('text.createuser')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -148,16 +148,16 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="name">Nombre: </label>
-                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Nombre" required>
+                            <label for="name">{{__('text.name')}}: </label>
+                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="surname">Apellidos: </label>
-                            <input type="text" id="surname" value="{{ old('surname') }}" name="surname" class="form-control" placeholder="Apellidos" required>
+                            <label for="surname">{{__('text.surname')}}: </label>
+                            <input type="text" id="surname" value="{{ old('surname') }}" name="surname" class="form-control" placeholder="{{__('text.surname')}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="passwd">Contraseña: </label>
-                            <input type="password" id="passwd" value="{{ old('passwd') }}" name="passwd" class="form-control" placeholder="Contraseña" required>
+                            <label for="passwd">{{__('text.password')}}: </label>
+                            <input type="password" id="passwd" value="{{ old('passwd') }}" name="passwd" class="form-control" placeholder="{{__('text.password')}}" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
@@ -170,17 +170,17 @@
                         <br>
                         <div class="form-check">
                             <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
-                            <label class="form-check-label" for="visible">¿Es visible?</label>
+                            <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                         </div>
                         <br>
                         <div class="form-check">
                             <input type="checkbox" id="admin" value="{{ old('admin') }}" name="admin" class="form-check-input">
-                            <label class="form-check-label" for="admin">¿Es administrador?</label>
+                            <label class="form-check-label" for="admin">{{__('text.isadmin')}}</label>
                         </div>
                         <br>
-                        <h3>Dirección</h3>
+                        <h3>{{__('text.address')}}</h3>
                         <div class="form-group">
-                            <label for="type">Tipo: </label>
+                            <label for="type">{{__('text.type')}}: </label>
                             <select  class="form-control" id="type" value="{{ old('type') }}" name="type">
                                 <option value="Calle">Calle</option>
                                 <option value="Avenida">Avenida</option>
@@ -188,19 +188,19 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="address">Dirección: </label>
-                            <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address" placeholder="Dirección" required>
+                            <label for="address">{{__('text.address')}}: </label>
+                            <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address" placeholder="{{__('text.address')}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="cp">Código postal: </label>
-                            <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="Código postal" required>
+                            <label for="cp">{{__('text.postal')}}: </label>
+                            <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="{{__('text.postal')}}" required>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
                 </div>
             </div>
         </div>
@@ -213,7 +213,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">Editar usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">{{__('text.edituser')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -221,12 +221,12 @@
                         @method('PUT')
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="name{{$user->id}}">Nombre: </label>
-                            <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="Nombre" value="{{$user->name}}" required>
+                            <label for="name{{$user->id}}">{{__('text.name')}}: </label>
+                            <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$user->name}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="surname{{$user->id}}">Apellidos: </label>
-                            <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}" required>
+                            <label for="surname{{$user->id}}">{{__('text.surname')}}: </label>
+                            <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="{{__('text.surname')}}" value="{{$user->surname}}" required>
                         </div>
                         <div class="form-group">
                             <label for="email{{$user->id}}">Email: </label>
@@ -243,7 +243,7 @@
                             @else
                             <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
                             @endif
-                            <label class="form-check-label" for="visible{{$user->id}}">¿Es visible?</label>
+                            <label class="form-check-label" for="visible{{$user->id}}">{{__('text.isvisible')}}</label>
                         </div>
                         <br>
                         <div class="form-check">
@@ -252,14 +252,14 @@
                             @else
                             <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
                             @endif
-                            <label class="form-check-label" for="admin{{$user->id}}">¿Es administrador?</label>
+                            <label class="form-check-label" for="admin{{$user->id}}">{{__('text.isadmin')}}</label>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Aplicar</button>
+                        <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
                 </div>
             </div>
         </div>
