@@ -7,6 +7,17 @@
 @section('content')
 <div class="container mt-5 mb-5 p-4 rounded" style="background-color: black;">
   <div class="container">
+    @if (count($errors) > 0)
+    <div class="alert alert-danger" role="alert">
+      @foreach ($errors->all() as $error)
+      <div>{{ $error }}</div>
+      @endforeach
+    </div>
+    @elseif(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+      {{ Session::get('success') }}
+    </div>
+    @endif
     <div class="row row-cols-2" style="text-align: center; color: white;">
       <div class="col"><b>{{__('text.type')}}</b></div>
       <div class="col">
@@ -46,17 +57,6 @@
       </div>
       @endforeach
     </div>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger" role="alert">
-      @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-      @endforeach
-    </div>
-    @elseif(Session::has('success'))
-    <div class="alert alert-success" role="alert">
-      {{ Session::get('success') }}
-    </div>
-    @endif
   </div>
 
   <!-- Modal -->

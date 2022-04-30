@@ -48,6 +48,17 @@
 
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($users))
+            @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+                @endforeach
+            </div>
+            @elseif(Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('success') }}
+            </div>
+            @endif
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.name')}}</b></div>
                 <div class="col"><b>{{__('text.surname')}}</b></div>
@@ -117,152 +128,141 @@
                 </div>
                 @endforeach
             </div>
-            @if (count($errors) > 0)
-            <div class="alert alert-danger" role="alert">
-            @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-            @endforeach
-            </div>
-            @elseif(Session::has('success'))
-            <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-            </div>
-            @endif
             <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
             @else
-        <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
+            <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
+            @endif
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createModalTitle">{{__('text.createuser')}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ url('/users/create')}}" method="POST">
+                            {{ csrf_field() }}
+
+                            <div class="form-group">
+                                <label for="name">{{__('text.name')}}: </label>
+                                <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname">{{__('text.surname')}}: </label>
+                                <input type="text" id="surname" value="{{ old('surname') }}" name="surname" class="form-control" placeholder="{{__('text.surname')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passwd">{{__('text.password')}}: </label>
+                                <input type="password" id="passwd" value="{{ old('passwd') }}" name="passwd" class="form-control" placeholder="{{__('text.password')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email: </label>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dni">DNI: </label>
+                                <input type="text" id="dni" name="dni" value="{{ old('dni') }}" class="form-control" placeholder="DNI" required>
+                            </div>
+                            <br>
+                            <div class="form-check">
+                                <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
+                                <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
+                            </div>
+                            <br>
+                            <div class="form-check">
+                                <input type="checkbox" id="admin" value="{{ old('admin') }}" name="admin" class="form-check-input">
+                                <label class="form-check-label" for="admin">{{__('text.isadmin')}}</label>
+                            </div>
+                            <br>
+                            <h3>{{__('text.address')}}</h3>
+                            <div class="form-group">
+                                <label for="type">{{__('text.type')}}: </label>
+                                <select class="form-control" id="type" value="{{ old('type') }}" name="type">
+                                    <option value="Calle">Calle</option>
+                                    <option value="Avenida">Avenida</option>
+                                    <option value="Paseo">Paseo</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">{{__('text.address')}}: </label>
+                                <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address" placeholder="{{__('text.address')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cp">{{__('text.postal')}}: </label>
+                                <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="{{__('text.postal')}}" required>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if(!is_null($users))
+        @foreach ($users as $user)
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">{{__('text.edituser')}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
+                            @method('PUT')
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="name{{$user->id}}">{{__('text.name')}}: </label>
+                                <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$user->name}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname{{$user->id}}">{{__('text.surname')}}: </label>
+                                <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="{{__('text.surname')}}" value="{{$user->surname}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email{{$user->id}}">Email: </label>
+                                <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dni{{$user->id}}">DNI: </label>
+                                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
+                            </div>
+                            <br>
+                            <div class="form-check">
+                                @if ($user->visible == 1)
+                                <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input" checked>
+                                @else
+                                <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
+                                @endif
+                                <label class="form-check-label" for="visible{{$user->id}}">{{__('text.isvisible')}}</label>
+                            </div>
+                            <br>
+                            <div class="form-check">
+                                @if ($user->admin == 1)
+                                <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input" checked>
+                                @else
+                                <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
+                                @endif
+                                <label class="form-check-label" for="admin{{$user->id}}">{{__('text.isadmin')}}</label>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
         @endif
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createModalTitle">{{__('text.createuser')}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('/users/create')}}" method="POST">
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label for="name">{{__('text.name')}}: </label>
-                            <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="surname">{{__('text.surname')}}: </label>
-                            <input type="text" id="surname" value="{{ old('surname') }}" name="surname" class="form-control" placeholder="{{__('text.surname')}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="passwd">{{__('text.password')}}: </label>
-                            <input type="password" id="passwd" value="{{ old('passwd') }}" name="passwd" class="form-control" placeholder="{{__('text.password')}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email: </label>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dni">DNI: </label>
-                            <input type="text" id="dni" name="dni" value="{{ old('dni') }}" class="form-control" placeholder="DNI" required>
-                        </div>
-                        <br>
-                        <div class="form-check">
-                            <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
-                            <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
-                        </div>
-                        <br>
-                        <div class="form-check">
-                            <input type="checkbox" id="admin" value="{{ old('admin') }}" name="admin" class="form-check-input">
-                            <label class="form-check-label" for="admin">{{__('text.isadmin')}}</label>
-                        </div>
-                        <br>
-                        <h3>{{__('text.address')}}</h3>
-                        <div class="form-group">
-                            <label for="type">{{__('text.type')}}: </label>
-                            <select  class="form-control" id="type" value="{{ old('type') }}" name="type">
-                                <option value="Calle">Calle</option>
-                                <option value="Avenida">Avenida</option>
-                                <option value="Paseo">Paseo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="address">{{__('text.address')}}: </label>
-                            <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address" placeholder="{{__('text.address')}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cp">{{__('text.postal')}}: </label>
-                            <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="{{__('text.postal')}}" required>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @if(!is_null($users))
-    @foreach ($users as $user)
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel{{$user->id}}">{{__('text.edituser')}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('/users/edit/' . $user->id)}}" method="POST">
-                        @method('PUT')
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="name{{$user->id}}">{{__('text.name')}}: </label>
-                            <input type="text" id="name{{$user->id}}" name="name{{$user->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$user->name}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="surname{{$user->id}}">{{__('text.surname')}}: </label>
-                            <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="{{__('text.surname')}}" value="{{$user->surname}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email{{$user->id}}">Email: </label>
-                            <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dni{{$user->id}}">DNI: </label>
-                            <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
-                        </div>
-                        <br>
-                        <div class="form-check">
-                            @if ($user->visible == 1)
-                            <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input" checked>
-                            @else
-                            <input type="checkbox" id="visible{{$user->id}}" name="visible{{$user->id}}" class="form-check-input">
-                            @endif
-                            <label class="form-check-label" for="visible{{$user->id}}">{{__('text.isvisible')}}</label>
-                        </div>
-                        <br>
-                        <div class="form-check">
-                            @if ($user->admin == 1)
-                            <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input" checked>
-                            @else
-                            <input type="checkbox" id="admin{{$user->id}}" name="admin{{$user->id}}" class="form-check-input">
-                            @endif
-                            <label class="form-check-label" for="admin{{$user->id}}">{{__('text.isadmin')}}</label>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-    @endif
-    @endsection
+        @endsection
