@@ -16,7 +16,7 @@ class UsersController extends Controller
     private $search_admins = true;
     private $search_users = true;
 
-    public function index() {
+    public function listUsers() {
         $users = User::paginate(10);
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }

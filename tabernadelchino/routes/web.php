@@ -42,8 +42,8 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 // Productos
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'productShow']);
+Route::get('/products', [ProductController::class, 'gridProducts'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'showProduct']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Authentication
@@ -78,7 +78,7 @@ Route::middleware('admin')->group(function () {
     // Usuarios
     Route::get('/admin/users', [UsersController::class, 'listUsers'])->name('admin-users');
     Route::post('/admin/users', [UsersController::class, 'create'])->name('admin-user-create');
-    Route::post('/admin/users', [UsersController::class, 'filter'])->name('admin-users-filter');
+    Route::post('/admin/users/filtered', [UsersController::class, 'filter'])->name('admin-users-filter');
     Route::get('/admin/users/{id}', [UsersController::class, 'userProfile'])->name('admin-user-profile');
     Route::patch('/admin/users/{id}', [UsersController::class, 'edit'])->name('admin-user-edit');
     Route::delete('/admin/users/{id}', [UsersController::class, 'delete'])->name('admin-user-delete');
