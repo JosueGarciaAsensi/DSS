@@ -25,15 +25,6 @@ use App\Models\Address;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index']);
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'productShow']);
-Route::get('/search', [ProductController::class, 'search'])->name('search');
-
 /*
  * Lógica
  *
@@ -44,25 +35,54 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
  * delete -> borrar objeto
  */
 
-// Carrito
-Route::get('/cart/{id}', [CartController::class, 'listCart'])->name('cart-list');
-Route::post('/cart/{id}', [CartController::class, 'buy'])->name('cart-buy');
-Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name('cart-add');
-Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
-Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
+ // Inicio
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+// Productos
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'productShow']);
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 
+// Carrito
+Route::middleware('auth')->group(function () {
+    Route::get('/cart/{id}', [CartController::class, 'listCart'])->name('cart-list');
+    Route::post('/cart/{id}', [CartController::class, 'buy'])->name('cart-buy');
+    Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name('cart-add');
+    Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
+    Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
+});
+
 // Usuario
-Route::get('/user/{id}', [UsersController::class, 'myProfile'])->name('user-profile');
-Route::get('/user/{id}/orders', [OrderController::class, 'listOrders'])->name('user-orders');
-Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
-Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
-Route::post('/user', [UsersController::class, 'create'])->name('user-create');
-Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user-delete');
+Route::middleware('auth')->group(function () {
+    Route::get('/user/{id}', [UsersController::class, 'myProfile'])->name('user-profile');
+    Route::get('/user/{id}/orders', [OrderController::class, 'listOrders'])->name('user-orders');
+    Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
+    Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
+    Route::post('/user', [UsersController::class, 'create'])->name('user-create');
+    Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user-delete');
+});
+
+// Admin routes
+Route::middleware('admin')->group(function () {
+    // Inicio
+    Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
+
+    // Usuarios
+    Route::get('/admin/users', [UsersController::class, 'listUsers'])->name('admin-users');
+    Route::post('/admin/users', [UsersController::class, 'create'])->name('admin-user-create');
+    Route::post('/admin/users', [UsersController::class, 'filter'])->name('admin-users-filter');
+    Route::get('/admin/users/{id}', [UsersController::class, 'userProfile'])->name('admin-user-profile');
+    Route::patch('/admin/users/{id}', [UsersController::class, 'edit'])->name('admin-user-edit');
+    Route::delete('/admin/users/{id}', [UsersController::class, 'delete'])->name('admin-user-delete');
+});
 
 /*
 // Usuario admistrador
@@ -90,12 +110,13 @@ Route::middleware('/user/{id}/admin')->group(function () {
 }); */
 
 // Admin routes
-Route::middleware('admin')->group(function () {
-    Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
 
-    Route::get('/admin-users', [UsersController::class, 'index']);
-    Route::get('/admin-users/search', [UsersController::class, 'filter']);
-    Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
+Route::middleware('admin')->group(function () {
+    //Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
+
+    //Route::get('/admin-users', [UsersController::class, 'index']);
+    //Route::get('/admin-users/search', [UsersController::class, 'filter']);
+    //Route::post('/admin-users/delete/{id}', [UsersController::class, 'destroy']);
 
     // /admin
     // /admin/products

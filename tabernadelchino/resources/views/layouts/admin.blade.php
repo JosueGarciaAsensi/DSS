@@ -22,8 +22,10 @@
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 @if (App::getLocale() == 'es')
                 <img src="{{ asset('img/espana.png')}}" width="20px">
-                @else
+                @elseif (App::getLocale() == 'en')
                 <img src="{{ asset('img/english.png')}}" width="20">
+                @else
+                <img src="{{ asset('img/china.png')}}" width="20">
                 @endif
                 {{ Config::get('languages')[App::getLocale()] }}
             </a>
@@ -36,12 +38,16 @@
                     <img src="{{ asset('img/english.png')}}" width="20px">
                     English
                 </a>
+                <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
+                    <img src="{{ asset('img/china.png')}}" width="20px">
+                    中文
+                </a>
             </ul>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
         <div class="container-fluid">
-            <a href="{{ url('/admin') }}" class="nav-item nav-link">
+            <a href="{{ route('admin') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-house-door text-light" viewBox="0 0 16 16">
@@ -53,7 +59,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ url('/admin-users') }}" class="nav-item nav-link">
+            <a href="{{ route('admin-users') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-person text-light mt-2" viewBox="0 0 16 16">

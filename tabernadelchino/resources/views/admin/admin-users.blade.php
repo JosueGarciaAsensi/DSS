@@ -12,8 +12,7 @@
                 <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
-            <form action="{{ url('/admin-users/search/') }}" method="GET">
-                @method('GET')
+            <form action="{{ route('admin-user-filter') }}" method="GET">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="p-2">
@@ -95,7 +94,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col d-flex align-items-center">
-                            <form action="{{ route('user-delete', ['id' => $user->id]) }}" method="POST">
+                            <form action="{{ route('admin-user-delete', ['id' => $user->id]) }}" method="POST">
                                 {{ csrf_field() }}
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">
@@ -145,7 +144,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('user-create, ['id' => $user->id])}}" method="POST">
+                    <form action="{{ route('admin-user-create, ['id' => $user->id])}}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">{{__('text.name')}}: </label>
@@ -217,7 +216,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('user-edit', ['id' => $user->id]) }}" method="POST">
+                    <form action="{{ route('admin-user-edit', ['id' => $user->id]) }}" method="POST">
                         {{ csrf_field() }}
                         @method('PATCH')
                         <div class="form-group">
