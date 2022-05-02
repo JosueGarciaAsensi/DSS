@@ -173,4 +173,11 @@ class UsersController extends Controller
         $address = Address::find($user->addresses_id);
         return view('myprofile', ['user' => $user, 'address' => $address]);
     }
+
+    public function resetPassword(Request $request) {
+        $user = User::where('email', '=', $request->input('email'))->first();
+        $user->password = Hash::make($user->dni);
+        $user->save();
+        return redirect()->route('login')->with('success', 'Contraseña restablecida');
+    }
 }
