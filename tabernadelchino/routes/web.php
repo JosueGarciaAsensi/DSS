@@ -36,14 +36,14 @@ Auth::routes();
  */
 
  // Inicio
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/home', [HomeController::class, 'home']);
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 // Productos
-Route::get('/products', [ProductController::class, 'gridProducts'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'showProduct']);
+Route::get('/products', [ProductController::class, 'grid'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Authentication
@@ -53,21 +53,21 @@ Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('r
 
 // Carrito
 Route::middleware('auth')->group(function () {
-    Route::get('/cart/{id}', [CartController::class, 'listCart'])->name('cart-list');
+    Route::get('/cart/{id}', [CartController::class, 'list'])->name('cart-list');
     Route::post('/cart/{id}', [CartController::class, 'buy'])->name('cart-buy');
-    Route::patch('/cart/{id}/{idItem}', [CartController::class, 'addToCart'])->name('cart-add');
-    Route::delete('/cart/{id}', [CartController::class, 'emptyCart'])->name('cart-empty');
-    Route::delete('/cart/{id}/{idItem}', [CartController::class, 'removeFromCart'])->name('cart-remove');
+    Route::patch('/cart/{id}/{idItem}', [CartController::class, 'add'])->name('cart-add');
+    Route::delete('/cart/{id}', [CartController::class, 'empty'])->name('cart-empty');
+    Route::delete('/cart/{id}/{idItem}', [CartController::class, 'remove'])->name('cart-remove');
 });
 
 // Usuario
 Route::middleware('auth')->group(function () {
-    Route::get('/user/{id}', [UsersController::class, 'myProfile'])->name('user-profile');
-    Route::get('/user/{id}/orders', [OrderController::class, 'listOrders'])->name('user-orders');
+    Route::get('/user/{id}', [UsersController::class, 'show'])->name('user-profile');
+    Route::get('/user/{id}/orders', [OrderController::class, 'list'])->name('user-orders');
     Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
     Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
     Route::post('/user', [UsersController::class, 'create'])->name('user-create');
-    Route::delete('/user/{id}', [UsersController::class, 'delete'])->name('user-delete');
+    Route::delete('/user/{id}', [UsersController::class, 'destroy'])->name('user-delete');
 });
 
 // Admin routes
@@ -76,12 +76,11 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin', [StatisticsController::class, 'statistics'])->name('admin');
 
     // Usuarios
-    Route::get('/admin/users', [UsersController::class, 'listUsers'])->name('admin-users');
+    Route::get('/admin/users', [UsersController::class, 'list'])->name('admin-users');
     Route::post('/admin/users', [UsersController::class, 'create'])->name('admin-user-create');
-    Route::post('/admin/users/filtered', [UsersController::class, 'filter'])->name('admin-users-filter');
-    Route::get('/admin/users/{id}', [UsersController::class, 'userProfile'])->name('admin-user-profile');
+    Route::get('/admin/users/filtered', [UsersController::class, 'filter'])->name('admin-users-filter');
     Route::patch('/admin/users/{id}', [UsersController::class, 'edit'])->name('admin-user-edit');
-    Route::delete('/admin/users/{id}', [UsersController::class, 'delete'])->name('admin-user-delete');
+    Route::delete('/admin/users/{id}', [UsersController::class, 'destroy'])->name('admin-user-delete');
 });
 
 /*
@@ -123,17 +122,17 @@ Route::middleware('admin')->group(function () {
     // /admin/beertypes
     // /admin/orders
 
-    Route::get('/admin-products', [ProductController::class, 'adminShow']);
+    Route::get('/admin-products', [ProductController::class, 'list']);
     Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
     Route::post('/admin-products/create', [ProductController::class, 'create']);
     Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
-    Route::get('/admin-products/search', [ProductController::class, 'filter']);
+    Route::get('/admin-products/filtered', [ProductController::class, 'filter']);
 
-    Route::get('/admin-beertypes', [BeerTypeController::class, 'index']);
+    Route::get('/admin-beertypes', [BeerTypeController::class, 'list']);
     Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
     Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
     Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
 
-    Route::get('/admin-orders', [OrderController::class, 'index']);
-    Route::get('/admin-orders/search', [OrderController::class, 'filter']);
+    Route::get('/admin-orders', [OrderController::class, 'adminlist']);
+    Route::get('/admin-orders/filtered', [OrderController::class, 'filter']);
 });

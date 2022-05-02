@@ -11,7 +11,7 @@ use App\Models\Cart;
 
 class CartController extends Controller
 {
-    public function listCart($id) {
+    public function list($id) {
         $cart = Cart::find($id);
         $products = [];
 
@@ -22,7 +22,7 @@ class CartController extends Controller
         return view('cart')->with('products', $products);
     }
 
-    public function addToCart($id, $idItem) {
+    public function add($id, $idItem) {
         $cart = Cart::find($id);
         $product = Product::find($idItem);
 
@@ -31,7 +31,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function removeFromCart($id, $idItem) {
+    public function remove($id, $idItem) {
         $cart = Cart::find($id);
         $product = Product::find($idItem);
 
@@ -40,7 +40,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function emptyCart($id) {
+    public function empty($id) {
         $cart = Cart::find($id);
 
         $cart->products()->sync([]);

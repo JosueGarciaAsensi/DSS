@@ -8,7 +8,7 @@ use App\Models\BeerType;
 
 class BeerTypeController extends Controller
 {
-    public function index() {
+    public function list() {
         $beertypes = BeerType::all();
         return view('admin.admin-beertypes', ['beertypes' => $beertypes]);
     }

@@ -8,13 +8,13 @@ use App\Models\User;
 
 class OrderController extends Controller
 {
-    public function index() {
+    public function adminlist() {
         $orders = Order::paginate(10);
 
         return view('admin.admin-orders', ['orders' => $orders]);
     }
 
-    public function listOrders($id) {
+    public function list($id) {
         $user = User::find($id);
         $orders = [];
 

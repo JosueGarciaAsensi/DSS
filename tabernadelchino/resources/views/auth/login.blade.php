@@ -69,13 +69,11 @@
                 </div>
             </form>
         </div>
-        @isset($success)
-        <div class="row mt-3">
-            <div class="alert alert-success" role="alert">
-                {{ $success }}
-            </div>
+        @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+        {{ Session::get('success') }}
         </div>
-        @endisset
+        @endif
     </div>
 </div>
  

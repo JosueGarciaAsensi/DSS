@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function gridProducts() {
+    public function grid() {
         $products = Product::where('visible', '!=', 0)->paginate(3);
         return view('products', ['products' => $products]);
     }
 
-    public function showProduct($id) {
+    public function show($id) {
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }

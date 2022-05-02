@@ -10,7 +10,7 @@ use GrahamCampbell\ResultType\Success;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function home() {
         return view('index');
     }
 

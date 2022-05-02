@@ -12,7 +12,7 @@
                 <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
-            <form action="{{ route('admin-user-filter') }}" method="GET">
+            <form action="{{ route('admin-users-filter') }}" method="GET">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="p-2">
@@ -144,7 +144,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin-user-create, ['id' => $user->id])}}" method="POST">
+                    <form action="{{ route('admin-user-create')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">{{__('text.name')}}: </label>
