@@ -146,11 +146,35 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email: </label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required>
+                                @error('email')
+                                <script>
+                                    $(function() {
+                                        $('#createModal').modal('show');
+                                    });
+                                </script>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="dni">DNI: </label>
-                                <input type="text" id="dni" name="dni" value="{{ old('dni') }}" class="form-control" placeholder="DNI" required>
+                                <input type="text" id="dni" name="dni" value="{{ old('dni') }}" class="form-control @error('dni') is-invalid @enderror" placeholder="DNI" required>
+                                @error('dni')
+                                <script>
+                                    $(function() {
+                                        $('#createModal').modal('show');
+                                    });
+                                </script>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                             </div>
                             <br>
                             <div class="form-check">
@@ -178,7 +202,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="cp">{{__('text.postal')}}: </label>
-                                <input type="text" class="form-control" id="cp" value="{{ old('cp') }}" name="cp" placeholder="{{__('text.postal')}}" required>
+                                <input type="text" class="form-control @error('cp') is-invalid @enderror" id="cp" value="{{ old('cp') }}" name="cp" placeholder="{{__('text.postal')}}" required>
+                                @error('cp')
+                                <script>
+                                    $(function() {
+                                        $('#createModal').modal('show');
+                                    });
+                                </script>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                             </div>
                             <br>
                             <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
@@ -215,11 +251,35 @@
                             </div>
                             <div class="form-group">
                                 <label for="email{{$user->id}}">Email: </label>
-                                <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}" required>
+                                <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control @error('email'.$user->id) is-invalid @enderror" placeholder="Email" value="{{$user->email}}" required>
+                                @error('email'.$user->id)
+                                <script>
+                                    $(function() {
+                                        $('#exampleModal{{$user->id}}').modal('show');
+                                    });
+                                </script>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="dni{{$user->id}}">DNI: </label>
-                                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control" placeholder="DNI" value="{{$user->dni}}" required>
+                                <input type="text" id="dni{{$user->id}}" name="dni{{$user->id}}" class="form-control @error('dni'.$user->id) is-invalid @enderror" placeholder="DNI" value="{{$user->dni}}" required>
+                                @error('dni'.$user->id)
+                                <script>
+                                    $(function() {
+                                        $('#exampleModal{{$user->id}}').modal('show');
+                                    });
+                                </script>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                             </div>
                             <br>
                             <div class="form-check">
