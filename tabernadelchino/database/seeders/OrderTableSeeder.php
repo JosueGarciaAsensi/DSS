@@ -26,16 +26,17 @@ class OrderTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    { 
+    {
         $states = ['Pendiente pago', 'Pago realizado', 'Enviado', 'Entregado', 'Devuelto'];
 
         foreach (range(0,4) as $i) {
             $order = new Order();
             $order->users()->associate($this->getUsers());
             $order->state = $states[$i];
+            $order->total = random_int(100, 1000);
 
             $order->save();
-            
+
             $products = $this->getProducts();
             $indexes = array();
             foreach (range(0, count($products)-1) as $i) {
