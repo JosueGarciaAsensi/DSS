@@ -99,9 +99,9 @@
 
                     <div class="col-md-6">
                         <select id="type" name="type">
-                            <option value="Calle">Calle</option>
-                            <option value="Avenida">Avenida</option>
-                            <option value="Paseo">Paseo</option>
+                            <option value="Calle" {{ old('type') == "Calle" ? 'selected' : '' }}>Calle</option>
+                            <option value="Avenida" {{ old('type') == "Avenida" ? 'selected' : '' }}>Avenida</option>
+                            <option value="Paseo" {{ old('type') == "Paseo" ? 'selected' : '' }}>Paseo</option>
                         </select>
 
                         @error('tipo')

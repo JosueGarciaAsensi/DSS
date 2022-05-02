@@ -159,10 +159,10 @@
                     </div>
                     <div>
                         <label for="beertype">{{__('text.type')}}: </label>
-                        <select class="form-control" value="{{ old('beertype') }}" name="beertype" id="beertype">
+                        <select class="form-control" name="beertype" id="beertype">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
-                            <option value="{{$beertype->id}}">{{$beertype->names}}</option>
+                            <option value="{{$beertype->id}}" {{ old('beertype') == $beertype->id ? 'selected' : '' }}>{{$beertype->names}}</option>
                             @endif
                             @endforeach
                         </select>

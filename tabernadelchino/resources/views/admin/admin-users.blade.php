@@ -190,10 +190,10 @@
                             <h3>{{__('text.address')}}</h3>
                             <div class="form-group">
                                 <label for="type">{{__('text.type')}}: </label>
-                                <select class="form-control" id="type" value="{{ old('type') }}" name="type">
-                                    <option value="Calle">Calle</option>
-                                    <option value="Avenida">Avenida</option>
-                                    <option value="Paseo">Paseo</option>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="Calle" {{ old('type') == "Calle" ? 'selected' : '' }}>Calle</option>
+                                    <option value="Avenida" {{ old('type') == "Avenida" ? 'selected' : '' }}>Avenida</option>
+                                    <option value="Paseo" {{ old('type') == "Paseo" ? 'selected' : '' }}>Paseo</option>
                                 </select>
                             </div>
                             <div class="form-group">
