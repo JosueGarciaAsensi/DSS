@@ -10,7 +10,7 @@
 
     <div class="container col-lg-2 d-flex align-items-left flex-column mt-5 mb-5 p-4 rounded" style="background-color: black;">
             <div class="p-2" style="text-align: left; color: white;">
-                <b>Filtros</b>
+                <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
             <form action="{{ url('/admin-orders/search/') }}" method="GET">
@@ -20,7 +20,7 @@
 
                 <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
-                            <label class="form-check-label" for="estado">Estado: </label>
+                            <label class="form-check-label" for="estado">{{__('text.state')}}: </label>
                                 <select class="form-control" name="state" id="state">
                                     <option value="empty"></option>
                                     <option value="to-pay">Pendiente pago</option>
@@ -35,7 +35,7 @@
 
                 <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
-                            <label class="form-check-label" for="precio">Total: </label>
+                            <label class="form-check-label" for="precio">{{__('text.total')}}: </label>
                                 <select class="form-control" name="sign" id="sign">
                                     <option value="empty"></option>
                                     <option value="greater"> > </option>
@@ -48,7 +48,7 @@
                 </div>
                 <br>
                 <div class="row p-2 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                    <button type="submit" class="btn btn-primary">{{__('text.applyfilters')}}</button>
                 </div>
             </form>
         </div>
@@ -59,9 +59,9 @@
             @if(!is_null($orders))
             <div class="row row-cols-4 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>ID</b></div>
-                <div class="col"><b>Usuario</b></div>
-                <div class="col"><b>Estado</b></div>
-                <div class="col"><b>Total</b></div>
+                <div class="col"><b>{{__('text.user')}}</b></div>
+                <div class="col"><b>{{__('text.state')}}</b></div>
+                <div class="col"><b>{{__('text.total')}}</b></div>
             </div>
             @endif
             <hr style="color:#acacac;" />

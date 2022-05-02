@@ -59,4 +59,12 @@ return [
     'inputemail' => 'Introdueix el teu correu electrònic',
     'rememberme' => 'Recorda\'m',
     'confirmpassword' => 'Confirmar contrasenya',
+    'saveprofile' => 'Guardar canvis del perfil',
+    'saveaddress' => 'Guardar canvis de la direcció',
+    'total' => 'Total',
+    'date' => 'Data',
+    'state' => 'Estat',
+    'user' => 'Usuari',
+    'visible' => 'Visible',
+    'stock' => 'Stock',
 ];

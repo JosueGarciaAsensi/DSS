@@ -63,4 +63,12 @@ return [
     'inputemail' => 'A continuación, introduce tu email',
     'rememberme' => 'Recuérdame',
     'confirmpassword' => 'Confirmar contraseña',
+    'saveprofile' => 'Guardar cambios del perfil',
+    'saveaddress' => 'Guardar cambios de la dirección',
+    'total' => 'Total',
+    'date' => 'Fecha',
+    'state' => 'Estado',
+    'user' => 'Usuario',
+    'visible' => 'Visible',
+    'stock' => 'Stock',
 ];

@@ -63,4 +63,12 @@ return [
     'inputemail' => 'Now, please enter your email',
     'rememberme' => 'Remember me',
     'confirmpassword' => 'Confirm password',
+    'saveprofile' => 'Save profile',
+    'saveaddress' => 'Save address',
+    'total' => 'Total',
+    'date' => 'Date',
+    'state' => 'State',
+    'user' => 'User',
+    'visible' => 'Visible',
+    'stock' => 'Stock',
 ];

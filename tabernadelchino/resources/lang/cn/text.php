@@ -62,4 +62,12 @@ return [
     'inputemail' => '输入邮箱',
     'rememberme' => '记住我',
     'confirmpassword' => '确认密码',
+    'saveprofile' => '保存资料',
+    'saveaddress' => '保存地址',
+    'total' => '总计',
+    'date' => '日期',
+    'state' => '状态',
+    'user' => '用户',
+    'visible' => '可见',
+    'stock' => '库存',
 ];

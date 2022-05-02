@@ -99,7 +99,7 @@
                         </svg>
                     </div>
                     <div class="col">
-                        <h4 class="text-light">Pedidos</h4>
+                        <h4 class="text-light">{{__('text.orders')}}</h4>
                     </div>
                 </div>
             </a>

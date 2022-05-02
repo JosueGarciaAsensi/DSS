@@ -89,7 +89,7 @@
                     @if (!is_null($product->beer_types))
                     <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names }}</h4>
                     @else
-                    <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('notype')}}</h4>
+                    <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('text.notype')}}</h4>
                     @endif
                 </div>
             </a>

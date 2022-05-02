@@ -43,7 +43,7 @@
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
                         <div class="form-check">
-                            <label class="form-check-label" for="visible">Visible</label>
+                            <label class="form-check-label" for="visible">{{__('text.visible')}}</label>
                             @if($search_visibles == true)
                             <input type="checkbox" id="visible" name="visible" class="form-check-input" checked>
                             @else
@@ -172,7 +172,7 @@
                         <input type="text" id="description" value="{{ old('description') }}" name="description" class="form-control" placeholder="{{__('text.description')}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="stock">Stock: </label>
+                        <label for="stock">{{__('text.stock')}}: </label>
                         <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="Stock" required>
                     </div>
                     <div class="form-group">
@@ -233,7 +233,7 @@
                         <input type="text" id="description{{$product->id}}" name="description{{$product->id}}" class="form-control" placeholder="{{__('text.description')}}" value="{{$product->description}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="stock{{$product->id}}">Stock: </label>
+                        <label for="stock{{$product->id}}">{{__('text.stock')}}: </label>
                         <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="Stock" value="{{$product->stock}}" required>
                     </div>
                     <div class="form-group">
