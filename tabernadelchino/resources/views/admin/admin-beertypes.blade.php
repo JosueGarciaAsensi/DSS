@@ -3,10 +3,14 @@
 @section('menu')
 @parent
 @endsection
-
 @section('content')
 <div class="container mt-5 mb-5 p-4 rounded" style="background-color: black;">
   <div class="container">
+    @if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+      {{ Session::get('success') }}
+    </div>
+    @endif
     <div class="row row-cols-2" style="text-align: center; color: white;">
       <div class="col"><b>{{__('text.type')}}</b></div>
       <div class="col">
@@ -47,19 +51,8 @@
       </div>
       @endforeach
     </div>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger" role="alert">
-      @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-      @endforeach
-    </div>
-    @elseif(Session::has('success'))
-    <div class="alert alert-success" role="alert">
-      {{ Session::get('success') }}
-    </div>
-    @endif
   </div>
-
+  
   <!-- Modal -->
   <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -73,7 +66,19 @@
             {{ csrf_field() }}
             <div class="form-group">
               <label for="type">{{__('text.type')}}: </label>
-              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control" placeholder="{{__('text.type')}}" required>
+              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control @error('type') is-invalid @enderror" placeholder="{{__('text.type')}}" required>
+              @error('type')
+              <script>
+                $(function() {
+                  $('#createModal').modal('show');
+                });
+              </script>
+              <span class="invalid-feedback" role="alert">
+                <strong>
+                  {{ $message }}
+                </strong>
+              </span>
+              @enderror
             </div>
             <br>
             <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
@@ -101,7 +106,19 @@
             {{ csrf_field() }}
             <div class="form-group">
               <label for="name{{$beertype->id}}">{{__('text.name')}}: </label>
-              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="{{__('text.name')}}" value="{{$beertype->names}}" required>
+              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control @error('name'.$beertype->id) is-invalid @enderror" placeholder="{{__('text.name')}}" value="{{$beertype->names}}" required>
+              @error('name'.$beertype->id)
+              <script>
+                $(function() {
+                  $('#exampleModal{{$beertype->id}}').modal('show');
+                });
+              </script>
+              <span class="invalid-feedback" role="alert">
+                <strong>
+                  {{ $message }}
+                </strong>
+              </span>
+              @enderror
             </div>
             <br>
             <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>

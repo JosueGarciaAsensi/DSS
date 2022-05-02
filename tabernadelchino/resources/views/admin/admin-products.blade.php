@@ -31,13 +31,14 @@
                     <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
                             <label class="form-check-label" for="precio">{{__('text.price')}}: </label>
-                                <select class="form-control" name="sign" id="sign">
-                                    <option value="empty"></option>
-                                    <option value="greater"> > </option>
-                                    <option value="equal"> = </option>
-                                    <option value="less"> < </option>
-                                </select>
-                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
+                            <select class="form-control" name="sign" id="sign">
+                                <option value="empty"></option>
+                                <option value="greater"> > </option>
+                                <option value="equal"> = </option>
+                                <option value="less">
+                                    < </option>
+                            </select>
+                            <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
                         </div>
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
@@ -68,6 +69,15 @@
         <br>
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($products))
+            @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+                @endforeach
+            </div>
+            @elseif(Session::has('success'))
+            <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+            @endif
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.name')}}</b></div>
                 <div class="col"><b>{{__('text.type')}}</b></div>
@@ -82,7 +92,7 @@
                     </button>
                 </div>
             </div>
-            <hr style="color:#acacac;"/>
+            <hr style="color:#acacac;" />
             <div class="row row-cols-6" style="text-align: center; color: white;">
                 @foreach ($products as $product)
                 <div class="col">{{$product->name}}</div>
@@ -123,16 +133,7 @@
                 @endforeach
 
             </div>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
-                </div>
-                @elseif(Session::has('success'))
-                    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
-                @endif
-                <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresults')}}</h1>
             @endif
@@ -158,10 +159,10 @@
                     </div>
                     <div>
                         <label for="beertype">{{__('text.type')}}: </label>
-                        <select class="form-control" value="{{ old('beertype') }}"  name="beertype" id="beertype">
+                        <select class="form-control" name="beertype" id="beertype">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
-                            <option value="{{$beertype->id}}">{{$beertype->names}}</option>
+                            <option value="{{$beertype->id}}" {{ old('beertype') == $beertype->id ? 'selected' : '' }}>{{$beertype->names}}</option>
                             @endif
                             @endforeach
                         </select>
@@ -184,7 +185,7 @@
                     </div>
                     <br>
                     <div class="form-check">
-                        <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
+                        <input type="checkbox" id="visible" name="visible" class="form-check-input" {{ old('visible') == 'on' ? 'checked' : '' }}>
                         <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                     </div>
                     <br>
