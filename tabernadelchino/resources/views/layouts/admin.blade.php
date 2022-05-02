@@ -25,7 +25,7 @@
                 @elseif (App::getLocale() == 'en')
                 <img src="{{ asset('img/english.png')}}" width="20">
                 @elseif (App::getLocale() == 'val')
-                <img src="{{ asset('img/valencian.png')}}" width="20">
+                <img src="{{ asset('img/valencia.png')}}" width="20">
                 @else
                 <img src="{{ asset('img/china.png')}}" width="20">
                 @endif
