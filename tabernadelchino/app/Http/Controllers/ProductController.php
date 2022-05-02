@@ -25,7 +25,7 @@ class ProductController extends Controller
         return $productsAlt;
     }
 
-    public function adminShow() {
+    public function list() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
         $search_visibles = true;

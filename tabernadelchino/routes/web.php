@@ -81,6 +81,19 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/users/filtered', [UsersController::class, 'filter'])->name('admin-users-filter');
     Route::patch('/admin/users/{id}', [UsersController::class, 'edit'])->name('admin-user-edit');
     Route::delete('/admin/users/{id}', [UsersController::class, 'destroy'])->name('admin-user-delete');
+
+    // Productos
+    Route::get('/admin/products', [ProductController::class, 'list'])->name('admin-products');
+    Route::post('/admin/products', [ProductController::class, 'create'])->name('admin-product-create');
+    Route::get('/admin/products/filtered', [ProductController::class, 'filter'])->name('admin-products-filter');
+    Route::patch('/admin/products/{id}', [ProductController::class, 'edit'])->name('admin-product-edit');
+    Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin-product-delete');
+
+    // Beertypes
+    Route::get('/admin/beertypes', [BeerTypeController::class, 'list']);
+    Route::post('/admin/beertypes', [BeerTypeController::class, 'create']);
+    Route::put('/admin/beertypes/{id}', [BeerTypeController::class, 'edit']);
+    Route::post('/admin/beertypes/{id}', [BeerTypeController::class, 'destroy']);
 });
 
 /*
@@ -122,16 +135,16 @@ Route::middleware('admin')->group(function () {
     // /admin/beertypes
     // /admin/orders
 
-    Route::get('/admin-products', [ProductController::class, 'list']);
-    Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
-    Route::post('/admin-products/create', [ProductController::class, 'create']);
-    Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
-    Route::get('/admin-products/filtered', [ProductController::class, 'filter']);
+    //Route::get('/admin-products', [ProductController::class, 'list']);
+    //Route::post('/admin-products/delete/{id}', [ProductController::class, 'destroy']);
+    //Route::post('/admin-products/create', [ProductController::class, 'create']);
+    //Route::put('/admin-products/edit/{id}', [ProductController::class, 'edit']);
+    //Route::get('/admin-products/filtered', [ProductController::class, 'filter']);
 
-    Route::get('/admin-beertypes', [BeerTypeController::class, 'list']);
-    Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
-    Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
-    Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
+    //Route::get('/admin-beertypes', [BeerTypeController::class, 'list']);
+    //Route::post('/admin-beertypes/delete/{id}', [BeerTypeController::class, 'destroy']);
+    //Route::put('/admin-beertypes/edit/{id}', [BeerTypeController::class, 'edit']);
+    //Route::post('/admin-beertypes/create', [BeerTypeController::class, 'create']);
 
     Route::get('/admin-orders', [OrderController::class, 'adminlist']);
     Route::get('/admin-orders/filtered', [OrderController::class, 'filter']);
