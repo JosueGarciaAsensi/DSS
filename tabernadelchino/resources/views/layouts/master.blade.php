@@ -24,6 +24,7 @@
                         <a href="{{ route('products') }}" class="nav-item nav-link">{{ __('text.products') }}</a>
                         <a href="{{ route('about') }}" class="nav-item nav-link">{{ __('text.about') }}</a>
                     </div>
+                    
                     <form class="d-flex" action="{{ route('search') }}" method="GET">
                         {{ csrf_field() }}
                         <div class="input-group mt-3">
@@ -38,8 +39,6 @@
                             </button>
                         </div>
                     </form>
-
-
 
                     <div class="navbar-nav">
 
