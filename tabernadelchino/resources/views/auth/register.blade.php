@@ -9,9 +9,8 @@
                     <h1 class="text-light">{{__('text.register')}}</h1>
                 </div>
             </div>
-            <form method="POST" action="{{ url('users/create') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
-
                 <div class="row mb-3">
                     <label for="name" class="col-md-4 col-form-label text-md-end text-light">{{ __('text.name') }}</label>
 

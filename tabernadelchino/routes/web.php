@@ -49,6 +49,7 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
+Route::post('/register', [UsersController::class, 'create'])->name('user-create');
 Route::post('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 
 // Carrito
@@ -66,7 +67,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/orders', [OrderController::class, 'list'])->name('user-orders');
     Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
     Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
-    Route::post('/user', [UsersController::class, 'create'])->name('user-create');
     Route::delete('/user/{id}', [UsersController::class, 'destroy'])->name('user-delete');
 });
 
