@@ -17,7 +17,7 @@ class BeerTypeController extends Controller
         $beertype = BeerType::find($id);
         $beertype->delete();
         
-        return redirect('/admin-beertypes')->with('success', '¡Tipo eliminado con éxito!');
+        return redirect()->back()->with('success', '¡Tipo eliminado con éxito!');
     }
 
     public function edit(Request $request, $id){
@@ -46,7 +46,7 @@ class BeerTypeController extends Controller
             $beertype->save();
         }
 
-        return redirect('/admin-beertypes')->with('success', '¡Tipo editado con éxito!');
+        return redirect()->back()->with('success', '¡Tipo editado con éxito!');
     }
 
     public function create(Request $request) {
@@ -73,6 +73,6 @@ class BeerTypeController extends Controller
         
         $tipoCerveza->save();
         
-        return redirect('/admin-beertypes')->with('success', '¡Nuevo tipo añadido con éxito!');
+        return redirect()->back()->with('success', '¡Nuevo tipo añadido con éxito!');
     }
 }
