@@ -17,8 +17,6 @@ class UsersController extends Controller
     private $search_users = true;
     
     public function list() {
-        
-        
         $users = null;
         if($this->search_admins == true && $this->search_users == true) {
             $users = User::paginate(10);
