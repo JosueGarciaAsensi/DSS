@@ -49,6 +49,8 @@
                                 <input type="email" id="email{{$user->id}}" name="email{{$user->id}}" class="form-control" placeholder="Email" value="{{$user->email}}">
                             </div>
                         </div>
+                        <input type="hidden" id="admin{{$user->id}}" name="admin{{$user->id}}" value="{{$user->admin}}">
+                        <input type="hidden" id="visible{{$user->id}}" name="visible{{$user->id}}" value="{{$user->visible}}">
                         <button type="submit" class="btn btn-primary">Guardar cambios del perfil</button>
                     </form>
                     <br>
