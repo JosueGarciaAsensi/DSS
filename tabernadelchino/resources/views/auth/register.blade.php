@@ -9,9 +9,8 @@
                     <h1 class="text-light">{{__('text.register')}}</h1>
                 </div>
             </div>
-            <form method="POST" action="{{ url('users/create') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
-
                 <div class="row mb-3">
                     <label for="name" class="col-md-4 col-form-label text-md-end text-light">{{ __('text.name') }}</label>
 
@@ -80,7 +79,7 @@
                     <label for="dni" class="col-md-4 col-form-label text-md-end text-light">DNI</label>
 
                     <div class="col-md-6">
-                        <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" required autocomplete="dni">
+                        <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" name="dni" required autocomplete="dni">
 
                         @error('dni')
                             <span class="invalid-feedback" role="alert">
@@ -98,10 +97,10 @@
                     <label for="type" class="col-md-4 col-form-label text-md-end text-light">{{__('text.type')}}: </label>
 
                     <div class="col-md-6">
-                        <select id="type" name="type">
-                            <option value="Calle">Calle</option>
-                            <option value="Avenida">Avenida</option>
-                            <option value="Paseo">Paseo</option>
+                        <select class="form-control" id="type" name="type">
+                            <option value="Calle" {{ old('type') == "Calle" ? 'selected' : '' }}>Calle</option>
+                            <option value="Avenida" {{ old('type') == "Avenida" ? 'selected' : '' }}>Avenida</option>
+                            <option value="Paseo" {{ old('type') == "Paseo" ? 'selected' : '' }}>Paseo</option>
                         </select>
 
                         @error('tipo')
@@ -116,7 +115,7 @@
                     <label for="address" class="col-md-4 col-form-label text-md-end text-light">{{__('text.address')}}: </label>
 
                     <div class="col-md-6">
-                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address">
+                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" name="address" required autocomplete="address">
 
                         @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -130,7 +129,7 @@
                     <label for="cp" class="col-md-4 col-form-label text-md-end text-light">{{__('text.postal')}}: </label>
 
                     <div class="col-md-6">
-                        <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror" name="cp" required autocomplete="cp">
+                        <input id="cp" type="text" class="form-control @error('cp') is-invalid @enderror" value="{{ old('cp') }}" name="cp" required autocomplete="cp">
 
                         @error('cp')
                             <span class="invalid-feedback" role="alert">

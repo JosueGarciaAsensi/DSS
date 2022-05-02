@@ -10,7 +10,7 @@ use GrahamCampbell\ResultType\Success;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function home() {
         return view('index');
     }
 
@@ -28,12 +28,5 @@ class HomeController extends Controller
 
     public function register() {
         return view('auth.register');
-    }
-
-    public function resetPassword(Request $request) {
-        $user = User::where('email', '=', $request->input('email'))->first();
-        $user->password = Hash::make($user->dni);
-        $user->save();
-        return redirect('login')->with('success', 'Password reset to email');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use Exception;
 use Illuminate\Contracts\Validation\Rule;
 
 class DNIRule implements Rule
@@ -25,14 +26,15 @@ class DNIRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $letra = substr($value, -1);
-        $numeros = substr($value, 0, -1);
         
-        if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros%23, 1) == $letra && strlen($letra) == 1 && strlen ($numeros) == 8 ){
-            return true;
-        }else{
-            return false;
+        $nifRegEx = '/^[0-9]{8}[A-Z]$/i';
+        $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+        if (preg_match($nifRegEx, $value)) {
+            return ($letras[(substr($value, 0, 8) % 23)] == $value[8]);
         }
+
+        return false;
     }
 
     /**

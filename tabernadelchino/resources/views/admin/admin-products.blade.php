@@ -12,8 +12,7 @@
                 <b>{{__('text.filters')}}</b>
             </div>
             <hr style="color:#acacac; margin-top:10px;" />
-            <form action="{{ url('/admin-products/search') }}" method="GET">
-                @method('GET')
+            <form action="{{ route('admin-products-filter') }}" method="GET">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="p-2">
@@ -32,13 +31,14 @@
                     <div class="p-2">
                         <div class="form-group" style="text-align: left; color: white;">
                             <label class="form-check-label" for="precio">{{__('text.price')}}: </label>
-                                <select class="form-control" name="sign" id="sign">
-                                    <option value="empty"></option>
-                                    <option value="greater"> > </option>
-                                    <option value="equal"> = </option>
-                                    <option value="less"> < </option>
-                                </select>
-                                <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
+                            <select class="form-control" name="sign" id="sign">
+                                <option value="empty"></option>
+                                <option value="greater"> > </option>
+                                <option value="equal"> = </option>
+                                <option value="less">
+                                    < </option>
+                            </select>
+                            <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
                         </div>
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
@@ -69,6 +69,15 @@
         <br>
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($products))
+            @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+                @endforeach
+            </div>
+            @elseif(Session::has('success'))
+            <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+            @endif
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.name')}}</b></div>
                 <div class="col"><b>{{__('text.type')}}</b></div>
@@ -83,7 +92,7 @@
                     </button>
                 </div>
             </div>
-            <hr style="color:#acacac;"/>
+            <hr style="color:#acacac;" />
             <div class="row row-cols-6" style="text-align: center; color: white;">
                 @foreach ($products as $product)
                 <div class="col">{{$product->name}}</div>
@@ -102,8 +111,9 @@
                     @endif
                 </div>
                 <div class="col d-flex align-items-center">
-                    <form action="{{ url('/admin-products/delete/' . $product->id) }}" method="POST">
+                    <form action="{{ route('admin-product-delete', ['id' => $product->id]) }}" method="POST">
                         {{ csrf_field() }}
+                        @method('DELETE')
                         <button class="btn btn-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -123,16 +133,7 @@
                 @endforeach
 
             </div>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
-                </div>
-                @elseif(Session::has('success'))
-                    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
-                @endif
-                <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresults')}}</h1>
             @endif
@@ -149,7 +150,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/admin-products/create')}}" method="POST">
+                <form action="{{ route('admin-product-create') }}" method="POST">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -158,10 +159,10 @@
                     </div>
                     <div>
                         <label for="beertype">{{__('text.type')}}: </label>
-                        <select class="form-control" value="{{ old('beertype') }}"  name="beertype" id="beertype">
+                        <select class="form-control" name="beertype" id="beertype">
                             @foreach($beertypes as $beertype)
                             @if(!is_null($beertype->id))
-                            <option value="{{$beertype->id}}">{{$beertype->names}}</option>
+                            <option value="{{$beertype->id}}" {{ old('beertype') == $beertype->id ? 'selected' : '' }}>{{$beertype->names}}</option>
                             @endif
                             @endforeach
                         </select>
@@ -184,7 +185,7 @@
                     </div>
                     <br>
                     <div class="form-check">
-                        <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
+                        <input type="checkbox" id="visible" name="visible" class="form-check-input" {{ old('visible') == 'on' ? 'checked' : '' }}>
                         <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                     </div>
                     <br>
@@ -209,8 +210,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/admin-products/edit/' . $product->id)}}" method="POST">
-                    @method('PUT')
+                <form action="{{ route('admin-product-edit', ['id' => $product->id]) }}" method="POST">
+                    @method('PATCH')
                     {{ csrf_field() }}
 
                     <div class="form-group">

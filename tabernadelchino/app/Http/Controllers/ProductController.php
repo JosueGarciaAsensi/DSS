@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function grid() {
         $products = Product::where('visible', '!=', 0)->paginate(3);
         return view('products', ['products' => $products]);
     }
 
-    public function productShow($id) {
+    public function show($id) {
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
@@ -25,7 +25,7 @@ class ProductController extends Controller
         return $productsAlt;
     }
 
-    public function adminShow() {
+    public function list() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
         $search_visibles = true;
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->visible = false;
         $product->save();
-        return redirect('/admin-products')->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
+        return redirect()->back()->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
     }
 
     //Funciona
@@ -85,7 +85,7 @@ class ProductController extends Controller
         $product->users()->associate($user);
         $product->save();
 
-        return redirect('/admin-products')->with('success', '¡Producto creado con éxito!');
+        return redirect()->back()->with('success', '¡Producto creado con éxito!');
     }
 
     public function edit(Request $request, $id) {
@@ -137,7 +137,7 @@ class ProductController extends Controller
             $product->beer_types()->associate($beertype);
             $product->save();
         }
-        return redirect('/admin-products')->with('success', '¡Producto editado con éxito!');
+        return redirect()->back()->with('success', '¡Producto editado con éxito!');
     }
 
     public function filter(Request $request){
@@ -246,7 +246,7 @@ class ProductController extends Controller
         else{
             $products = null;
         }
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
     }
 
     public function search(Request $request) {
