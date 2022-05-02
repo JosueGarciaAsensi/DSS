@@ -23,7 +23,7 @@ use App\Models\Address;
 |
 */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 /*
  * Lógica

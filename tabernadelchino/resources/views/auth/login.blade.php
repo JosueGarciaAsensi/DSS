@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container mt-5 p-3 rounded" style="background-color: black;">
+@if(Session::has('success'))
+<div class="mt-5 alert alert-info" role="alert">
+    {{ Session::get('success') }}
+</div>
+@endif
+<div class="container mt-3 p-3 rounded" style="background-color: black;">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
@@ -68,11 +73,6 @@
                 </div>
             </form>
         </div>
-        @if(Session::has('success'))
-        <div class="alert alert-success" role="alert">
-        {{ Session::get('success') }}
-        </div>
-        @endif
     </div>
 </div>
  

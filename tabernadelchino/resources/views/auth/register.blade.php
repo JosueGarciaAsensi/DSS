@@ -97,7 +97,7 @@
                     <label for="type" class="col-md-4 col-form-label text-md-end text-light">{{__('text.type')}}: </label>
 
                     <div class="col-md-6">
-                        <select id="type" name="type">
+                        <select class="form-control" id="type" name="type">
                             <option value="Calle">Calle</option>
                             <option value="Avenida">Avenida</option>
                             <option value="Paseo">Paseo</option>
