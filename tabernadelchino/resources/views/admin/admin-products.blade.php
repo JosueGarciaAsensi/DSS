@@ -185,7 +185,7 @@
                     </div>
                     <br>
                     <div class="form-check">
-                        <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
+                        <input type="checkbox" id="visible" name="visible" class="form-check-input" {{ old('visible') == 'on' ? 'checked' : '' }}>
                         <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                     </div>
                     <br>

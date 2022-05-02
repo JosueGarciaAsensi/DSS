@@ -19,21 +19,13 @@
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
                             <label class="form-check-label" for="search_admins">{{__('text.administrators')}}</label>
-                            @if($search_admins == true)
-                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" checked>
-                            @else
-                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input">
-                            @endif
+                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" {{ $search_admins == true ? 'checked' : ''}}>
                         </div>
                     </div>
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
                             <label class="form-check-label" for="search_users">{{__('text.users')}}</label>
-                            @if($search_users == true)
-                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input" checked>
-                            @else
-                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input">
-                            @endif
+                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input" {{ $search_users == true ? 'checked' : ''}}>
                         </div>
                     </div>
                 </div>
@@ -48,13 +40,7 @@
 
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($users))
-            @if (count($errors) > 0)
-            <div class="alert alert-danger" role="alert">
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            @elseif(Session::has('success'))
+            @if(Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
             </div>
@@ -128,7 +114,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center"> {{ $users->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $users->appends(['search_users' => $search_users, 'search_admins' => $search_admins])->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
             @endif
@@ -168,12 +154,12 @@
                             </div>
                             <br>
                             <div class="form-check">
-                                <input type="checkbox" id="visible" value="{{ old('visible') }}" name="visible" class="form-check-input">
+                                <input type="checkbox" id="visible" name="visible" class="form-check-input" {{ old('visible') == 'on' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="visible">{{__('text.isvisible')}}</label>
                             </div>
                             <br>
                             <div class="form-check">
-                                <input type="checkbox" id="admin" value="{{ old('admin') }}" name="admin" class="form-check-input">
+                                <input type="checkbox" id="admin" name="admin" class="form-check-input" {{ old('admin') == 'on' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="admin">{{__('text.isadmin')}}</label>
                             </div>
                             <br>
