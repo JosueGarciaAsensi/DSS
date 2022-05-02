@@ -22,8 +22,10 @@
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 @if (App::getLocale() == 'es')
                 <img src="{{ asset('img/espana.png')}}" width="20px">
-                @else
+                @elseif (App::getLocale() == 'en')
                 <img src="{{ asset('img/english.png')}}" width="20">
+                @else
+                <img src="{{ asset('img/china.png')}}" width="20">
                 @endif
                 {{ Config::get('languages')[App::getLocale()] }}
             </a>
@@ -36,12 +38,16 @@
                     <img src="{{ asset('img/english.png')}}" width="20px">
                     English
                 </a>
+                <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
+                    <img src="{{ asset('img/china.png')}}" width="20px">
+                    中文
+                </a>
             </ul>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
         <div class="container-fluid">
-            <a href="{{ url('/admin') }}" class="nav-item nav-link">
+            <a href="{{ route('admin') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-house-door text-light" viewBox="0 0 16 16">
@@ -53,7 +59,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ url('/admin-users') }}" class="nav-item nav-link">
+            <a href="{{ route('admin-users') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-person text-light mt-2" viewBox="0 0 16 16">
@@ -65,7 +71,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ url('/admin-products') }}" class="nav-item nav-link">
+            <a href="{{ route('admin-products') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-cup text-light" viewBox="0 0 16 16">
@@ -75,31 +81,21 @@
                     <div class="col">
                         <h4 class="text-light">{{__('text.products')}}</h4>
                     </div>
-
-                </a>
-
-                <a href="{{ url('/admin-orders') }}" class="nav-item nav-link">
-                    <div class="row">
-                        <div class="col">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-house-door text-light" viewBox="0 0 16 16">
-                                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
-                            </svg>
-                        </div>
-                        <div class="col">
-                            <h4 class="text-light">Pedidos</h4>
-                        </div>
-                    </div>
-                </a>
-
-
-
-            </div>
-        </nav>
-        @show
-
                 </div>
             </a>
-            <a href="{{ url('/admin-beertypes') }}" class="nav-item nav-link">
+            <a href="{{ route('admin-orders') }}" class="nav-item nav-link">
+                <div class="row">
+                    <div class="col">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-house-door text-light" viewBox="0 0 16 16">
+                            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                        </svg>
+                    </div>
+                    <div class="col">
+                        <h4 class="text-light">Pedidos</h4>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ route('admin-beertypes') }}" class="nav-item nav-link">
                 <div class="row">
                     <div class="col">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list-task text-light" viewBox="0 0 16 16">

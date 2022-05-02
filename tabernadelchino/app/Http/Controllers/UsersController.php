@@ -16,9 +16,8 @@ class UsersController extends Controller
     private $search_admins = true;
     private $search_users = true;
 
-    public function index() {
+    public function list() {
         $users = User::paginate(10);
-
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
     }
 
@@ -54,11 +53,10 @@ class UsersController extends Controller
     public function destroy($id) {
         $user = User::find($id);
         $user->delete();
-        return redirect('/admin-users')->with('success', '¡Usuario eliminado con éxito!');
+        return redirect()->back()->with('success', '¡Usuario eliminado con éxito!');
     }
 
     public function edit(Request $request, $id) {
-
         $http_host = $_SERVER["HTTP_HOST"];
         $url = url()->previous();
         $url = str_replace("http://$http_host", '', $url);
@@ -91,33 +89,20 @@ class UsersController extends Controller
             $user->surname = $request->input('surname' . $id);
             $user->email = $request->input('email' . $id);
             $user->dni = $request->input('dni' . $id);
-            if ($url == '/admin-users') {
-                if ($request->has('admin' . $id)) {
-                    $user->admin = 1;
-                } else {
-                    $user->admin = 0;
-                }
-                if ($request->has('visible' . $id)) {
-                    $user->visible = 1;
-                } else {
-                    $user->visible = 0;
-                }
+            if ($request->has('admin' . $id)) {
+                $user->admin = 1;
+            } else {
+                $user->admin = 0;
+            }
+            if ($request->has('visible' . $id)) {
+                $user->visible = 1;
+            } else {
+                $user->visible = 0;
             }
             $user->save();
         }
 
-        if ($url == '/admin-users') {
-            return redirect($url)->with('success', '¡Usuario editado con éxito!');
-        } else if ($url == '/myprofile') {
-            $address = Address::find($user->addresses_id);
-            return view('myprofile', ['user' => $user, 'address' => $address]);
-            //return redirect()->route('myprofile', ['user' => $user, 'address' => $address]);
-            //return back()->with('success', '¡Datos actualizados con éxito!');
-            //return redirect()->action([UsersController::class, 'myProfile'], ['user' => $user, 'address' => $address]);
-
-        } else {
-            return redirect('/index');
-        }
+        return redirect()->back();
     }
 
     public function create(Request $request) {
@@ -177,15 +162,22 @@ class UsersController extends Controller
         $user->save();
 
         if ($request->has('register')) {
-            return redirect('login')->with('success', '¡Usuario registrado con éxito!');
+            return redirect()->route('login')->with('success', '¡Usuario registrado con éxito!');
         } else {
-            return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
+            return redirect()->route('admin-users')->with('success', '¡Usuario creado con éxito!');
         }
     }
 
-    public function myProfile(Request $request) {
-        $user = User::find($request->input('id'));
+    public function show($id) {
+        $user = User::find($id);
         $address = Address::find($user->addresses_id);
         return view('myprofile', ['user' => $user, 'address' => $address]);
+    }
+
+    public function resetPassword(Request $request) {
+        $user = User::where('email', '=', $request->input('email'))->first();
+        $user->password = Hash::make($user->dni);
+        $user->save();
+        return redirect()->route('login')->with('success', 'Contraseña restablecida');
     }
 }

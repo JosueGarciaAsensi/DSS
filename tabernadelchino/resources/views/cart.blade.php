@@ -6,6 +6,7 @@
 @section('content')
     @php($total = 0.0)
     @php($nostocks = 0)
+    @php($cart = Auth::user()->carts()->first()->id)
     <div class="container mt-5 mb-5 p-3 rounded" style="background-color: black;">
         <div class="row" style="border-bottom: none;">
             <div class="col col-xl-12 border-bottom">
@@ -40,10 +41,9 @@
                                         <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
                                     </svg>
                                 </a>
-                                <form id="removeFrom-form{{ $product->id }}" action="{{ route('removeFromCart') }}" method="POST" class="d-none">
+                                <form id="removeFrom-form{{ $product->id }}" action="{{ route('cart-remove', ['id' => $cart, 'idItem' => $product->id]) }}" method="POST" class="d-none">
                                     @csrf
-                                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
+                                    @method('DELETE')
                                 </form>
                             </div>
                         </div>
@@ -52,10 +52,10 @@
             </div>
             <div class="col float-end text-end ms-auto">
                 <h2 class="text-light">Total: {{ $total }}€</h2>
-                <form action="{{ route('buy') }}" method="POST">
-                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" id="total" name="total" value="{{ $total }}">
+                <form action="{{ route('cart-buy', ['id' => $cart]) }}" method="POST">
                     @csrf
+                    <input type="hidden" id="user" name="user" value="{{ Auth::user()->id }}">
+                    <input type="hidden" id="total" name="total" value="{{ $total }}">
                     @if ($products == [] || $nostocks > 0)
                         <button type="submit" class="btn mt-4" style="background-color:#ffa834; color: #3c3c3c" disabled>{{__('text.buy')}}</button>
                     @else
@@ -66,9 +66,9 @@
         </div>
         @if($products != [])
             <div class="row mt-3">
-                <form action="{{ route('emptyCart') }}" method="POST">
+                <form action="{{ route('cart-empty', ['id' => $cart]) }}" method="POST">
                     @csrf
-                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                    @method('DELETE')
                     <button type="submit" class="btn btn-danger">{{__('text.emptycart')}}</button>
                 </form>
             </div>

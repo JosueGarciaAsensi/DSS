@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function grid() {
         $products = Product::where('visible', '!=', 0)->paginate(3);
         return view('products', ['products' => $products]);
     }
 
-    public function productShow($id) {
+    public function show($id) {
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
@@ -25,7 +25,7 @@ class ProductController extends Controller
         return $productsAlt;
     }
 
-    public function adminShow() {
+    public function list() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
         $search_visibles = true;
