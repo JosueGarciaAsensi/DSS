@@ -69,13 +69,7 @@
         <br>
         <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($products))
-            @if (count($errors) > 0)
-            <div class="alert alert-danger" role="alert">
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            @elseif(Session::has('success'))
+            @if(Session::has('success'))
             <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
             @endif
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
@@ -155,7 +149,19 @@
 
                     <div class="form-group">
                         <label for="name">{{__('text.name')}}: </label>
-                        <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="{{__('text.name')}}" required>
+                        <input type="text" id="name" value="{{ old('name') }}" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="{{__('text.name')}}" required>
+                        @error('name')
+                            <script>
+                                $(function() {
+                                $('#createModal').modal('show');
+                                });
+                            </script>
+                            <span class="invalid-feedback" role="alert">
+                            <strong>
+                                {{ $message }}
+                            </strong>
+                            </span>
+                        @enderror
                     </div>
                     <div>
                         <label for="beertype">{{__('text.type')}}: </label>
