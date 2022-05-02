@@ -24,6 +24,8 @@
                 <img src="{{ asset('img/espana.png')}}" width="20px">
                 @elseif (App::getLocale() == 'en')
                 <img src="{{ asset('img/english.png')}}" width="20">
+                @elseif (App::getLocale() == 'val')
+                <img src="{{ asset('img/valencian.png')}}" width="20">
                 @else
                 <img src="{{ asset('img/china.png')}}" width="20">
                 @endif
@@ -41,6 +43,10 @@
                 <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
                     <img src="{{ asset('img/china.png')}}" width="20px">
                     中文
+                </a>
+                <a class="dropdown-item" href="{{ route('lang.switch', 'val') }}">
+                    <img src="{{ asset('img/valencia.png') }}" width="20px">
+                    Valencià
                 </a>
             </ul>
         </div>
