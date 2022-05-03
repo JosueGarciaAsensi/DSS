@@ -28,6 +28,7 @@ return [
     'ordersperuser' => '每个用户的订单',
     'bestproduct' => '最好的产品',
     'administrators' => '管理员',
+    'administrator' => '管理员',
     'applyfilters' => '应用过滤器',
     'name' => '名字',
     'surname' => '姓',
@@ -70,4 +71,5 @@ return [
     'user' => '用户',
     'visible' => '可见',
     'stock' => '库存',
+    'tobuy' => '登录购买',
 ];

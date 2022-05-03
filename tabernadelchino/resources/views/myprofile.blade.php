@@ -15,7 +15,7 @@
                         @method('PATCH')
                         {{ csrf_field() }}
                         <div class="row">
-                            <h4>Usuario</h4>
+                            <h4>{{__('text.user')}}</h4>
                         </div>
                         <div class="row form-group">
                             <div class="col">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Tipo: </h5>
+                                <h5>{{__('text.type')}}: </h5>
                             </div>
                             <div class="col">
                                 <select  class="form-control" id="addresstype{{$address->id}}" value="{{ $address->type }}" name="addresstype{{$address->id}}">

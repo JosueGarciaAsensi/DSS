@@ -42,7 +42,7 @@
                     <img src="{{ asset('img/english.png')}}" width="20px">
                     English
                 </a>
-                <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
+                <a class="dropdown-item" href="{{ route('lang.switch', 'cn') }}">
                     <img src="{{ asset('img/china.png')}}" width="20px">
                     中文
                 </a>

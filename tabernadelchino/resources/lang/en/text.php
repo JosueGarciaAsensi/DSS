@@ -29,6 +29,7 @@ return [
     'ordersperuser' => 'Orders per user',
     'bestproduct' => 'Best product',
     'administrators' => 'Administrators',
+    'administrator' => 'Admin',
     'applyfilters' => 'Apply filters',
     'name' => 'Name',
     'surname' => 'Surnames',
@@ -71,4 +72,5 @@ return [
     'user' => 'User',
     'visible' => 'Visible',
     'stock' => 'Stock',
+    'tobuy' => 'Please, login to buy',
 ];

@@ -51,8 +51,8 @@
                 <div class="col"><b>DNI</b></div>
                 <div class="col">
                     <div class="row">
-                        <div class="col"><b>{{__('text.isadmin')}}</b></div>
-                        <div class="col"><b>{{__('text.isvisible')}}</b></div>
+                        <div class="col"><b>{{__('text.administrator')}}</b></div>
+                        <div class="col"><b>{{__('text.visible')}}</b></div>
                     </div>
                 </div>
                 <div class="col">

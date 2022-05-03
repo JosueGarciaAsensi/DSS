@@ -81,9 +81,9 @@
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.name')}}</b></div>
                 <div class="col"><b>{{__('text.type')}}</b></div>
-                <div class="col"><b>Stock</b></div>
+                <div class="col"><b>{{__('text.stock')}}</b></div>
                 <div class="col"><b>{{__('text.price')}}</b></div>
-                <div class="col"><b>Visible</b></div>
+                <div class="col"><b>{{__('text.visible')}}</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -173,7 +173,7 @@
                     </div>
                     <div class="form-group">
                         <label for="stock">{{__('text.stock')}}: </label>
-                        <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="Stock" required>
+                        <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="{{__('text.stock')}}" required>
                     </div>
                     <div class="form-group">
                         <label for="price">{{__('text.price')}}: </label>
@@ -234,7 +234,7 @@
                     </div>
                     <div class="form-group">
                         <label for="stock{{$product->id}}">{{__('text.stock')}}: </label>
-                        <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="Stock" value="{{$product->stock}}" required>
+                        <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="{{__('text.stock')}}" value="{{$product->stock}}" required>
                     </div>
                     <div class="form-group">
                         <label for="price{{$product->id}}">{{__('text.price')}}: </label>

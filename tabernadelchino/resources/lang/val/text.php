@@ -29,6 +29,7 @@ return [
     'ordersperuser' => 'Comandes per usuari',
     'bestproduct' => 'Producte estrella',
     'administrators' => 'Administradors',
+    'administrator' => 'Admin',
     'applyfilters' => 'Aplicar filtres',
     'name' => 'Nom',
     'surname' => 'Cognoms',
@@ -67,4 +68,5 @@ return [
     'user' => 'Usuari',
     'visible' => 'Visible',
     'stock' => 'Stock',
+    'tobuy' => 'Inicia sesió per realitzar la compra',
 ];
