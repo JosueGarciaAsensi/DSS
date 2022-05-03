@@ -185,6 +185,21 @@ class UsersController extends Controller
     }
 
     public function resetPassword(Request $request) {
+        $users = User::all();
+        $susers = [];
+        foreach($users as $user){
+            array_push($susers, $user->email);
+        }
+
+        $this->validate($request,
+            [
+                'email' =>  [Rule::notIn($susers)],
+            ],
+            [
+                'not_in' => 'Este email ya está registrado.'
+            ]
+        );
+
         $user = User::where('email', '=', $request->input('email'))->first();
         $user->password = Hash::make($user->dni);
         $user->save();
