@@ -193,10 +193,10 @@ class UsersController extends Controller
 
         $this->validate($request,
             [
-                'email' =>  [Rule::notIn($susers)],
+                'email' =>  [Rule::in($susers)],
             ],
             [
-                'not_in' => 'Este email ya está registrado.'
+                'in' => 'Este email no está registrado.'
             ]
         );
 

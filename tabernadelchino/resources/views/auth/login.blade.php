@@ -93,8 +93,8 @@
                             <p>{{__('text.inputemail')}}:</p>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required>
+                            <div class="col col-lg-8">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
                                 @error('email')
                                     <script>
                                         $(function() {

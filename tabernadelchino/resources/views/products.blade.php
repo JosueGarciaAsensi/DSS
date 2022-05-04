@@ -7,7 +7,7 @@
 <div class="container text-light row justify-content-center mt-5 mb-5 rounded" style="background-color: #000;">
     <div class="col-auto">
         @if (count($products) == 0)
-        <h1 class="text-light m-5">No se ha encontrado ningún producto...</h1>
+        <h1 class="text-light m-5">{{__('text.noresults')}}</h1>
         @else
         <table class="table table-responsive">
             @php($i = 1)
@@ -23,7 +23,7 @@
                             @if(!is_null($product->beer_types))
                             <h4 class="mt-2 mb-4" style="color: #ffa834;">{{ $product->beer_types->names; }}</h4>
                             @else
-                            <h4 class="mt-2 mb-4" style="color: #ffa834;">Sin tipo</h4>
+                            <h4 class="mt-2 mb-4" style="color: #ffa834;">{{__('text.notype')}}</h4>
                             @endif
                         </div>
                     </a>
