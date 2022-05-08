@@ -27,7 +27,7 @@
                     <h3 class="text-success">
                         {{__('text.plentystock')}}
                         @guest
-                            <h4 class="text-light mt-5">Inicia sesión para realizar compras...</h4>
+                            <h4 class="text-light mt-5">{{__('text.tobuy')}}</h4>
                         @else
                             <form action="{{ route('cart-add', ['id' => Auth::user()->carts()->first()->id, 'idItem' => $product->id]) }}" method="POST">
                                 @csrf
@@ -44,7 +44,7 @@
                     <h3 class="text-warning">
                         {{__('text.laststock')}}
                         @guest
-                            <h4 class="text-light mt-5">Inicia sesión para realizar compras...</h4>
+                            <h4 class="text-light mt-5">{{__('text.tobuy')}}</h4>
                         @else
                             <form action="{{ route('cart-add', ['id' => Auth::user()->carts()->first()->id, 'idItem' => $product->id]) }}" method="POST">
                                 @csrf

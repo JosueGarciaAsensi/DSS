@@ -42,7 +42,7 @@
                     <img src="{{ asset('img/english.png')}}" width="20px">
                     English
                 </a>
-                <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
+                <a class="dropdown-item" href="{{ route('lang.switch', 'cn') }}">
                     <img src="{{ asset('img/china.png')}}" width="20px">
                     中文
                 </a>
@@ -99,7 +99,7 @@
                         </svg>
                     </div>
                     <div class="col">
-                        <h4 class="text-light">Pedidos</h4>
+                        <h4 class="text-light">{{__('text.orders')}}</h4>
                     </div>
                 </div>
             </a>

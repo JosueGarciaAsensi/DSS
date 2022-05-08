@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -106,12 +107,11 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                                     @guest
-                                        <a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a>
-                                        <a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
+                                        <a class="dropdown-item" href="{{ route('login') }}">{{__('text.login')}}</a>
+                                        <a class="dropdown-item" href="{{ route('register') }}">{{__('text.register')}}</a>
                                     @else
                                         <a class="dropdown-item" href=""
-                                            onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">Mi
-                                            Perfil</a>
+                                            onclick="event.preventDefault(); document.getElementById('getProfile-form').submit();">{{__('text.profile')}}</a>
                                         <form id="getProfile-form"
                                             action="{{ route('user-profile', ['id' => Auth::user()->id]) }}" method="GET"
                                             class="d-none">
@@ -119,19 +119,17 @@
                                         </form>
 
                                         <a class="dropdown-item" href=""
-                                            onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">Mis
-                                            Pedidos</a>
+                                            onclick="event.preventDefault(); document.getElementById('getOrders-form').submit();">{{__('text.myorders')}}</a>
                                         <form id="getOrders-form" action="{{ route('user-orders', ['id' => Auth::user()->id]) }}"
                                             method="GET" class="d-none">
                                             @csrf
                                         </form>
                                         @if (Auth::user()->admin == 1)
-                                            <a class="dropdown-item" href="{{ route('admin') }}">Administración</a>
+                                            <a class="dropdown-item" href="{{ route('admin') }}">{{__('text.admin')}}</a>
                                         @endif
                                         <a class="dropdown-divider"></a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">Cerrar
-                                            sesión</a>
+                                                                 document.getElementById('logout-form').submit();">{{__('text.logout')}}</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             class="d-none">
                                             @csrf

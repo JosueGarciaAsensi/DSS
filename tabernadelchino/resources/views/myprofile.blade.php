@@ -15,11 +15,11 @@
                         @method('PATCH')
                         {{ csrf_field() }}
                         <div class="row">
-                            <h4>Usuario</h4>
+                            <h4>{{__('text.user')}}</h4>
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Nombre: </h5>
+                                <h5>{{__('text.name')}}: </h5>
                             </div>
                             <div class="col">
                                 <input type="text" id="name{{$user->id}}" value="{{$user->name}}" name="name{{$user->id}}" class="form-control" placeholder="{{ $user->name }}">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Apellidos: </h5>
+                                <h5>{{__('text.surname')}}: </h5>
                             </div>
                             <div class="col">
                                 <input type="text" id="surname{{$user->id}}" name="surname{{$user->id}}" class="form-control" placeholder="Apellidos" value="{{$user->surname}}">
@@ -51,18 +51,18 @@
                         </div>
                         <input type="hidden" id="admin{{$user->id}}" name="admin{{$user->id}}" value="{{$user->admin}}">
                         <input type="hidden" id="visible{{$user->id}}" name="visible{{$user->id}}" value="{{$user->visible}}">
-                        <button type="submit" class="btn btn-primary">Guardar cambios del perfil</button>
+                        <button type="submit" class="btn btn-primary">{{__('text.saveprofile')}}</button>
                     </form>
                     <br>
                     <form action="{{ route('user-address', ['id' => Auth::user()->addresses()->first()->id]) }}" method="POST">
                         @method('PATCH')
                         {{ csrf_field() }}
                         <div class="row">
-                            <h4>Dirección</h4>
+                            <h4>{{__('text.address')}}</h4>
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Tipo: </h5>
+                                <h5>{{__('text.type')}}: </h5>
                             </div>
                             <div class="col">
                                 <select  class="form-control" id="addresstype{{$address->id}}" value="{{ $address->type }}" name="addresstype{{$address->id}}">
@@ -78,7 +78,7 @@
 
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Dirección: </h5>
+                                <h5>{{__('text.address')}}: </h5>
                             </div>
                             <div class="col">
                                 <input type="text" id="addressname{{$address->id}}" value="{{ $address->name }}" name="addressname{{$address->id}}" class="form-control" placeholder="{{$address->name}}">
@@ -86,13 +86,13 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <h5>Código postal: </h5>
+                                <h5>{{__('text.postal')}}: </h5>
                             </div>
                             <div class="col">
                                 <input type="text" id="addresspc{{$address->id}}" value="{{ $address->pc }}" name="addresspc{{$address->id}}" class="form-control" placeholder="{{$address->pc}}">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar cambios en la dirección</button>
+                        <button type="submit" class="btn btn-primary">{{__('text.saveaddress')}}</button>
                     </form>
                 </div>
             </div>

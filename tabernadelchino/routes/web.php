@@ -46,9 +46,9 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::post('/login', [UsersController::class, 'resetPassword'])->name('resetPassword');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/register', [UsersController::class, 'create'])->name('user-create');
-Route::post('/resetPassword', [UsersController::class, 'resetPassword'])->name('resetPassword');
 
 // Carrito
 Route::middleware('auth')->group(function () {

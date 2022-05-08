@@ -91,7 +91,7 @@
 
                 <br>
 
-                <h3 class="text-light">Dirección</h3>
+                <h3 class="text-light">{{__('text.address')}}</h3>
 
                 <div class="row mb-3">
                     <label for="type" class="col-md-4 col-form-label text-md-end text-light">{{__('text.type')}}: </label>

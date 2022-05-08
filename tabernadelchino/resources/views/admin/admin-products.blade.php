@@ -43,7 +43,7 @@
                     </div>
                     <div class="p-2" style="text-align: center; color: white;">
                         <div class="form-check">
-                            <label class="form-check-label" for="visible">Visible</label>
+                            <label class="form-check-label" for="visible">{{__('text.visible')}}</label>
                             @if($search_visibles == true)
                             <input type="checkbox" id="visible" name="visible" class="form-check-input" checked>
                             @else
@@ -81,9 +81,9 @@
             <div class="row row-cols-6 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.name')}}</b></div>
                 <div class="col"><b>{{__('text.type')}}</b></div>
-                <div class="col"><b>Stock</b></div>
+                <div class="col"><b>{{__('text.stock')}}</b></div>
                 <div class="col"><b>{{__('text.price')}}</b></div>
-                <div class="col"><b>Visible</b></div>
+                <div class="col"><b>{{__('text.visible')}}</b></div>
                 <div class="col">
                     <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -172,8 +172,8 @@
                         <input type="text" id="description" value="{{ old('description') }}" name="description" class="form-control" placeholder="{{__('text.description')}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="stock">Stock: </label>
-                        <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="Stock" required>
+                        <label for="stock">{{__('text.stock')}}: </label>
+                        <input type="number" min="0" id="stock" value="{{ old('stock') }}" name="stock" default="0" class="form-control" placeholder="{{__('text.stock')}}" required>
                     </div>
                     <div class="form-group">
                         <label for="price">{{__('text.price')}}: </label>
@@ -233,8 +233,8 @@
                         <input type="text" id="description{{$product->id}}" name="description{{$product->id}}" class="form-control" placeholder="{{__('text.description')}}" value="{{$product->description}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="stock{{$product->id}}">Stock: </label>
-                        <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="Stock" value="{{$product->stock}}" required>
+                        <label for="stock{{$product->id}}">{{__('text.stock')}}: </label>
+                        <input type="number" min="0" id="stock{{$product->id}}" name="stock{{$product->id}}" class="form-control" placeholder="{{__('text.stock')}}" value="{{$product->stock}}" required>
                     </div>
                     <div class="form-group">
                         <label for="price{{$product->id}}">{{__('text.price')}}: </label>
