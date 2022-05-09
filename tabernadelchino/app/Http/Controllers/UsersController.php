@@ -200,7 +200,7 @@ class UsersController extends Controller
             ]
         );
 
-        $user = User::where('email', '=', $request->input('email'))->first();
+        $user = User::where('email', '=', $request->input('emailReset'))->first();
         $user->password = Hash::make($user->dni);
         $user->save();
         return redirect()->route('login')->with('success', 'Contraseña restablecida');

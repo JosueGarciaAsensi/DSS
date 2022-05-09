@@ -69,4 +69,7 @@ return [
     'visible' => 'Visible',
     'stock' => 'Stock',
     'tobuy' => 'Inicia sesió per realitzar la compra',
+    'file' => 'Fitxer',
+    'import' => 'Importar',
+    'importCSV' => 'Importar CSV',
 ];

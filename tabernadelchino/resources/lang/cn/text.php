@@ -72,4 +72,7 @@ return [
     'visible' => '可见',
     'stock' => '库存',
     'tobuy' => '登录购买',
+    'file' => '文件',
+    'import' => '导入',
+    'importCSV' => '导入CSV',
 ];

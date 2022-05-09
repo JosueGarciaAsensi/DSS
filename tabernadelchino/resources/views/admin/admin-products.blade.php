@@ -6,8 +6,15 @@
 
 @section('content')
 <div class="container px-4">
-    <div class="row">
-        <div class="container col-lg-2 d-flex align-items-left flex-column mt-5 mb-5 p-4 rounded" style="background-color: black;">
+    <button class="btn btn-success mt-5" type="submit" data-bs-toggle="modal" data-bs-target="#importModal">
+        <b>{{__('text.importCSV')}}</b>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-excel text-light" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z" />
+            <path fill-rule="evenodd" d="M8.5 1h1a1 1 0 0 1 1 1v11.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V2.5a.5.5 0 0 1 .5-.5zm-1 11.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3h-1v10z" />
+        </svg>
+    </button>
+    <div class="row mt-3">
+        <div class="container col-lg-2 d-flex align-items-left flex-column mb-5 p-4 rounded" style="background-color: black;">
             <div class="p-2" style="text-align: left; color: white;">
                 <b>{{__('text.filters')}}</b>
             </div>
@@ -67,7 +74,7 @@
             </form>
         </div>
         <br>
-        <div class="container col mt-5 mb-5 p-4 rounded" style="background-color: black;">
+        <div class="container col mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($products))
             @if (count($errors) > 0)
             <div class="alert alert-danger" role="alert">
@@ -199,6 +206,41 @@
     </div>
 </div>
 
+<!-- Formulario para importar con CSV -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalTitle">{{__('text.import')}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin-product-import') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="userCSV" name="userCSV" value="{{ Auth::user()->id }}">
+                    <div class="form-group">
+                        <label for="file">{{__('text.file')}}: </label>
+                        <input type="file" id="file" name="file" class="form-control @error('file') is-invalid @enderror" required>
+                        @error('file')
+                        <script>
+                            $(function() {
+                                $('#importModal').modal('show');
+                            });
+                        </script>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>
+                                {{ $message }}
+                            </strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">{{__('text.import')}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @if(!is_null($products))
 @foreach ($products as $product)
 <!-- Modal -->
@@ -220,9 +262,11 @@
                     </div>
                     <div class="form-group">
                         <label for="beertype{{$product->id}}">{{__('text.type')}}: </label>
-                        <select class="form-control" name="beertype{{$product->id}}" id="beertype{{$product->id}}">
+                        <select class="form-control" name="beertype{{$product->id}}" id="beertype{{$product->id}}" >
                             @foreach($beertypes as $beertype)
-                            @if(!is_null($beertype->id))
+                            @if(!is_null($beertype->id) && $beertype->id == $product->beertype_id)
+                            <option value="{{$beertype->id}}" selected>{{$beertype->names}}</option>
+                            @elseif(!is_null($beertype->id))
                             <option value="{{$beertype->id}}">{{$beertype->names}}</option>
                             @endif
                             @endforeach

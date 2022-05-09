@@ -73,4 +73,7 @@ return [
     'visible' => 'Visible',
     'stock' => 'Stock',
     'tobuy' => 'Inicia sesión para realizar compras...',
+    'file' => 'Archivo',
+    'import' => 'Importar',
+    'importCSV' => 'Importar con CSV',
 ];

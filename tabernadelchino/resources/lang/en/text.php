@@ -73,4 +73,7 @@ return [
     'visible' => 'Visible',
     'stock' => 'Stock',
     'tobuy' => 'Please, login to buy',
+    'file' => 'File',
+    'import' => 'Import',
+    'importCSV' => 'Import CSV',
 ];
