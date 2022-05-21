@@ -62,4 +62,5 @@ return [
     'inputemail' => '输入邮箱',
     'rememberme' => '记住我',
     'confirmpassword' => '确认密码',
+    'orderby' => '按',
 ];

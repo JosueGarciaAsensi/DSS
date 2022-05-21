@@ -59,4 +59,5 @@ return [
     'inputemail' => 'Introdueix el teu correu electrònic',
     'rememberme' => 'Recorda\'m',
     'confirmpassword' => 'Confirmar contrasenya',
+    'orderby' => 'Ordenar per',
 ];

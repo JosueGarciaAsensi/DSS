@@ -63,4 +63,5 @@ return [
     'inputemail' => 'Now, please enter your email',
     'rememberme' => 'Remember me',
     'confirmpassword' => 'Confirm password',
+    'orderby' => 'Order by',
 ];

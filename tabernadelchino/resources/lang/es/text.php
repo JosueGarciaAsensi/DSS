@@ -63,4 +63,5 @@ return [
     'inputemail' => 'A continuación, introduce tu email',
     'rememberme' => 'Recuérdame',
     'confirmpassword' => 'Confirmar contraseña',
+    'orderby' => 'Ordenar por',
 ];
