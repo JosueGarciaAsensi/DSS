@@ -30,7 +30,8 @@ class ProductController extends Controller
         $beertypes = BeerType::all();
         $search_visibles = true;
         $search_invisibles = true;
-        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        $order = 'name';
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles, 'order' => $order]);
     }
 
     //Funciona
@@ -173,23 +174,25 @@ class ProductController extends Controller
             $sign =  null;
         }
 
+        $order = $request->input('order_by');
+
         if($request->has('visible') and $request->has('invisible')){
             if($sign != null and $request->input('price') != ""){
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('beer_types_id', '=', $request->input('beertype'))
+                    ->where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)
                     ->paginate(10);
                 }
                 else{
-                    $products = Product::where('price', $sign, $request->input('price'))->paginate(10);
+                    $products = Product::where('price', $sign, $request->input('price'))->orderBy($order)->paginate(10);
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
-                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->paginate(10);
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)->paginate(10);
                 }
                 else{
-                    $products = Product::paginate(10);
+                    $products = Product::OrderBy($order)->paginate(10);
                 }
             }
         }
@@ -198,23 +201,23 @@ class ProductController extends Controller
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 1)
+                    ->where('visible', '=', 1)->orderBy($order)
                     ->paginate(10);
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('visible', '=', 1)
+                    ->where('visible', '=', 1)->orderBy($order)
                     ->paginate(10);
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 1)
+                    ->where('visible', '=', 1)->orderBy($order)
                     ->paginate(10);
                 }
                 else{
-                    $products = Product::where('visible', '=', 1)->paginate(10);
+                    $products = Product::where('visible', '=', 1)->orderBy($order)->paginate(10);
                 }
             }
         }
@@ -223,30 +226,30 @@ class ProductController extends Controller
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 0)
+                    ->where('visible', '=', 0)->orderBy($order)
                     ->paginate(10);
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('visible', '=', 0)
+                    ->where('visible', '=', 0)->orderBy($order)
                     ->paginate(10);
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 0)
+                    ->where('visible', '=', 0)->orderBy($order)
                     ->paginate(10);
                 }
                 else{
-                    $products = Product::where('visible', '=', 0)->paginate(10);
+                    $products = Product::where('visible', '=', 0)->orderBy($order)->paginate(10);
                 }
             }
         }
         else{
             $products = null;
         }
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles, 'order' => $order]);
     }
 
     public function search(Request $request) {

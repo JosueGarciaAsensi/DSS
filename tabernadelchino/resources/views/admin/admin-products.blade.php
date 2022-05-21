@@ -60,6 +60,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="p-2">
+                        <div class="form-group">
+                            <label for="order_by" style="color: white;"><b>{{__('text.orderby')}}</b></label>
+                            <select class="form-control" id="order_by" name="order_by">
+                                @if ($order == 'name')
+                                    <option value="name" selected>{{__('text.name')}}</option>
+                                @else
+                                    <option value="name">{{__('text.name')}}</option>
+                                @endif
+                                @if ($order == 'beertype')
+                                    <option value="beer_types_id">{{__('text.type')}}</option>
+                                @else
+                                    <option value="beer_types_id">{{__('text.type')}}</option>
+                                @endif
+                                @if ($order == 'stock')
+                                    <option value="stock" selected>Stock</option>
+                                @else
+                                    <option value="stock">Stock</option>
+                                @endif
+                                @if ($order == 'price')
+                                    <option value="price" selected>{{__('text.price')}}</option>
+                                @else
+                                    <option value="price">{{__('text.price')}}</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <br>
                 <div class="row p-2 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary" name="submit">{{__('text.applyfilters')}}</button>

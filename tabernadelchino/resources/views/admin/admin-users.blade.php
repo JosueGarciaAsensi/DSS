@@ -38,7 +38,7 @@
                                 @else
                                     <option value="name">{{__('text.name')}}</option>
                                 @endif
-                                @if ($order == 'created_at')
+                                @if ($order == 'surname')
                                     <option value="surname">{{__('text.surname')}}</option>
                                 @else
                                     <option value="surname">{{__('text.surname')}}</option>
