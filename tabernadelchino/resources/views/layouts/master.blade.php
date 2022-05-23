@@ -18,7 +18,11 @@
                 <img src="{{ asset('img/logo.png') }}" width=80>
                 <a href="{{ route('home') }}" class="navbar-brand">La Taberna del Chino</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse"></button>
+                    data-bs-target="#navbarCollapse">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list text-light" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="{{ route('home') }}" class="nav-item nav-link active">{{ __('text.home') }}</a>
