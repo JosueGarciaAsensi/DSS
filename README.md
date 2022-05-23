@@ -75,4 +75,6 @@ Contenido:
 - _Video demo_
 
 Entregado:
+- [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
+- [\_documentacion/Mockups.pdf](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/Mockups.pdf)
 - Presentación y video demo en Google Drive.
