@@ -86,6 +86,7 @@
             <div class="modal-body">
                 <form action="{{ route('resetPassword') }}" method="POST">
                     @csrf
+                    @method('PATCH')
                     <div class="col">
                         <div class="row">
                             <b>{{__('text.caution')}}</b>
@@ -94,8 +95,8 @@
                         </div>
                         <div class="row">
                             <div class="col col-lg-8">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
+                                <input type="email" class="form-control @error('emailReset') is-invalid @enderror" id="emailReset" name="emailReset" value="{{ old('emailReset') }}" required>
+                                @error('emailReset')
                                     <script>
                                         $(function() {
                                             $('#exampleModal').modal('show');
