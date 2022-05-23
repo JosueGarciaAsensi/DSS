@@ -29,7 +29,7 @@ class UsersController extends Controller
             $users = User::where('admin', '=', false)->paginate(10);
         }
         
-        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);
     }
 
     public function filter(Request $request) {

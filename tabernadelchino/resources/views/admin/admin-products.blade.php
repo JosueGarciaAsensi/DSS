@@ -83,9 +83,9 @@
                                     <option value="beer_types_id">{{__('text.type')}}</option>
                                 @endif
                                 @if ($order == 'stock')
-                                    <option value="stock" selected>Stock</option>
+                                    <option value="stock" selected>{{__('text.stock')}}</option>
                                 @else
-                                    <option value="stock">Stock</option>
+                                    <option value="stock">{{__('text.stock')}}</option>
                                 @endif
                                 @if ($order == 'price')
                                     <option value="price" selected>{{__('text.price')}}</option>
