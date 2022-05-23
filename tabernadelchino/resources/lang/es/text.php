@@ -64,6 +64,7 @@ return [
     'inputemail' => 'A continuación, introduce tu email',
     'rememberme' => 'Recuérdame',
     'confirmpassword' => 'Confirmar contraseña',
+    'orderby' => 'Ordenar por',
     'saveprofile' => 'Guardar cambios del perfil',
     'saveaddress' => 'Guardar cambios de la dirección',
     'total' => 'Total',

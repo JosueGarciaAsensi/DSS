@@ -60,6 +60,7 @@ return [
     'inputemail' => 'Introdueix el teu correu electrònic',
     'rememberme' => 'Recorda\'m',
     'confirmpassword' => 'Confirmar contrasenya',
+    'orderby' => 'Ordenar per',
     'saveprofile' => 'Guardar canvis del perfil',
     'saveaddress' => 'Guardar canvis de la direcció',
     'total' => 'Total',

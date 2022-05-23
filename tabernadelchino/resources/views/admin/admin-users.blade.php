@@ -28,6 +28,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="p-2">
+                        <div class="form-group">
+                            <label for="order_by" style="color: white;"><b>{{__('text.orderby')}}</b></label>
+                            <select class="form-control" id="order_by" name="order_by">
+                                @if ($order == 'name')
+                                    <option value="name" selected>{{__('text.name')}}</option>
+                                @else
+                                    <option value="name">{{__('text.name')}}</option>
+                                @endif
+                                @if ($order == 'surname')
+                                    <option value="surname">{{__('text.surname')}}</option>
+                                @else
+                                    <option value="surname">{{__('text.surname')}}</option>
+                                @endif
+                                @if ($order == 'email')
+                                    <option value="email" selected>Email</option>
+                                @else
+                                    <option value="email">Email</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <br>
                 <div class="row p-2 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">{{__('text.applyfilters')}}</button>

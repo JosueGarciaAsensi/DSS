@@ -64,6 +64,7 @@ return [
     'inputemail' => 'Now, please enter your email',
     'rememberme' => 'Remember me',
     'confirmpassword' => 'Confirm password',
+    'orderby' => 'Order by',
     'saveprofile' => 'Save profile',
     'saveaddress' => 'Save address',
     'total' => 'Total',

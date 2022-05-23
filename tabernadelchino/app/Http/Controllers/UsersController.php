@@ -15,6 +15,7 @@ class UsersController extends Controller
     // Atributos para controlar filtros
     private $search_admins = true;
     private $search_users = true;
+    private $order = 'name';
     
     public function list() {
         $users = null;
@@ -46,18 +47,20 @@ class UsersController extends Controller
             $this->search_users = false;
         }
 
+        $this->order = $request->input('order_by');
+
         $users = null;
         if($this->search_admins == true && $this->search_users == true) {
-            $users = User::paginate(10);
+            $users =  User::OrderBy($this->order, 'asc')->paginate(10);
         }
         elseif($this->search_admins != null){
-            $users = User::where('admin', '=', true)->paginate(10);
+            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10);
         }
         elseif ($this->search_users != null) {
-            $users = User::where('admin', '=', false)->paginate(10);
+            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10);
         }
       
-        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);
     }
 
     public function destroy($id) {
