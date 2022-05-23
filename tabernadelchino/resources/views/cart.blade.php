@@ -51,7 +51,7 @@
                 @endif
             </div>
             <div class="col float-end text-end ms-auto">
-                <h2 class="text-light">Total: {{ $total }}€</h2>
+                <h2 class="text-light">{{__('text.total')}}: {{ $total }}€</h2>
                 <form action="{{ route('cart-buy', ['id' => $cart]) }}" method="POST">
                     @csrf
                     <input type="hidden" id="user" name="user" value="{{ Auth::user()->id }}">

@@ -86,11 +86,32 @@
             <div class="modal-body">
                 <form action="{{ route('resetPassword') }}" method="POST">
                     @csrf
-                    <b>{{__('text.caution')}}</b> {{__('text.resetmsg')}}
-                    <br>
-                    <p>{{__('text.inputemail')}}:</p>
-                    <input type="text" id="email" name="email" required>
-                    <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
+                    @method('PATCH')
+                    <div class="col">
+                        <div class="row">
+                            <b>{{__('text.caution')}}</b>
+                            <p>{{__('text.resetmsg')}}</p>
+                            <p>{{__('text.inputemail')}}:</p>
+                        </div>
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <input type="email" class="form-control @error('emailReset') is-invalid @enderror" id="emailReset" name="emailReset" value="{{ old('emailReset') }}" required>
+                                @error('emailReset')
+                                    <script>
+                                        $(function() {
+                                            $('#exampleModal').modal('show');
+                                        });
+                                    </script>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

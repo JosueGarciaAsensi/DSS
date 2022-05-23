@@ -4,7 +4,6 @@
     @parent
 @endsection
 @section('content')
-
     <div class="container text-light row justify-content-center mt-5 mb-5 rounded" style="background-color: black">
         <div class="row text-light">
             <div class="col-md-12 text-light">
@@ -16,9 +15,9 @@
                                     <thead>
                                         <tr>
                                             <th class="text-light">#</th>
-                                            <th class="text-light">Fecha</th>
-                                            <th class="text-light">Total</th>
-                                            <th class="text-light">Estado</th>
+                                            <th class="text-light">{{__('text.date')}}</th>
+                                            <th class="text-light">{{__('text.total')}}</th>
+                                            <th class="text-light">{{__('text.state')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,6 +38,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

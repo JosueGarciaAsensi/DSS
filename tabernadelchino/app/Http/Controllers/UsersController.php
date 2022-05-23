@@ -18,8 +18,6 @@ class UsersController extends Controller
     private $order = 'name';
     
     public function list() {
-        
-        
         $users = null;
         if($this->search_admins == true && $this->search_users == true) {
             $users = User::paginate(10);
@@ -190,7 +188,22 @@ class UsersController extends Controller
     }
 
     public function resetPassword(Request $request) {
-        $user = User::where('email', '=', $request->input('email'))->first();
+        $users = User::all();
+        $susers = [];
+        foreach($users as $user){
+            array_push($susers, $user->email);
+        }
+
+        $this->validate($request,
+            [
+                'email' =>  [Rule::in($susers)],
+            ],
+            [
+                'in' => 'Este email no está registrado.'
+            ]
+        );
+
+        $user = User::where('email', '=', $request->input('emailReset'))->first();
         $user->password = Hash::make($user->dni);
         $user->save();
         return redirect()->route('login')->with('success', 'Contraseña restablecida');

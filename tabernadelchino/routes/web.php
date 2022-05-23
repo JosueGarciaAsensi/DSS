@@ -9,6 +9,7 @@ use App\Http\Controllers\BeerTypeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,9 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Authentication
 Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::patch('/login', [UsersController::class, 'resetPassword'])->name('resetPassword');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/register', [UsersController::class, 'create'])->name('user-create');
-Route::post('/resetPassword', [UsersController::class, 'resetPassword'])->name('resetPassword');
 
 // Carrito
 Route::middleware('auth')->group(function () {
@@ -86,6 +87,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/products/filtered', [ProductController::class, 'filter'])->name('admin-products-filter');
     Route::patch('/admin/products/{id}', [ProductController::class, 'edit'])->name('admin-product-edit');
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin-product-delete');
+    Route::post('/admin/products/import', [ProductController::class, 'import'])->name('admin-product-import');
 
     // Beertypes
     Route::get('/admin/beertypes', [BeerTypeController::class, 'list'])->name('admin-beertypes');

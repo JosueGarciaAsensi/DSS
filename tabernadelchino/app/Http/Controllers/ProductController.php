@@ -7,6 +7,7 @@ use App\Models\BeerType;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->visible = false;
         $product->save();
-        return redirect('/admin-products')->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
+        return redirect()->back()->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
     }
 
     //Funciona
@@ -86,7 +87,7 @@ class ProductController extends Controller
         $product->users()->associate($user);
         $product->save();
 
-        return redirect('/admin-products')->with('success', '¡Producto creado con éxito!');
+        return redirect()->back()->with('success', '¡Producto creado con éxito!');
     }
 
     public function edit(Request $request, $id) {
@@ -138,7 +139,7 @@ class ProductController extends Controller
             $product->beer_types()->associate($beertype);
             $product->save();
         }
-        return redirect('/admin-products')->with('success', '¡Producto editado con éxito!');
+        return redirect()->back()->with('success', '¡Producto editado con éxito!');
     }
 
     public function filter(Request $request){
@@ -254,7 +255,48 @@ class ProductController extends Controller
 
     public function search(Request $request) {
         $search = $request->input('search');
-        $products = Product::where('name', 'LIKE','%' . $search . '%')->where('visible', '!=', '0')->paginate(3);
+        $products = Product::where('name', 'LIKE','%' . $search . '%')->where('visible', '!=', '0')->paginate(3)->appends(request()->except('page'));
         return view('products', ['products' => $products]);
+    }
+
+    // Importar productos desde CSV
+    public function import(Request $request) {
+
+        $this->validate($request, 
+        [
+            'file' => 'required|mimes:csv,txt',
+        ],
+        [
+            'file.extension' => 'El archivo debe ser un archivo CSV o TXT.',
+        ]);
+
+        $file = $request->file('file');
+        $file_name = $file->getClientOriginalName();
+        $file->move(public_path('/files'), $file_name);
+        $file_path = public_path('/files/' . $file_name);
+        
+        if (($open = fopen($file_path, "r")) !== FALSE) {
+            while(($line = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $product = new Product();
+                $product->name = $line[0];
+                $product->stock = $line[1];
+                $product->visible = $line[2];
+                $product->description = $line[3];
+                $product->price = $line[4];
+                $product->image = $line[5];
+
+                $beertype = BeerType::where('names', $line[6])->first();
+                $product->beer_types()->associate($beertype);
+
+                $user = User::find($request->input('userCSV'));
+                $product->users()->associate($user);
+
+                $product->save();
+            }
+
+            fclose($open);
+        }
+        
+        return redirect()->back()->with('success', '¡Productos importados con éxito!');
     }
 }
