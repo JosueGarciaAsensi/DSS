@@ -264,10 +264,10 @@ class ProductController extends Controller
 
         $this->validate($request, 
         [
-            'file' => 'required|mimes:csv,txt',
+            'file' => 'mimes:csv,txt',
         ],
         [
-            'file.extension' => 'El archivo debe ser un archivo CSV o TXT.',
+            'file.mimes' => 'El archivo debe ser un archivo CSV o TXT.',
         ]);
 
         $file = $request->file('file');

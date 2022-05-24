@@ -21,5 +21,12 @@ class CartTableSeeder extends Seeder
 
             $cart->save();
         }
+
+        foreach (range(5,25) as $i) {
+            $cart = new Cart();
+            $cart->status = $i % 2;
+
+            $cart->save();
+        }
     }
 }

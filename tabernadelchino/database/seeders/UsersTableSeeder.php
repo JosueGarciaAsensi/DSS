@@ -48,5 +48,20 @@ class UsersTableSeeder extends Seeder {
 
             $user->save();
         }
+
+        foreach (range(5,25) as $i) {
+            $user = new User();
+            $user->name = "DSS-name".$i;
+            $user->surname = "DSS-surname".$i;
+            $user->email = "DSS-email".$i;
+            $user->password = Hash::make('123');
+            $user->dni = $dni[0];
+            $user->admin = true;
+            $user->visible = true;
+            $user->addresses()->associate($this->getAddress($i));
+            $user->carts()->associate(Cart::find($i+1));
+
+            $user->save();
+        }
     }
 }
