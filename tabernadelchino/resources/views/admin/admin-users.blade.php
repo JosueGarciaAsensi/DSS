@@ -17,14 +17,16 @@
                 <div class="row">
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
-                            <label class="form-check-label" for="search_admins">{{__('text.administrators')}}</label>
-                            <input type="checkbox" id="search_admins" name="search_admins" class="form-check-input" {{ $search_admins == true ? 'checked' : ''}}>
+                            <label class="form-check-label" for="search_admins_filter">{{__('text.administrators')}}</label>
+                            <input type="checkbox" id="search_admins_filter" name="search_admins_filter" value="admins" class="form-check-input" {{ $search_admins == 'on' ? 'checked' : ''}}>
                         </div>
                     </div>
                     <div class="p-2">
                         <div class="form-check" style="text-align: center; color: white;">
-                            <label class="form-check-label" for="search_users">{{__('text.users')}}</label>
-                            <input type="checkbox" id="search_users" name="search_users" class="form-check-input" {{ $search_users == true ? 'checked' : ''}}>
+                            <label class="form-check-label" for="search_users_filter">{{__('text.users')}}</label>
+                            <input type="checkbox" id="search_users_filter" name="search_users_filter" value="users" class="form-check-input" {{ $search_users == 'on' ? 'checked' : ''}}>
+                            <h2>{{$search_admins}}</h2>
+                            <h2>{{$order}}</h2>
                         </div>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
                                     <option value="name">{{__('text.name')}}</option>
                                 @endif
                                 @if ($order == 'surname')
-                                    <option value="surname">{{__('text.surname')}}</option>
+                                    <option value="surname" selected>{{__('text.surname')}}</option>
                                 @else
                                     <option value="surname">{{__('text.surname')}}</option>
                                 @endif
@@ -138,7 +140,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center"> {{ $users->appends(['search_users' => $search_users, 'search_admins' => $search_admins])->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $users->appends(['search_users_filter' => $search_users, 'search_admins_filter' => $search_admins, 'order_by' => $order])->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
             @endif

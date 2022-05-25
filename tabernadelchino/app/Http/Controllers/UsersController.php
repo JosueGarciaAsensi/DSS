@@ -13,50 +13,55 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     // Atributos para controlar filtros
-    private $search_admins = true;
-    private $search_users = true;
+    private $search_admins = 'on';  
+    private $search_users = 'on';
     private $order = 'name';
     
     public function list() {
         $users = null;
-        if($this->search_admins == true && $this->search_users == true) {
-            $users = User::paginate(10);
+        if($this->search_admins == 'on' && $this->search_users == 'on') {
+            $users = User::OrderBy($this->order)->paginate(10);
         }
         elseif($this->search_admins != null){
-            $users = User::where('admin', '=', true)->paginate(10);
+            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10);
         }
         elseif ($this->search_users != null) {
-            $users = User::where('admin', '=', false)->paginate(10);
+            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10);
         }
         
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);
     }
 
     public function filter(Request $request) {
-        if ($request->has('search_admins')) {
-            $this->search_admins = true;
-        }
+        if ($request->has('search_admins_filter')) {
+            $this->search_admins = 'on';
+        } 
         else {
-            $this->search_admins = false;
+            $this->search_admins = 'off';
         }
 
-        if ($request->has('search_users')) {
-            $this->search_users = true;
+        if ($request->has('search_users_filter')) {
+            $this->search_users = 'on';
         }
         else {
-            $this->search_users = false;
+            $this->search_users = 'off';
         }
-
-        $this->order = $request->input('order_by');
+        
+        
+        if ($request->has('order_by'))
+        {
+            $this->order = $request->order_by;
+        }
+        
 
         $users = null;
-        if($this->search_admins == true && $this->search_users == true) {
-            $users =  User::OrderBy($this->order, 'asc')->paginate(10);
+        if($this->search_admins == 'on' && $this->search_users == 'on') {
+            $users =  User::OrderBy($this->order)->paginate(10);
         }
-        elseif($this->search_admins != null){
+        elseif($this->search_admins == 'on'){
             $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10);
         }
-        elseif ($this->search_users != null) {
+        elseif ($this->search_users == 'on') {
             $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10);
         }
       

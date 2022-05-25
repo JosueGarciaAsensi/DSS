@@ -56,7 +56,7 @@ class UsersTableSeeder extends Seeder {
             $user->email = "DSS-email".$i;
             $user->password = Hash::make('123');
             $user->dni = $dni[0];
-            $user->admin = true;
+            $user->admin = false;
             $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
             $user->carts()->associate(Cart::find($i+1));
