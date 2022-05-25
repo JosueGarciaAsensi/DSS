@@ -19,7 +19,7 @@ class OrderController extends Controller
         $orders = [];
 
         if(!is_null($user)) {
-            $orders = Order::where('users_id', $user->id)->get();
+            $orders = Order::where('users_id', $user->id)->paginate(5);
         }
 
         if (count($orders) == 0) {
