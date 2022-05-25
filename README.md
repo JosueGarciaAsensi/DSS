@@ -39,4 +39,22 @@ Contenido:
 Entregado:
 - [\_documentacion/DiagramaClases.png](https://github.com/JosueGarciaAsensi/DSS/blob/main/_documentacion/DiagramaClases.png)
 
+## Extra:
 
+### Base de datos remota
+
+Durante todo el desarrollo de la práctica hemos estado usando una base de datos remota para mantener la persistencia de datos durante todo el desarrollo. Esta base de datos se encuentra alojada en una Raspberry Pi de uno de los miembros del equipo.
+
+### Dockerización
+
+Hemos facilitado la dockerización del proyecto mediante las herramientas que nos brinda Composer. Para ello hemos usado Sail. Levantar un contendedor será tan sencillo como usar el comando siguiente:
+
+```bash
+bash ./vendor/laravel/sail/bin/sail up
+```
+
+En caso de no haber usado esta herramienta en ningún momento será conveniente añadirla a nuestros archivos del repositorio mediante el comando:
+
+```bash
+composer require laravel/sail --dev && php artisan sail:install
+```
