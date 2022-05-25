@@ -62,6 +62,9 @@ class OrderController extends Controller
         elseif($state == 'returned'){
             $state = 'Devuelto';
         }
+        elseif($state == 'pending'){
+            $state = 'pending';
+        }
         else{
             $state = null;
         }

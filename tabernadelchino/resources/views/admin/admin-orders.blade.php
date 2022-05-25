@@ -20,6 +20,7 @@
                             <select class="form-control" name="state" id="state">
                                 <option value="empty"></option>
                                 <option value="to-pay">Pendiente pago</option>
+                                <option value="pending">pending</option>
                                 <option value="paid">Pago realizado</option>
                                 <option value="sent">Enviado</option>
                                 <option value="given">Entregado</option>
@@ -50,23 +51,26 @@
         <br>
         <div class="container col mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($orders))
-            <div class="row row-cols-4 mb-2" style="text-align: center; color: white;">
-                <div class="col"><b>ID</b></div>
+            <div class="row row-cols-3 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.user')}}</b></div>
                 <div class="col"><b>{{__('text.state')}}</b></div>
                 <div class="col"><b>{{__('text.total')}}</b></div>
             </div>
-            @endif
             <hr style="color:#acacac;" />
-            <div class="row row-cols-4" style="text-align: center; color: white;">
+            <div class="row row-cols-3" style="text-align: center; color: white;">
                 @foreach ($orders as $order)
-                <div class="col">{{$order->id}}</div>
                 <div class="col">{{$order->users_id}}</div>
                 <div class="col">{{$order->state}}</div>
-                <div class="col">{{$order->total}}</div>
+                <div class="col">{{$order->total}}€</div>
                 @endforeach
             </div>
+            <br>
+            <div class="d-flex justify-content-center"> {{ $orders->appends(request()->except('page'))->links() }} </div>
         </div>
+        @else
+        <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
+        @endif
+
     </div>
 </div>
 @endsection
