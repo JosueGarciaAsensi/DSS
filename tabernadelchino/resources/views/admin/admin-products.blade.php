@@ -42,8 +42,7 @@
                                 <option value="empty"></option>
                                 <option value="greater"> > </option>
                                 <option value="equal"> = </option>
-                                <option value="less">
-                                    < </option>
+                                <option value="less"> < </option>
                             </select>
                             <input type="number" min="0" step="0.01" id="price" name="price" class="form-control mt-2" placeholder="{{__('text.price')}}">
                         </div>
@@ -163,7 +162,7 @@
                 @endforeach
 
             </div>
-            <div class="d-flex justify-content-center"> {{ $products->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $products->appends(['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles, 'order' => $order])->appends(request()->except('page'))->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresults')}}</h1>
             @endif

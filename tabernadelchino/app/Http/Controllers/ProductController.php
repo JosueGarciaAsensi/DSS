@@ -182,18 +182,18 @@ class ProductController extends Controller
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('price', $sign, $request->input('price'))->orderBy($order)->paginate(10);
+                    $products = Product::where('price', $sign, $request->input('price'))->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
-                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)->paginate(10);
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::OrderBy($order)->paginate(10);
+                    $products = Product::OrderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }
@@ -203,22 +203,22 @@ class ProductController extends Controller
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
                     ->where('visible', '=', 1)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('visible', '=', 1)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
                     ->where('visible', '=', 1)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('visible', '=', 1)->orderBy($order)->paginate(10);
+                    $products = Product::where('visible', '=', 1)->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }
@@ -228,22 +228,22 @@ class ProductController extends Controller
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
                     ->where('visible', '=', 0)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('visible', '=', 0)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
                     ->where('visible', '=', 0)->orderBy($order)
-                    ->paginate(10);
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('visible', '=', 0)->orderBy($order)->paginate(10);
+                    $products = Product::where('visible', '=', 0)->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }

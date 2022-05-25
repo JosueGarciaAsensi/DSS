@@ -56,13 +56,13 @@ class UsersController extends Controller
 
         $users = null;
         if($this->search_admins == 'on' && $this->search_users == 'on') {
-            $users =  User::OrderBy($this->order)->paginate(10);
+            $users =  User::OrderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
         elseif($this->search_admins == 'on'){
-            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10);
+            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
         elseif ($this->search_users == 'on') {
-            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10);
+            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
       
         return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);

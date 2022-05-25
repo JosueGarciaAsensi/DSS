@@ -25,8 +25,6 @@
                         <div class="form-check" style="text-align: center; color: white;">
                             <label class="form-check-label" for="search_users_filter">{{__('text.users')}}</label>
                             <input type="checkbox" id="search_users_filter" name="search_users_filter" value="users" class="form-check-input" {{ $search_users == 'on' ? 'checked' : ''}}>
-                            <h2>{{$search_admins}}</h2>
-                            <h2>{{$order}}</h2>
                         </div>
                     </div>
                 </div>
@@ -140,7 +138,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center"> {{ $users->appends(['search_users_filter' => $search_users, 'search_admins_filter' => $search_admins, 'order_by' => $order])->links() }} </div>
+            <div class="d-flex justify-content-center"> {{ $users->appends(['search_users' => $search_users, 'search_admins' => $search_admins, 'order_by' => $order])->appends(request()->except('page'))->links() }} </div>
             @else
             <h1 class="text-light">{{__('text.noresultsusers')}}</h1>
             @endif
