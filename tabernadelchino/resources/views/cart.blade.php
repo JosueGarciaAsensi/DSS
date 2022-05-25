@@ -7,6 +7,11 @@
     @php($total = 0.0)
     @php($nostocks = 0)
     @php($cart = Auth::user()->carts()->first()->id)
+    @if (session('success'))
+        <div class="alert alert-success mt-5">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="container mt-5 mb-5 p-3 rounded" style="background-color: black;">
         <div class="row" style="border-bottom: none;">
             <div class="col col-xl-12 border-bottom">

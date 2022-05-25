@@ -79,4 +79,5 @@ return [
     'importCSV' => 'Importar con CSV',
     'exportCSV' => 'Exportar con CSV',
     'export' => 'Exportar',
+    'noorders' => 'No existen pedidos',
 ];

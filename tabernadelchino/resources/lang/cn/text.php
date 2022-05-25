@@ -78,4 +78,5 @@ return [
     'importCSV' => '导入CSV',
     'exportCSV' => '导出CSV',
     'export' => '导出',
+    'noorders' => '没有订单',
 ];

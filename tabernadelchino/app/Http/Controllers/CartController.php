@@ -25,10 +25,14 @@ class CartController extends Controller
     public function add($id, $idItem) {
         $cart = Cart::find($id);
         $product = Product::find($idItem);
+        
+        try {
+            $cart->products()->attach($product);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Producto ya existente en el carrito.');
+        }
 
-        $cart->products()->attach($product);
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Producto añadido al carrito.');
     }
 
     public function remove($id, $idItem) {
@@ -71,6 +75,6 @@ class CartController extends Controller
 
         $cart->products()->sync([]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Pedido realizado. Échale un ojo en Mis Pedidos.');
     }
 }
