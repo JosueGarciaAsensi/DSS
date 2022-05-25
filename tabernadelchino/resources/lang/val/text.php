@@ -73,4 +73,6 @@ return [
     'file' => 'Fitxer',
     'import' => 'Importar',
     'importCSV' => 'Importar CSV',
+    'exportCSV' => 'Exportar CSV',
+    'export' => 'Exportar',
 ];

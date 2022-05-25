@@ -77,4 +77,6 @@ return [
     'file' => 'Archivo',
     'import' => 'Importar',
     'importCSV' => 'Importar con CSV',
+    'exportCSV' => 'Exportar con CSV',
+    'export' => 'Exportar',
 ];

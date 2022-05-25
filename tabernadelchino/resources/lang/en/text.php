@@ -77,4 +77,6 @@ return [
     'file' => 'File',
     'import' => 'Import',
     'importCSV' => 'Import CSV',
+    'exportCSV' => 'Export CSV',
+    'export' => 'Export',
 ];

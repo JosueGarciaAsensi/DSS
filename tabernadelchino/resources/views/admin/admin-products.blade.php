@@ -6,13 +6,27 @@
 
 @section('content')
 <div class="container px-4">
-    <button class="btn btn-success mt-5" type="submit" data-bs-toggle="modal" data-bs-target="#importModal">
-        <b>{{__('text.importCSV')}}</b>
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-excel text-light" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z" />
-            <path fill-rule="evenodd" d="M8.5 1h1a1 1 0 0 1 1 1v11.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V2.5a.5.5 0 0 1 .5-.5zm-1 11.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3h-1v10z" />
-        </svg>
-    </button>
+    <div class="row mt-5">
+        <div class="col">
+            <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#importModal">
+                <b>{{__('text.importCSV')}}</b>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-bar-down text-light" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <form action="{{ route('admin-product-export') }}" method="POST">
+                @csrf
+                <button class="btn btn-primary" type="submit">
+                    <b>{{__('text.exportCSV')}}</b>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-bar-up text-light" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="container col-lg-2 d-flex align-items-left flex-column mb-5 p-4 rounded" style="background-color: black;">
             <div class="p-2" style="text-align: left; color: white;">

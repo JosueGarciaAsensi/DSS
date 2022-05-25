@@ -76,4 +76,6 @@ return [
     'file' => '文件',
     'import' => '导入',
     'importCSV' => '导入CSV',
+    'exportCSV' => '导出CSV',
+    'export' => '导出',
 ];

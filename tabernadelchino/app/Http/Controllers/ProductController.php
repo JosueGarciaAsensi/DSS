@@ -299,4 +299,18 @@ class ProductController extends Controller
         
         return redirect()->back()->with('success', '¡Productos importados con éxito!');
     }
+
+    // Exportar productos a CSV
+    public function export(Request $request) {
+        $products = Product::all();
+        $file_name = 'productos.csv';
+        $file_path = public_path('/files/' . $file_name);
+        $file = fopen($file_path, "w");
+        fputcsv($file, array('Nombre', 'Stock', 'Visible', 'Descripción', 'Precio', 'Imagen', 'Tipo de cerveza'));
+        foreach ($products as $product) {
+            fputcsv($file, array($product->name, $product->stock, $product->visible, $product->description, $product->price, $product->image, $product->beer_types->names));
+        }
+        fclose($file);
+        return response()->download($file_path);
+    }
 }

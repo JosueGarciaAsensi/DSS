@@ -88,6 +88,7 @@ Route::middleware('admin')->group(function () {
     Route::patch('/admin/products/{id}', [ProductController::class, 'edit'])->name('admin-product-edit');
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin-product-delete');
     Route::post('/admin/products/import', [ProductController::class, 'import'])->name('admin-product-import');
+    Route::post('/admin/products/export', [ProductController::class, 'export'])->name('admin-product-export');
 
     // Beertypes
     Route::get('/admin/beertypes', [BeerTypeController::class, 'list'])->name('admin-beertypes');
