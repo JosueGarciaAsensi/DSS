@@ -79,4 +79,5 @@ return [
     'exportCSV' => '导出CSV',
     'export' => '导出',
     'noorders' => '没有订单',
+    'edit' => '编辑',
 ];

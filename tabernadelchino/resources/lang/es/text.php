@@ -80,4 +80,5 @@ return [
     'exportCSV' => 'Exportar con CSV',
     'export' => 'Exportar',
     'noorders' => 'No existen pedidos',
+    'edit' => 'Editar',
 ];

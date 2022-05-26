@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/user/{id}', [UsersController::class, 'show'])->name('user-profile');
     Route::get('/user/{id}/orders', [OrderController::class, 'list'])->name('user-orders');
+    Route::post('/user/{id}', [UsersController::class, 'enable_edit'])->name('user-enable-edit');
     Route::patch('/user/{id}', [UsersController::class, 'edit'])->name('user-edit');
     Route::patch('/address/{id}', [AddressController::class, 'edit'])->name('user-address');
     Route::delete('/user/{id}', [UsersController::class, 'destroy'])->name('user-delete');

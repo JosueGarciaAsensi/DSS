@@ -213,4 +213,10 @@ class UsersController extends Controller
         $user->save();
         return redirect()->route('login')->with('success', 'Contraseña restablecida');
     }
+
+    public function enable_edit($id) {
+        $user = User::find($id);
+        $address = Address::find($user->addresses_id);
+        return view('myprofile', ['user' => $user, 'address' => $address, 'edit' => true]); 
+    }
 }

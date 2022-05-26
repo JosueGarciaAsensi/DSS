@@ -76,4 +76,5 @@ return [
     'exportCSV' => 'Exportar CSV',
     'export' => 'Exportar',
     'noorders' => 'No hi ha comandes',
+    'edit' => 'Editar',
 ];
