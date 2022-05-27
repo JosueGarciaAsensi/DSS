@@ -51,15 +51,17 @@
         <br>
         <div class="container col mb-5 p-4 rounded" style="background-color: black;">
             @if(!is_null($orders))
-            <div class="row row-cols-3 mb-2" style="text-align: center; color: white;">
+            <div class="row row-cols-4 mb-2" style="text-align: center; color: white;">
                 <div class="col"><b>{{__('text.user')}}</b></div>
+                <div class="col"><b>{{__('text.date')}}</b></div>
                 <div class="col"><b>{{__('text.state')}}</b></div>
                 <div class="col"><b>{{__('text.total')}}</b></div>
             </div>
             <hr style="color:#acacac;" />
-            <div class="row row-cols-3" style="text-align: center; color: white;">
+            <div class="row row-cols-4" style="text-align: center; color: white;">
                 @foreach ($orders as $order)
-                <div class="col">{{$order->users_id}}</div>
+                <div class="col">{{ $order->users()->first()->email }}</div>
+                <div class="col">{{ $order->created_at }}</div>
                 <div class="col">{{$order->state}}</div>
                 <div class="col">{{$order->total}}€</div>
                 @endforeach
