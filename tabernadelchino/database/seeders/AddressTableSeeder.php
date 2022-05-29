@@ -27,5 +27,14 @@ class AddressTableSeeder extends Seeder
 
             $address->save();
         }
+
+        foreach (range(5,25) as $i) {
+            $address = new Address();
+            $address->type = "DSS.type".$i;
+            $address->name = "DSS.name".$i;
+            $address->pc = "DSS.pc".$i;
+
+            $address->save();
+        }
     }
 }

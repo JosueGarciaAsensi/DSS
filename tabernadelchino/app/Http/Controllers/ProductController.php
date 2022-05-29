@@ -7,15 +7,16 @@ use App\Models\BeerType;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function grid() {
         $products = Product::where('visible', '!=', 0)->paginate(3);
         return view('products', ['products' => $products]);
     }
 
-    public function productShow($id) {
+    public function show($id) {
         $product = Product::find($id);
         return view('product')->with('product', $product)->with('productsAlt', $this->productAlt());
     }
@@ -25,12 +26,13 @@ class ProductController extends Controller
         return $productsAlt;
     }
 
-    public function adminShow() {
+    public function list() {
         $products = Product::paginate(10);
         $beertypes = BeerType::all();
         $search_visibles = true;
         $search_invisibles = true;
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        $order = 'name';
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles, 'order' => $order]);
     }
 
     //Funciona
@@ -38,7 +40,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->visible = false;
         $product->save();
-        return redirect('/admin-products')->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
+        return redirect()->back()->with('success', '¡Producto eliminado con éxito! Ahora está invisible.');
     }
 
     //Funciona
@@ -85,7 +87,7 @@ class ProductController extends Controller
         $product->users()->associate($user);
         $product->save();
 
-        return redirect('/admin-products')->with('success', '¡Producto creado con éxito!');
+        return redirect()->back()->with('success', '¡Producto creado con éxito!');
     }
 
     public function edit(Request $request, $id) {
@@ -137,7 +139,7 @@ class ProductController extends Controller
             $product->beer_types()->associate($beertype);
             $product->save();
         }
-        return redirect('/admin-products')->with('success', '¡Producto editado con éxito!');
+        return redirect()->back()->with('success', '¡Producto editado con éxito!');
     }
 
     public function filter(Request $request){
@@ -173,23 +175,25 @@ class ProductController extends Controller
             $sign =  null;
         }
 
+        $order = $request->input('order_by');
+
         if($request->has('visible') and $request->has('invisible')){
             if($sign != null and $request->input('price') != ""){
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('beer_types_id', '=', $request->input('beertype'))
-                    ->paginate(10);
+                    ->where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('price', $sign, $request->input('price'))->paginate(10);
+                    $products = Product::where('price', $sign, $request->input('price'))->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
-                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->paginate(10);
+                    $products = Product::where('beer_types_id', '=', $request->input('beertype'))->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::paginate(10);
+                    $products = Product::OrderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }
@@ -198,23 +202,23 @@ class ProductController extends Controller
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 1)
-                    ->paginate(10);
+                    ->where('visible', '=', 1)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('visible', '=', 1)
-                    ->paginate(10);
+                    ->where('visible', '=', 1)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 1)
-                    ->paginate(10);
+                    ->where('visible', '=', 1)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('visible', '=', 1)->paginate(10);
+                    $products = Product::where('visible', '=', 1)->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }
@@ -223,35 +227,90 @@ class ProductController extends Controller
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('price', $sign, $request->input('price'))
                     ->where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 0)
-                    ->paginate(10);
+                    ->where('visible', '=', 0)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
                     $products = Product::where('price', $sign, $request->input('price'))
-                    ->where('visible', '=', 0)
-                    ->paginate(10);
+                    ->where('visible', '=', 0)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
             }
             else{
                 if($request->input('beertype') != 'null'){
                     $products = Product::where('beer_types_id', '=', $request->input('beertype'))
-                    ->where('visible', '=', 0)
-                    ->paginate(10);
+                    ->where('visible', '=', 0)->orderBy($order)
+                    ->paginate(10)->appends(request()->except('page'));
                 }
                 else{
-                    $products = Product::where('visible', '=', 0)->paginate(10);
+                    $products = Product::where('visible', '=', 0)->orderBy($order)->paginate(10)->appends(request()->except('page'));
                 }
             }
         }
         else{
             $products = null;
         }
-        return view('admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles]);
+        return view('admin.admin-products', ['products' => $products, 'beertypes' => $beertypes, 'search_visibles' => $search_visibles, 'search_invisibles' => $search_invisibles, 'order' => $order]);
     }
 
     public function search(Request $request) {
         $search = $request->input('search');
-        $products = Product::where('name', 'LIKE','%' . $search . '%')->where('visible', '!=', '0')->paginate(3);
+        $products = Product::where('name', 'LIKE','%' . $search . '%')->where('visible', '!=', '0')->paginate(3)->appends(request()->except('page'));
         return view('products', ['products' => $products]);
+    }
+
+    // Importar productos desde CSV
+    public function import(Request $request) {
+
+        $this->validate($request, 
+        [
+            'file' => 'mimes:csv,txt',
+        ],
+        [
+            'file.mimes' => 'El archivo debe ser un archivo CSV o TXT.',
+        ]);
+
+        $file = $request->file('file');
+        $file_name = $file->getClientOriginalName();
+        $file->move(public_path('/files'), $file_name);
+        $file_path = public_path('/files/' . $file_name);
+        
+        if (($open = fopen($file_path, "r")) !== FALSE) {
+            while(($line = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $product = new Product();
+                $product->name = $line[0];
+                $product->stock = $line[1];
+                $product->visible = $line[2];
+                $product->description = $line[3];
+                $product->price = $line[4];
+                $product->image = $line[5];
+
+                $beertype = BeerType::where('names', $line[6])->first();
+                $product->beer_types()->associate($beertype);
+
+                $user = User::find($request->input('userCSV'));
+                $product->users()->associate($user);
+
+                $product->save();
+            }
+
+            fclose($open);
+        }
+        
+        return redirect()->back()->with('success', '¡Productos importados con éxito!');
+    }
+
+    // Exportar productos a CSV
+    public function export(Request $request) {
+        $products = Product::all();
+        $file_name = 'productos.csv';
+        $file_path = public_path('/files/' . $file_name);
+        $file = fopen($file_path, "w");
+        fputcsv($file, array('Nombre', 'Stock', 'Visible', 'Descripción', 'Precio', 'Imagen', 'Tipo de cerveza'));
+        foreach ($products as $product) {
+            fputcsv($file, array($product->name, $product->stock, $product->visible, $product->description, $product->price, $product->image, $product->beer_types->names));
+        }
+        fclose($file);
+        return response()->download($file_path);
     }
 }

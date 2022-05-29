@@ -13,51 +13,73 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     // Atributos para controlar filtros
-    private $search_admins = true;
-    private $search_users = true;
-
-    public function index() {
-        $users = User::paginate(10);
+    private $search_admins = 'on';  
+    private $search_users = 'on';
+    private $order = 'name';
+    
+    public function list() {
+        $users = null;
+        if($this->search_admins == 'on' && $this->search_users == 'on') {
+            $users = User::OrderBy($this->order)->paginate(10);
+        }
+        elseif($this->search_admins != null){
+            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10);
+        }
+        elseif ($this->search_users != null) {
+            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10);
+        }
         
-        return view('admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users]);
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);
     }
 
     public function filter(Request $request) {
-        if ($request->has('search_admins')) {
-            $search_admins = true;
-        }
+        if ($request->has('search_admins_filter')) {
+            $this->search_admins = 'on';
+        } 
         else {
-            $search_admins = false;
+            $this->search_admins = 'off';
         }
 
-        if ($request->has('search_users')) {
-            $search_users = true;
+        if ($request->has('search_users_filter')) {
+            $this->search_users = 'on';
         }
         else {
-            $search_users = false;
+            $this->search_users = 'off';
         }
         
+        
+        if ($request->has('order_by'))
+        {
+            $this->order = $request->order_by;
+        }
+        
+
         $users = null;
-        if($search_admins != null && $search_users != null) {
-            $users = User::paginate(10);
+        if($this->search_admins == 'on' && $this->search_users == 'on') {
+            $users =  User::OrderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
-        elseif($search_admins != null){
-            $users = User::where('admin', '=', true)->paginate(10);
+        elseif($this->search_admins == 'on'){
+            $users = User::where('admin', '=', true)->orderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
-        elseif ($search_users != null) {
-            $users = User::where('admin', '=', false)->paginate(10);
+        elseif ($this->search_users == 'on') {
+            $users = User::where('admin', '=', false)->orderBy($this->order)->paginate(10)->appends(request()->except('page'));
         }
-        
-        return view('admin-users', ['users' => $users, 'search_admins' => $search_admins, 'search_users' => $search_users]);
+      
+        return view('admin.admin-users', ['users' => $users, 'search_admins' => $this->search_admins, 'search_users' => $this->search_users, 'order' => $this->order]);
     }
 
     public function destroy($id) {
         $user = User::find($id);
         $user->delete();
-        return redirect('/admin-users')->with('success', '¡Usuario eliminado con éxito!');
+        return redirect()->back()->with('success', '¡Usuario eliminado con éxito!');
     }
 
     public function edit(Request $request, $id) {
+        $http_host = $_SERVER["HTTP_HOST"];
+        $url = url()->previous();
+        $url = str_replace("http://$http_host", '', $url);
+        error_log('Venimos de: ' . $url);
+
         $users = User::all();
         $susers = [];
         foreach($users as $user){
@@ -85,21 +107,20 @@ class UsersController extends Controller
             $user->surname = $request->input('surname' . $id);
             $user->email = $request->input('email' . $id);
             $user->dni = $request->input('dni' . $id);
-            if ($request->has('admin'. $id)) {
+            if ($request->has('admin' . $id)) {
                 $user->admin = 1;
-            }
-            else {
+            } else {
                 $user->admin = 0;
             }
-            if ($request->has('visible'. $id)) {
+            if ($request->has('visible' . $id)) {
                 $user->visible = 1;
-            }
-            else {
+            } else {
                 $user->visible = 0;
             }
             $user->save();
         }
-        return redirect('/admin-users')->with('success', '¡Usuario editado con éxito!');
+
+        return redirect()->back();
     }
 
     public function create(Request $request) {
@@ -158,6 +179,44 @@ class UsersController extends Controller
         $user->addresses()->associate($address);
         $user->save();
 
-        return redirect('/admin-users')->with('success', '¡Usuario creado con éxito!');
+        if ($request->has('register')) {
+            return redirect()->route('login')->with('success', '¡Usuario registrado con éxito!');
+        } else {
+            return redirect()->route('admin-users')->with('success', '¡Usuario creado con éxito!');
+        }
+    }
+
+    public function show($id) {
+        $user = User::find($id);
+        $address = Address::find($user->addresses_id);
+        return view('myprofile', ['user' => $user, 'address' => $address]);
+    }
+
+    public function resetPassword(Request $request) {
+        $users = User::all();
+        $susers = [];
+        foreach($users as $user){
+            array_push($susers, $user->email);
+        }
+
+        $this->validate($request,
+            [
+                'email' =>  [Rule::in($susers)],
+            ],
+            [
+                'in' => 'Este email no está registrado.'
+            ]
+        );
+
+        $user = User::where('email', '=', $request->input('emailReset'))->first();
+        $user->password = Hash::make($user->dni);
+        $user->save();
+        return redirect()->route('login')->with('success', 'Contraseña restablecida');
+    }
+
+    public function enable_edit($id) {
+        $user = User::find($id);
+        $address = Address::find($user->addresses_id);
+        return view('myprofile', ['user' => $user, 'address' => $address, 'edit' => true]); 
     }
 }

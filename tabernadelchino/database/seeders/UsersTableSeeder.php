@@ -17,11 +17,6 @@ class UsersTableSeeder extends Seeder {
         return $direcciones[$i];
     }
 
-    protected function getCart() {
-        $carts = Cart::all();
-        return $carts[random_int(0, count($carts)-1)];
-    }
-
     protected function getOrder() {
         $orders = Order::all();
         return $orders[random_int(0, count($orders)-1)];
@@ -36,7 +31,7 @@ class UsersTableSeeder extends Seeder {
     {
         $names = ['Francisco', 'Josué', 'Jordi', 'David', 'Ángel'];
         $surnames = ['Ferrández Martínez', 'García Asensi', 'Sellés Enríquez', 'Pastor Crespo', 'León Cerdán'];
-        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse10@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
+        $emails = ['ffm18@alu.ua.es', 'jga74@alu.ua.es', 'jse20@alu.ua.es', 'dpc38@alu.ua.es', 'alc111@alu.ua.es'];
         $dni = ['50503584T', '51253198K', '48759207N', '48763949Q', '74379711B'];
 
         foreach (range(0,4) as $i) {
@@ -44,13 +39,27 @@ class UsersTableSeeder extends Seeder {
             $user->name = $names[$i];
             $user->surname = $surnames[$i];
             $user->email = $emails[$i];
-            $user->password = Hash::make(Str::random(5));
+            $user->password = Hash::make('123');
             $user->dni = $dni[$i];
             $user->admin = true;
             $user->visible = true;
             $user->addresses()->associate($this->getAddress($i));
+            $user->carts()->associate(Cart::find($i+1));
 
-            $user->carts()->associate($this->getCart());
+            $user->save();
+        }
+
+        foreach (range(5,25) as $i) {
+            $user = new User();
+            $user->name = "DSS-name".$i;
+            $user->surname = "DSS-surname".$i;
+            $user->email = "DSS-email".$i;
+            $user->password = Hash::make('123');
+            $user->dni = $dni[0];
+            $user->admin = false;
+            $user->visible = true;
+            $user->addresses()->associate($this->getAddress($i));
+            $user->carts()->associate(Cart::find($i+1));
 
             $user->save();
         }

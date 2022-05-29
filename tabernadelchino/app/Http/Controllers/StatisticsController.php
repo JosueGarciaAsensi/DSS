@@ -12,10 +12,10 @@ class StatisticsController extends Controller
         $products = Product::all();
         $users = User::all();
         $orders = Order::all();
-        return view('admin-menu')->with('productsCount', count($products))->with('usersCount', count($users))->with('ordersCount', count($orders))->with('product', $this->productoEstrella($orders, $products));
+        return view('admin.admin-menu')->with('productsCount', count($products))->with('usersCount', count($users))->with('ordersCount', count($orders))->with('product', $this->bestProduct($orders, $products));
     }
 
-    protected function productoEstrella($orders, $products) {
+    protected function bestProduct($orders, $products) {
         $points = array();
 
         foreach ($products as $p) {
@@ -31,6 +31,6 @@ class StatisticsController extends Controller
 
         $index = array_search(max($points), $points);
 
-        return $products[$index+1];
+        return $products[$index];
     }
 }

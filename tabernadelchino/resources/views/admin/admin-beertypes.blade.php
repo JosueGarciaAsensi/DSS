@@ -1,14 +1,18 @@
-@extends('admin')
+@extends('layouts.admin')
 @section('title', 'Tipo Cerveza - La Taberna del Chino')
 @section('menu')
 @parent
 @endsection
-
 @section('content')
 <div class="container mt-5 mb-5 p-4 rounded" style="background-color: black;">
   <div class="container">
+    @if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+      {{ Session::get('success') }}
+    </div>
+    @endif
     <div class="row row-cols-2" style="text-align: center; color: white;">
-      <div class="col"><b>Tipo</b></div>
+      <div class="col"><b>{{__('text.type')}}</b></div>
       <div class="col">
         <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#createModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus text-light" viewBox="0 0 16 16">
@@ -23,8 +27,9 @@
       <div class="col">{{$beertype->names}}</div>
       <div class="col d-flex justify-content-center">
         <div class="row">
-          <form action="{{ url('/admin-beertypes/delete/' . $beertype->id) }}" method="POST">
+          <form action="{{ route('admin-beertype-delete', ['id' => $beertype->id]) }}" method="POST">
             {{ csrf_field() }}
+            @method('DELETE')
             <button class="btn btn-danger" type="submit">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-light" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -46,40 +51,41 @@
       </div>
       @endforeach
     </div>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger" role="alert">
-      @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-      @endforeach
-    </div>
-    @elseif(Session::has('success'))
-    <div class="alert alert-success" role="alert">
-      {{ Session::get('success') }}
-    </div>
-    @endif
   </div>
-
+  
   <!-- Modal -->
   <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createModalTitle">Añadir tipo de cerveza</h5>
+          <h5 class="modal-title" id="createModalTitle">{{__('text.addbeertype')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/create')}}" method="POST">
+          <form action="{{ route('admin-beertype-create') }}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-              <label for="type">Tipo: </label>
-              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control" placeholder="Tipo" required>
+              <label for="type">{{__('text.type')}}: </label>
+              <input type="text" id="type" value="{{old('type')}}" name="type" class="form-control @error('type') is-invalid @enderror" placeholder="{{__('text.type')}}" required>
+              @error('type')
+              <script>
+                $(function() {
+                  $('#createModal').modal('show');
+                });
+              </script>
+              <span class="invalid-feedback" role="alert">
+                <strong>
+                  {{ $message }}
+                </strong>
+              </span>
+              @enderror
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary">{{__('text.create')}}</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
         </div>
       </div>
     </div>
@@ -91,24 +97,35 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">Editar tipo</h5>
+          <h5 class="modal-title" id="exampleModalLabel{{$beertype->id}}">{{__('text.editbeertype')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ url('/admin-beertypes/edit/' . $beertype->id)}}" method="POST">
-            @method('PUT')
+          <form action="{{ route('admin-beertype-edit', ['id' => $beertype->id]) }}" method="POST">
+            @method('PATCH')
             {{ csrf_field() }}
-
             <div class="form-group">
-              <label for="name{{$beertype->id}}">Nombre: </label>
-              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control" placeholder="Nombre" value="{{$beertype->names}}" required>
+              <label for="name{{$beertype->id}}">{{__('text.name')}}: </label>
+              <input type="text" id="name{{$beertype->id}}" name="name{{$beertype->id}}" class="form-control @error('name'.$beertype->id) is-invalid @enderror" placeholder="{{__('text.name')}}" value="{{$beertype->names}}" required>
+              @error('name'.$beertype->id)
+              <script>
+                $(function() {
+                  $('#exampleModal{{$beertype->id}}').modal('show');
+                });
+              </script>
+              <span class="invalid-feedback" role="alert">
+                <strong>
+                  {{ $message }}
+                </strong>
+              </span>
+              @enderror
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Aplicar</button>
+            <button type="submit" class="btn btn-primary">{{__('text.apply')}}</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('text.close')}}</button>
         </div>
       </div>
     </div>
