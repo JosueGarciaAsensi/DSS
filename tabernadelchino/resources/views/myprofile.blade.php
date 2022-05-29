@@ -65,7 +65,9 @@
                                 @endisset
                             </div>
                         </div>
+                        @if ($user->admin == 1)
                         <input type="hidden" id="admin{{$user->id}}" name="admin{{$user->id}}" value="{{$user->admin}}">
+                        @endif
                         <input type="hidden" id="visible{{$user->id}}" name="visible{{$user->id}}" value="{{$user->visible}}">
                         @isset($edit)
                             <button type="submit" class="btn btn-primary">{{__('text.saveprofile')}}</button>
